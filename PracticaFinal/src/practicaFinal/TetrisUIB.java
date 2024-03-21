@@ -4,17 +4,25 @@
  */
 package practicaFinal;
 
-/**
- *
- * @author dimit
+import java.awt.Container;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+/*
+ * @author Dimitri Coampny Cifre
+ * @author Joan Enric Soler Carvajal
  */
 public class TetrisUIB {
 
     /**
      * @param args the command line arguments
+     * 
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Ventana ventana = new Ventana();
     }
-    
 }
