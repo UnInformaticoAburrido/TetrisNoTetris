@@ -6,7 +6,8 @@
 
 # BlueJ files
 *.ctxt
-# Package Files #
+
+# Package Files
 *.jar
 *.war
 *.nar
@@ -14,4 +15,6 @@
 *.zip
 *.tar.gz
 *.rar
+
+# NetBeans
 /PracticaFinal/nbproject/private/
