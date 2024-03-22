@@ -4,19 +4,24 @@
  */
 package practicaFinal;
 
+import java.awt.Color;
+import javax.swing.JPanel;
+
 /**
  *
  * @author dimitry
  * Esta clase tiene como objetivo quitarnos trabajo centraliznado las funcionalidades
  */
 public class Opciones {
-    public static void partida(){
+        public static void partida(JPanel panel){
             //Esta funcion deve iniciar la partida
             System.out.println("Funcionalidad no implementada");
+            panel.setBackground(Color.red);
         }
-        public static void configuracion(){
+        public static boolean configuracion(){
             //Esta funcion deve  habrir la configuracion
             System.out.println("Funcionalidad no implementada");
+            return true;
         }
         public static void historial(){
             //Esta funcion deve habrir el historial

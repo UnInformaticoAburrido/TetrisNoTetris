@@ -4,6 +4,7 @@
  */
 package practicaFinal;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -24,6 +25,7 @@ public class Ventana extends Opciones{
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container contenido = ventana.getContentPane();
         contenido.add(panelDeBotones());
+        ventana.setVisible(true);
     }
 
     public JPanel panelDeBotones() {
@@ -33,7 +35,7 @@ public class Ventana extends Opciones{
         Partida.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                partida();
+                partida(panelbotones);
             }
         });
         panelbotones.add(Partida);
