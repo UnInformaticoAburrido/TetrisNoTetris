@@ -17,7 +17,7 @@ import javax.swing.JPanel;
  *
  * @author dimit
  */
-public class Ventana extends Opciones{
+public class Ventana extends MenuGenerico{
 
     public Ventana() {
         JFrame ventana = new JFrame("Tetris UIB");

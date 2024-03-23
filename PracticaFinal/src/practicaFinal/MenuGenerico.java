@@ -12,7 +12,7 @@ import javax.swing.JPanel;
  * @author dimitry
  * Esta clase tiene como objetivo quitarnos trabajo centraliznado las funcionalidades
  */
-public class Opciones {
+public class MenuGenerico {
         public static void partida(JPanel panel){
             //Esta funcion deve iniciar la partida
             System.out.println("Funcionalidad no implementada");
