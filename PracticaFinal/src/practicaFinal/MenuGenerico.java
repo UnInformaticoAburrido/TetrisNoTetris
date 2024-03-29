@@ -32,7 +32,8 @@ public class MenuGenerico {
     }
 
     public static void salir() {
-        //Esta funcion deve finalizar el progrma
-        System.out.println("Funcionalidad no implementada");
+        // Esta función permite salir del programa.
+        System.out.println("Se ha salido del programa. (Code 0)");
+        System.exit(0);
     }
 }
