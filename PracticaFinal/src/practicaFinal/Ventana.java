@@ -2,7 +2,9 @@ package practicaFinal;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -24,7 +26,8 @@ public class Ventana extends MenuGenerico {
 
     public Ventana() {
         JFrame ventana = new JFrame("Tetris UIB");
-        ventana.setSize(500, 400);
+        Dimension dimensiones = Toolkit.getDefaultToolkit().getScreenSize();
+        ventana.setSize(dimensiones.width / 2, dimensiones.height / 2);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setLayout(new BorderLayout());
         ventana.setJMenuBar(crearMenu(ventana));
@@ -32,6 +35,7 @@ public class Ventana extends MenuGenerico {
         contenido.add(panelDeBotones(), BorderLayout.WEST);
         contenido.add(crearPantallaJuego(), BorderLayout.CENTER);
         contenido.add(MenuIconos(), BorderLayout.NORTH);
+        ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
     }
     //Funcion para crear el menu
@@ -47,7 +51,7 @@ public class Ventana extends MenuGenerico {
                 partida();
             }
         });
-        
+
         panelbotones.add(Partida);
         //Boton de Configuracion
         JButton Configuracion = new JButton("Configuración");
@@ -57,7 +61,7 @@ public class Ventana extends MenuGenerico {
                 configuracion();
             }
         });
-        
+
         panelbotones.add(Configuracion);
         //Boton de Historial
         JButton Historial = new JButton("Historial");
@@ -67,7 +71,7 @@ public class Ventana extends MenuGenerico {
                 historial();
             }
         });
-        
+
         panelbotones.add(Historial);
         //Boton de Informacion
         JButton Informacion = new JButton("Informacion");
@@ -77,7 +81,7 @@ public class Ventana extends MenuGenerico {
                 informacion();
             }
         });
-        
+
         panelbotones.add(Informacion);
         //Boton de Salir
         JButton Salir = new JButton("Salir");
@@ -87,7 +91,7 @@ public class Ventana extends MenuGenerico {
                 salir();
             }
         });
-        
+
         panelbotones.add(Salir);
         return panelbotones;
     }
@@ -103,7 +107,7 @@ public class Ventana extends MenuGenerico {
                 partida();
             }
         });
-        
+
         menu.add(partida);
         JMenuItem configuracion = new JMenuItem("Configuracion");
         configuracion.addActionListener(new ActionListener() {
@@ -112,7 +116,7 @@ public class Ventana extends MenuGenerico {
                 configuracion();
             }
         });
-        
+
         menu.add(configuracion);
         JMenuItem historial = new JMenuItem("Historial");
         historial.addActionListener(new ActionListener() {
@@ -121,7 +125,7 @@ public class Ventana extends MenuGenerico {
                 historial();
             }
         });
-        
+
         menu.add(historial);
         JMenuItem informacion = new JMenuItem("Informacion");
         informacion.addActionListener(new ActionListener() {
@@ -130,7 +134,7 @@ public class Ventana extends MenuGenerico {
                 informacion();
             }
         });
-        
+
         menu.add(informacion);
         JMenuItem salir = new JMenuItem("Salir");
         salir.addActionListener(new ActionListener() {
@@ -139,7 +143,7 @@ public class Ventana extends MenuGenerico {
                 salir();
             }
         });
-        
+
         menu.add(salir);
         //Segunda lista de menus porque me parece horrible tener un menu tan vacio.
         JMenu menuIconos = new JMenu("Barra Iconos");
@@ -154,7 +158,7 @@ public class Ventana extends MenuGenerico {
                 System.out.println(mostrarIconos);
             }
         });
-        
+
         menuIconos.add(mostrar);
         menuBar.add(menu);
         menuBar.add(menuIconos);
@@ -170,7 +174,7 @@ public class Ventana extends MenuGenerico {
                 partida();
             }
         });
-        
+
         iconBar.add(Partida);
         //Boton de Configuracion
         JButton Configuracion = new JButton("Configuración");
@@ -180,7 +184,7 @@ public class Ventana extends MenuGenerico {
                 configuracion();
             }
         });
-        
+
         iconBar.add(Configuracion);
         //Boton de Historial
         JButton Historial = new JButton("Historial");
@@ -190,7 +194,7 @@ public class Ventana extends MenuGenerico {
                 historial();
             }
         });
-        
+
         iconBar.add(Historial);
         //Boton de Informacion
         JButton Informacion = new JButton("Informacion");
@@ -200,7 +204,7 @@ public class Ventana extends MenuGenerico {
                 informacion();
             }
         });
-        
+
         iconBar.add(Informacion);
         //Boton de Salir
         JButton Salir = new JButton("Salir");
