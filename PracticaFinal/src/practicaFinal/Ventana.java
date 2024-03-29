@@ -1,13 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package practicaFinal;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,13 +12,15 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JToolBar;
 
 /**
  *
  * @author dimit
  */
-public class Ventana extends MenuGenerico{
-    private boolean mostrarIconos=true;
+public class Ventana extends MenuGenerico {
+
+    private boolean mostrarIconos = true;
 
     public Ventana() {
         JFrame ventana = new JFrame("Tetris UIB");
@@ -33,17 +29,16 @@ public class Ventana extends MenuGenerico{
         ventana.setLayout(new BorderLayout());
         ventana.setJMenuBar(crearMenu(ventana));
         Container contenido = ventana.getContentPane();
-        contenido.add(panelDeBotones(),BorderLayout.WEST);
-        contenido.add(crearPantallaJuego(),BorderLayout.CENTER);
-        contenido.add(MenuIconos(),BorderLayout.NORTH);
+        contenido.add(panelDeBotones(), BorderLayout.WEST);
+        contenido.add(crearPantallaJuego(), BorderLayout.CENTER);
+        contenido.add(MenuIconos(), BorderLayout.NORTH);
         ventana.setVisible(true);
     }
     //Funcion para crear el menu
     //Funcion para crear el panel de botones con iconos
-    
     //Funcion dedicada a crear el panel de botones laterales
     public JPanel panelDeBotones() {
-        JPanel panelbotones = new JPanel(new GridLayout(5,1));
+        JPanel panelbotones = new JPanel(new GridLayout(5, 1));
         //Boton de Partida
         JButton Partida = new JButton("Partida");
         Partida.addActionListener(new ActionListener() {
@@ -52,6 +47,7 @@ public class Ventana extends MenuGenerico{
                 partida();
             }
         });
+        
         panelbotones.add(Partida);
         //Boton de Configuracion
         JButton Configuracion = new JButton("Configuración");
@@ -61,6 +57,7 @@ public class Ventana extends MenuGenerico{
                 configuracion();
             }
         });
+        
         panelbotones.add(Configuracion);
         //Boton de Historial
         JButton Historial = new JButton("Historial");
@@ -70,6 +67,7 @@ public class Ventana extends MenuGenerico{
                 historial();
             }
         });
+        
         panelbotones.add(Historial);
         //Boton de Informacion
         JButton Informacion = new JButton("Informacion");
@@ -79,6 +77,7 @@ public class Ventana extends MenuGenerico{
                 informacion();
             }
         });
+        
         panelbotones.add(Informacion);
         //Boton de Salir
         JButton Salir = new JButton("Salir");
@@ -88,10 +87,12 @@ public class Ventana extends MenuGenerico{
                 salir();
             }
         });
+        
         panelbotones.add(Salir);
         return panelbotones;
     }
-    public JMenuBar crearMenu(Container panelPrincipal){
+
+    public JMenuBar crearMenu(Container panelPrincipal) {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Menu");
         //Menu general
@@ -102,6 +103,7 @@ public class Ventana extends MenuGenerico{
                 partida();
             }
         });
+        
         menu.add(partida);
         JMenuItem configuracion = new JMenuItem("Configuracion");
         configuracion.addActionListener(new ActionListener() {
@@ -110,6 +112,7 @@ public class Ventana extends MenuGenerico{
                 configuracion();
             }
         });
+        
         menu.add(configuracion);
         JMenuItem historial = new JMenuItem("Historial");
         historial.addActionListener(new ActionListener() {
@@ -118,6 +121,7 @@ public class Ventana extends MenuGenerico{
                 historial();
             }
         });
+        
         menu.add(historial);
         JMenuItem informacion = new JMenuItem("Informacion");
         informacion.addActionListener(new ActionListener() {
@@ -126,6 +130,7 @@ public class Ventana extends MenuGenerico{
                 informacion();
             }
         });
+        
         menu.add(informacion);
         JMenuItem salir = new JMenuItem("Salir");
         salir.addActionListener(new ActionListener() {
@@ -134,6 +139,7 @@ public class Ventana extends MenuGenerico{
                 salir();
             }
         });
+        
         menu.add(salir);
         //Segunda lista de menus porque me parece horrible tener un menu tan vacio.
         JMenu menuIconos = new JMenu("Barra Iconos");
@@ -148,19 +154,19 @@ public class Ventana extends MenuGenerico{
                 System.out.println(mostrarIconos);
             }
         });
+        
         menuIconos.add(mostrar);
         menuBar.add(menu);
         menuBar.add(menuIconos);
         return menuBar;
     }
-    public JPanel MenuIconos(){
-        JPanel iconPanel = new JPanel();
-        //Este setVisible
-        iconPanel.setVisible(mostrarIconos); //.setVisible(mostrarIconos);
-        iconPanel.setBackground(Color.red);
+
+    public JToolBar MenuIconos() {
+        JToolBar barra = new JToolBar();
         return iconPanel;
     }
-    public JPanel crearPantallaJuego(){
+
+    public JPanel crearPantallaJuego() {
         JPanel penelJuego = new JPanel();
         //Cremos el objeto tablero.
         return penelJuego;
