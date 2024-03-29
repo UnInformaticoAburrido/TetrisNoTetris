@@ -33,8 +33,9 @@ public class Ventana extends MenuGenerico {
         ventana.setJMenuBar(crearMenu(ventana));
         Container contenido = ventana.getContentPane();
         contenido.add(panelDeBotones(), BorderLayout.WEST);
-        contenido.add(crearPantallaJuego(), BorderLayout.CENTER);
-        contenido.add(MenuIconos(), BorderLayout.NORTH);
+        GestorJuego juego = new GestorJuego();
+        contenido.add(juego.getPanelJuego(), BorderLayout.CENTER);
+        contenido.add(menuIconos(), BorderLayout.NORTH);
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
     }
@@ -165,7 +166,7 @@ public class Ventana extends MenuGenerico {
         return menuBar;
     }
 
-    public JToolBar MenuIconos() {
+    public JToolBar menuIconos() {
         JToolBar iconBar = new JToolBar();
         JButton Partida = new JButton("Partida");
         Partida.addActionListener(new ActionListener() {
@@ -217,10 +218,5 @@ public class Ventana extends MenuGenerico {
         iconBar.add(Salir);
         return iconBar;
     }
-
-    public JPanel crearPantallaJuego() {
-        JPanel penelJuego = new JPanel();
-        //Cremos el objeto tablero.
-        return penelJuego;
-    }
+    
 }
