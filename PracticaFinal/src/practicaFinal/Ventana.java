@@ -162,8 +162,56 @@ public class Ventana extends MenuGenerico {
     }
 
     public JToolBar MenuIconos() {
-        JToolBar barra = new JToolBar();
-        return iconPanel;
+        JToolBar iconBar = new JToolBar();
+        JButton Partida = new JButton("Partida");
+        Partida.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                partida();
+            }
+        });
+        
+        iconBar.add(Partida);
+        //Boton de Configuracion
+        JButton Configuracion = new JButton("Configuración");
+        Configuracion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                configuracion();
+            }
+        });
+        
+        iconBar.add(Configuracion);
+        //Boton de Historial
+        JButton Historial = new JButton("Historial");
+        Historial.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                historial();
+            }
+        });
+        
+        iconBar.add(Historial);
+        //Boton de Informacion
+        JButton Informacion = new JButton("Informacion");
+        Informacion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                informacion();
+            }
+        });
+        
+        iconBar.add(Informacion);
+        //Boton de Salir
+        JButton Salir = new JButton("Salir");
+        Salir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                salir();
+            }
+        });
+        iconBar.add(Salir);
+        return iconBar;
     }
 
     public JPanel crearPantallaJuego() {
