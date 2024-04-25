@@ -3,21 +3,17 @@ package practicaFinal;
 import javax.swing.JPanel;
 
 /*
- * @author dimitry CC
+ * @author Joan Enric Soler Carvajal
  */
 public class GestorJuego {
-    //Joan Enric te elijo a ti. Usa programar
     private JPanel panelJuego;
-    
+    private boolean[][] matrizJuego = new boolean[20][20];
+
     public GestorJuego() {
         this.panelJuego = new JPanel();
     }
-    
+
     public JPanel getPanelJuego() {
         return panelJuego;
     }
-
-    
-    
-    
 }
