@@ -23,6 +23,9 @@ public class TetrisUIB {
      * 
      */
     public static void main(String[] args) {
+        //Abrimos la configuracion y cargamos la configuracion y preparamos el .
+        
+        //Inicializamos la ventana.
         GestorVentana ventana = new GestorVentana();
     }
 }

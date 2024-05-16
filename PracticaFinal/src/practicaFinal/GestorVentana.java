@@ -15,7 +15,9 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author dimit
+ * @author Dimitry Comapny Cifre
+ * Asi mejor Joan? te gusta mas?
+ * 
  */
 public class GestorVentana extends MenuGenerico {
 
