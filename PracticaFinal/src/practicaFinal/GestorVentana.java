@@ -17,9 +17,9 @@ import javax.swing.JPanel;
  *
  * @author dimit
  */
-public class Ventana extends MenuGenerico{
+public class GestorVentana extends MenuGenerico {
 
-    public Ventana() {
+    public GestorVentana() {
         JFrame ventana = new JFrame("Tetris UIB");
         ventana.setSize(500, 400);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

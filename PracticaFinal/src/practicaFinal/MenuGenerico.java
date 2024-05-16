@@ -3,35 +3,48 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package practicaFinal;
-
-import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
  *
  * @author dimitry
- * Esta clase tiene como objetivo quitarnos trabajo centraliznado las funcionalidades
  */
-public class MenuGenerico {
-        public static void partida(JPanel panel){
+public abstract class MenuGenerico {
+        public void partida(JPanel panel){
             //Esta funcion deve iniciar la partida
-            System.out.println("Funcionalidad no implementada");
-            panel.setBackground(Color.red);
         }
-        public static boolean configuracion(){
+        public boolean configuracion(){
             //Esta funcion deve  habrir la configuracion
-            System.out.println("Funcionalidad no implementada");
+            JFrame ventana = new JFrame("Configuracion tetris UIB");
+            ventana.setSize(500, 400);
+            ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            //Antes de mostrar la ventana al usuario cargamos las confis actuales
+            File config = new File("configfile.dat");
+            try {
+                BufferedReader configBufer = new BufferedReader(new FileReader(config));
+            } catch (FileNotFoundException ex) {
+                
+            }
+            
+            ventana.setVisible(true);
             return true;
         }
-        public static void historial(){
+        public void historial(){
             //Esta funcion deve habrir el historial
             System.out.println("Funcionalidad no implementada");
         }
-        public static void informacion(){
+        public void informacion(){
             //Esta funcion deve mostrar la informacion
             System.out.println("Funcionalidad no implementada");
         }
-        public static void salir(){
+        public void salir(){
             //Esta funcion deve finalizar el progrma
             System.out.println("Funcionalidad no implementada");
         }
