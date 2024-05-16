@@ -19,7 +19,7 @@ public abstract class MenuGenerico {
             //Esta funcion deve iniciar la partida
         }
         public boolean configuracion(){
-            ConfigVentana();
+            //ConfigVentana();
             return true;
         }
         public void historial(){
