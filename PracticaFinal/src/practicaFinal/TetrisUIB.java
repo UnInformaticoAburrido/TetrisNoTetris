@@ -10,6 +10,6 @@ public class TetrisUIB {
      * 
      */
     public static void main(String[] args) {
-        Ventana ventana = new Ventana();
+        GestorVentanas ventana = new GestorVentanas();
     }
 }

@@ -20,11 +20,11 @@ import javax.swing.JToolBar;
  *
  * @author dimit
  */
-public class Ventana extends MenuGenerico {
+public class GestorVentanas extends MenuGenerico {
 
     private boolean mostrarIconos = true;
 
-    public Ventana() {
+    public GestorVentanas() {
         JFrame ventana = new JFrame("Tetris UIB");
         Dimension dimensiones = Toolkit.getDefaultToolkit().getScreenSize();
         ventana.setSize(dimensiones.width / 2, dimensiones.height / 2);
