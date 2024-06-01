@@ -54,12 +54,7 @@ public class ConfigVentana extends JFrame {
         puntuacion_in.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-
-                } catch (IOException ex) {
-                    System.err.println(".actionPerformed()");
-                    //Hacer cosas pendientes
-                }
+                //Hacer cosas pendientes
 
             }
         });
@@ -136,14 +131,13 @@ public class ConfigVentana extends JFrame {
         botonCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ConfiguracionFicheroEscritura escritura;
-
+                
             }
         });
         
         return principal;
     }
-    private int cerar(boolean mod, JFrame parent){
+    private void cerar(boolean mod, JFrame parent){
         String [] opciones={"Salir sin guardar","Guarda","Cerrar"};
         if (mod) {
             int option = JOptionPane.showOptionDialog(parent, "Estas intnetando salir de la configuracion sin guardar algunos cambios, todos los cambios no guardados se perderan", "Aviso: cambios sin guardar", JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE, null, opciones, opciones[3]);
