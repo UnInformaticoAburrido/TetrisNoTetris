@@ -11,6 +11,7 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -142,9 +143,23 @@ public class ConfigVentana extends JFrame {
         
         return principal;
     }
-    private void cerar(boolean mod){
+    private int cerar(boolean mod, JFrame parent){
+        String [] opciones={"Salir sin guardar","Guarda","Cerrar"};
         if (mod) {
-            
+            int option = JOptionPane.showOptionDialog(parent, "Estas intnetando salir de la configuracion sin guardar algunos cambios, todos los cambios no guardados se perderan", "Aviso: cambios sin guardar", JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE, null, opciones, opciones[3]);
+            switch (option) {
+                case 0:
+                    
+                    break;
+                case 1:
+                    
+                    break;
+                case 2:
+                    
+                    break;
+                default:
+                    throw new AssertionError();
+            }
         }else{
             this.dispose();
         }
