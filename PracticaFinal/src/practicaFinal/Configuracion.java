@@ -1,9 +1,5 @@
 package practicaFinal;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class Configuracion implements Serializable {
@@ -12,14 +8,6 @@ public class Configuracion implements Serializable {
     private int puntuacionNuevaForma;
     private String imagenCasillasFormas;
     private int tiempoPartida;
-    
-    public void escribirConfig(String icp) throws IOException,ClassNotFoundException {
-        File icf =new File(icp);//Initial Config Path
-        FileOutputStream fos = new FileOutputStream(icf);
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(this);
-        oos.close();
-    }
 
     public Configuracion() {
         this.puntuacionCasillasEliminadas = 1;

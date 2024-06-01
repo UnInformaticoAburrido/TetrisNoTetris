@@ -17,7 +17,7 @@ public class MenuGenerico {
 
     public static boolean configuracion() {
         //Esta funcion deve  habrir la configuracion
-        System.out.println("Funcionalidad no implementada");
+        ConfigVentana ventana = new ConfigVentana();
         return true;
     }
 

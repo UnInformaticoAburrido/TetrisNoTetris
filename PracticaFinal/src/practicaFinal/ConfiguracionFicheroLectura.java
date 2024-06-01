@@ -18,5 +18,5 @@ public class ConfiguracionFicheroLectura {
     
     public void cerrarFichero() throws IOException {
         stream.close();
-    }    
+    }
 }
