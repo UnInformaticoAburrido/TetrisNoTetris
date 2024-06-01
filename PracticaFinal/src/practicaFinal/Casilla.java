@@ -22,10 +22,10 @@ public class Casilla {
         compColor[2] = random.nextFloat(0.7f, 1);
 
         // Reordena de forma aleatoria los números generados.
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             int pos = random.nextInt(3);
 
-            if(i == pos) {
+            if (i == pos) {
                 continue;
             }
 
@@ -35,5 +35,17 @@ public class Casilla {
         }
 
         color = new Color(compColor[0], compColor[1], compColor[2]);
+    }
+
+    public boolean isOcupada() {
+        return ocupada;
+    }
+
+    public void setOcupada(boolean ocupada) {
+        this.ocupada = ocupada;
+    }
+
+    public Color getColor() {
+        return color;
     }
 }
