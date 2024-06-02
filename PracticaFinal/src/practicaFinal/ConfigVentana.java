@@ -21,7 +21,7 @@ import javax.swing.JTextField;
 public class ConfigVentana extends JFrame {
 
     private Configuracion configuracion;
-    private String lastPath;
+    private String lastPath="";
 
     public ConfigVentana() {
         this.configuracion = TetrisUIB.getConfiguracion();
@@ -86,15 +86,37 @@ public class ConfigVentana extends JFrame {
         botonAplicar.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                configuracion.setPuntuacionCasillasEliminadas(Integer.parseInt(pcfeIn.getText()));
-                configuracion.setPuntuacionRotarForma(Integer.parseInt(prfIn.getText()));
-                configuracion.setPuntuacionNuevaForma(Integer.parseInt(pnfIn.getText()));
-                configuracion.setImagenCasillasFormas(lastPath);
+                boolean modified=false;
+                if (!pcfeIn.getText().isEmpty()) {
+                    configuracion.setPuntuacionCasillasEliminadas(Integer.parseInt(pcfeIn.getText()));
+                    modified=true;
+                    pcfe.setText("PUNTUACIÓN CASILLAS FORMAS ELIMINADAS DEL TABLERO: "+configuracion.getPuntuacionCasillasEliminadas());
+                }
+                if (!prfIn.getText().isEmpty()) {
+                    configuracion.setPuntuacionRotarForma(Integer.parseInt(prfIn.getText()));
+                    modified=true;
+                    prf.setText("PUNTUACIÓN ROTAR FORMA: "+configuracion.getPuntuacionRotarForma());
+                }
+                if(!pnfIn.getText().isEmpty()){
+                    configuracion.setPuntuacionNuevaForma(Integer.parseInt(pnfIn.getText()));
+                    modified=true;
+                    pnf.setText("PUNTUACIÓN NUEVA FORMA: "+configuracion.getPuntuacionNuevaForma());
+                }
+                if (!(lastPath.isEmpty())) {
+                    configuracion.setImagenCasillasFormas(lastPath);
+                    modified=true;
+                    icf.setText("IMAGEN CASILLAS FORMAS ["+configuracion.getImagenCasillasFormas()+"]");
+                }
                 try {
-                    ConfiguracionFicheroEscritura escritura = new ConfiguracionFicheroEscritura(TetrisUIB.CAMINO_CONFIG);
-                    escritura.escribir(configuracion);
+                    if (modified) {
+                        ConfiguracionFicheroEscritura escritura = new ConfiguracionFicheroEscritura(TetrisUIB.CAMINO_CONFIG);
+                        escritura.escribir(configuracion);
+                        escritura.cerrarFichero();
+                    }
                 } catch (IOException ex) {
                     System.err.println("No se ha podido encontrar la ruta");
+                }finally{
+                    
                 }
             }
             
@@ -104,16 +126,33 @@ public class ConfigVentana extends JFrame {
         botonAceptar.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                configuracion.setPuntuacionCasillasEliminadas(Integer.parseInt(pcfeIn.getText()));
-                configuracion.setPuntuacionRotarForma(Integer.parseInt(prfIn.getText()));
-                configuracion.setPuntuacionNuevaForma(Integer.parseInt(pnfIn.getText()));
-                configuracion.setImagenCasillasFormas(lastPath);
+                boolean modified=false;
+                if (!pcfeIn.getText().isEmpty()) {
+                    configuracion.setPuntuacionCasillasEliminadas(Integer.parseInt(pcfeIn.getText()));
+                    modified=true;
+                }
+                if (!prfIn.getText().isEmpty()) {
+                    configuracion.setPuntuacionRotarForma(Integer.parseInt(prfIn.getText()));
+                    modified=true;
+                }
+                if(!pnfIn.getText().isEmpty()){
+                    configuracion.setPuntuacionNuevaForma(Integer.parseInt(pnfIn.getText()));
+                    modified=true;
+                }
+                if (!(lastPath.isEmpty())) {
+                    configuracion.setImagenCasillasFormas(lastPath);
+                    modified=true;
+                }
                 try {
-                    ConfiguracionFicheroEscritura escritura = new ConfiguracionFicheroEscritura(TetrisUIB.CAMINO_CONFIG);
-                    escritura.escribir(configuracion);
-                    dispose();
+                    if (modified) {
+                        ConfiguracionFicheroEscritura escritura = new ConfiguracionFicheroEscritura(TetrisUIB.CAMINO_CONFIG);
+                        escritura.escribir(configuracion);
+                        escritura.cerrarFichero();
+                    }
                 } catch (IOException ex) {
                     System.err.println("No se ha podido encontrar la ruta");
+                }finally{
+                    dispose();
                 }
             }
         });
