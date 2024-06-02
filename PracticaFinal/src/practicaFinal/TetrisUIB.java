@@ -18,6 +18,13 @@ public class TetrisUIB {
     public static void main(String[] args) {
         if (!(new File(CAMINO_CONFIG).exists())) {
             configuracion = new Configuracion();
+            try {
+                ConfiguracionFicheroEscritura escritura = new ConfiguracionFicheroEscritura(CAMINO_CONFIG);
+                escritura.escribir(configuracion);
+                escritura.cerrarFichero();
+            } catch (IOException e) {
+                System.err.println("La configuracion no se a podido crear");
+            }
         } else {
             ConfiguracionFicheroLectura temp = null;
             try {
