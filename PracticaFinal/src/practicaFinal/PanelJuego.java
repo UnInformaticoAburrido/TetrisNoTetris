@@ -228,6 +228,7 @@ public class PanelJuego extends JPanel implements MouseListener, MouseMotionList
             }
         }
 
+        // Aplica las casillas al tablero.
         for (int i = 0; i < PIEZA_X; i++) {
             for (int j = 0; j < PIEZA_Y; j++) {
                 Casilla casilla = piezaActual[i][j];
@@ -241,6 +242,54 @@ public class PanelJuego extends JPanel implements MouseListener, MouseMotionList
             }
         }
 
+        // Comprueba el tablero para puntuar:
+        for (int i = 0; i < TABLERO_X; i++) {
+            for (int j = 0; j < TABLERO_Y; j++) {
+                // Ignora las casillas que no están ocupadas.
+                if (!matrizJuego[i][j].isOcupada()) {
+                    continue;
+                }
+
+                // Si encuentra una casilla ocupada,
+                // comprueba las filas y las columnas.
+
+                boolean columnaOcupada = true;
+
+                // Mira si hay alguna casilla no ocupada en la columna.
+                for (int k = 0; k < TABLERO_X; k++) {
+                    if (!matrizJuego[k][j].isOcupada()) {
+                        columnaOcupada = false;
+                        break;
+                    }
+                }
+
+                boolean filaOcupada = true;
+
+                // Mira si hay alguna casilla no ocupada en la fila.
+                for (int k = 0; k < TABLERO_Y; k++) {
+                    if (!matrizJuego[i][k].isOcupada()) {
+                        filaOcupada = false;
+                        break;
+                    }
+                }
+
+                // Elimina la columna si está totalmente ocupada:
+                if (columnaOcupada) {
+                    for (int k = 0; k < TABLERO_X; k++) {
+                        matrizJuego[k][j].setOcupada(false);
+                    }
+                }
+
+                // Elimina la fila si está totalmente ocupada:
+                if (filaOcupada) {
+                    for (int k = 0; k < TABLERO_Y; k++) {
+                        matrizJuego[i][k].setOcupada(false);
+                    }
+                }
+            }
+        }
+
+        // Genera la nueva pieza:
         generaPieza();
         reestablecerPieza();
     }
