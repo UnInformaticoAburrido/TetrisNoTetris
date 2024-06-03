@@ -1,12 +1,15 @@
 package practicaFinal;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
@@ -15,14 +18,16 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
+import javax.swing.border.Border;
 
 /**
  *
  * @author dimit
  */
 public class GestorVentanas extends MenuGenerico {
-
     private boolean mostrarIconos = true;
+    private CardLayout centralLayaut = new CardLayout();
+    private JPanel centralPanel = new JPanel(centralLayaut);
 
     public GestorVentanas() {
         JFrame ventana = new JFrame("Tetris UIB");
@@ -34,10 +39,28 @@ public class GestorVentanas extends MenuGenerico {
         Container contenido = ventana.getContentPane();
         contenido.add(panelDeBotones(), BorderLayout.WEST);
         GestorJuego juego = new GestorJuego();
-        contenido.add(juego.getPanelJuego(), BorderLayout.CENTER);
+        //Insertamos el card layaut
+        Border border = BorderFactory.createMatteBorder(10, 10, 10, 10, Color.yellow);
+        centralPanel.setBorder(border);
+        contenido.add(centralPanel, BorderLayout.CENTER);
         contenido.add(menuIconos(), BorderLayout.NORTH);
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
+        
+        //Generamos las cartas
+        JPanel logoPanel = new JPanel();
+        logoPanel.setBackground(Color.black);
+        centralPanel.add(logoPanel, "LogoPanel");
+        JPanel juegoPanel = new JPanel();
+        //Insertar panel de juego
+        centralPanel.add(juegoPanel,"JuegoPanel");
+        JPanel infoPanel = new JPanel();
+        infoPanel.setLayout(new BorderLayout());
+        infoPanel.add(informacion(), BorderLayout.CENTER);
+        centralPanel.add(infoPanel, "InfoPanel");
+        
+        JPanel historialPanel = new JPanel();
+        centralPanel.add(historialPanel, "HistorialPanel");
     }
     //Funcion para crear el menu
     //Funcion para crear el panel de botones con iconos
@@ -69,7 +92,7 @@ public class GestorVentanas extends MenuGenerico {
         Historial.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                historial();
+                
             }
         });
 
@@ -79,7 +102,7 @@ public class GestorVentanas extends MenuGenerico {
         Informacion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                informacion();
+                centralLayaut.show(centralPanel, "InfoPanel");
             }
         });
 
@@ -132,7 +155,7 @@ public class GestorVentanas extends MenuGenerico {
         informacion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                informacion();
+                centralLayaut.show(centralPanel, "InfoPanel");
             }
         });
 
@@ -202,7 +225,7 @@ public class GestorVentanas extends MenuGenerico {
         Informacion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                informacion();
+                centralLayaut.show(centralPanel, "InfoPanel");
             }
         });
 

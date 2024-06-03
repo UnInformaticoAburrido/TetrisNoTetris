@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 /*
- * @author Dimitri Coampny Cifre
+ * @author Dimitri Company Cifre
  * @author Joan Enric Soler Carvajal
  */
 public class TetrisUIB {
@@ -12,8 +12,7 @@ public class TetrisUIB {
     private static Configuracion configuracion;
             
     /**
-     * @param args the command line arguments
-     * 
+     * @param args the command line arguments 
      */
     public static void main(String[] args) {
         if (!(new File(CAMINO_CONFIG).exists())) {
