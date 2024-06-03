@@ -191,7 +191,7 @@ public class PanelJuego extends JPanel implements MouseListener, MouseMotionList
 
         // Si la pieza se ha soltado fuera del tablero,
         // se devuelve a donde estaba.
-        if (!dentroTablero(x, y)) {
+        if (!dentroTablero(x, y) || !moviendoPieza) {
             reestablecerPieza();
             return;
         }
@@ -351,10 +351,10 @@ public class PanelJuego extends JPanel implements MouseListener, MouseMotionList
      * Comprueba si la posición dada está dentro del tablero.
      */
     private boolean dentroTablero(int x, int y) {
-        int minX = DESFASE_X;
-        int minY = DESFASE_Y;
-        int maxX = minX + ANCHURA;
-        int maxY = minY + ALTURA;
+        int minX = DESFASE_X - 1 * CASILLA_X;
+        int minY = DESFASE_Y - 1 * CASILLA_Y;
+        int maxX = minX + ANCHURA + 2 * CASILLA_X;
+        int maxY = minY + ALTURA + 2 * CASILLA_Y;
 
         return x >= minX && x <= maxX && y >= minY && y <= maxY;
     }
