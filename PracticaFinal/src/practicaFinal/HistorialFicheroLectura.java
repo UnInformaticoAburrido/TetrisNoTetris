@@ -16,11 +16,13 @@ public class HistorialFicheroLectura {
     private RandomAccessFile file;
 
     public HistorialFicheroLectura(String path) throws FileNotFoundException {
-        this.file = new RandomAccessFile(path, "w");
+        this.file = new RandomAccessFile(path, "r");
     }
 
     /*public Partida leerSiguietePartida() throws IOException, ClassNotFoundException {
         
+        
+        Partida partida = new Partida(nombre, 0, 0);
     }*/
 
     public void cerrarFichero() throws IOException {

@@ -68,7 +68,7 @@ public class GestorVentanas extends MenuGenerico {
         Partida.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Jugador jugador = empezarPartida(padre);
+                Partida partida = empezarPartida(padre);
                 //Aqui va la el metodo que llama al juego.
                 
             }

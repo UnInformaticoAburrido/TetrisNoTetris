@@ -18,9 +18,9 @@ import javax.swing.JTextField;
  */
 public class MenuGenerico {
 
-    public static Jugador empezarPartida(JFrame padre) {
+    public static Partida empezarPartida(JFrame padre) {
         //Creamos un jugador
-        Jugador jugador = new Jugador();
+        Partida partida = new Partida("",TetrisUIB.getConfiguracion().getTiempoPartida(),0);
         
         JDialog preInicio = new JDialog(padre,"Tetris UIB");
         preInicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -37,7 +37,7 @@ public class MenuGenerico {
         confirmarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                jugador.setNombre(nombre.getText());
+                partida.setNombre(nombre.getText());
                 preInicio.dispose();
             }
         });
@@ -55,7 +55,7 @@ public class MenuGenerico {
         preInicio.add(panelBotones);
         preInicio.pack();
         preInicio.setVisible(true);
-        return jugador;
+        return partida;
     }
 
     public static boolean configuracion(JFrame padre) {
@@ -85,7 +85,7 @@ public class MenuGenerico {
                 ventanaPreEntrada.dispose();
             }
         });
-        //Nada
+        
         JButton nada = new JButton("Nada");
         nada.addActionListener(new ActionListener() {
             @Override

@@ -14,13 +14,17 @@ import java.io.ObjectOutputStream;
  */
 public class HistorialFicheroEscritura {
     private ObjectOutputStream stream;
-
+    
     public HistorialFicheroEscritura(String camino) throws IOException {
         FileOutputStream inputStream = new FileOutputStream(camino);
         stream = new ObjectOutputStream(inputStream);
     }
-
+    
     public void escribir(Configuracion config) throws IOException {
         stream.writeObject(config);
+    }
+    
+    public void cerrarFichero() throws IOException {
+        stream.close();
     }
 }
