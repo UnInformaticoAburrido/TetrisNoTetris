@@ -375,6 +375,10 @@ public class PanelJuego extends JPanel implements MouseListener, MouseMotionList
      * Devuelve la columna correspondiente a la posición x dada.
      */
     private int columnaEn(int x) {
+        if ((x - DESFASE_X) < 0) {
+            return -1;
+        }
+
         return (x - DESFASE_X) / CASILLA_X;
     }
 
@@ -382,6 +386,10 @@ public class PanelJuego extends JPanel implements MouseListener, MouseMotionList
      * Devuelve la fila correspondiente a la posición y dada.
      */
     private int filaEn(int y) {
+        if ((y - DESFASE_Y) < 0) {
+            return -1;
+        }
+
         return (y - DESFASE_Y) / CASILLA_Y;
     }
 }
