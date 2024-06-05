@@ -112,6 +112,20 @@ public class PanelTablero extends JPanel implements MouseListener, MouseMotionLi
         }
     }
 
+    /**
+     * Rota la pieza en sentido de las abujas del reloj.
+     */
+    public void rotarPieza() {
+        Casilla casillaTemp = matrizJuego[0][0];
+
+        for (int i = 0; i < 2; i++) {
+            matrizJuego[0][i] = casillaTemp;
+            casillaTemp = matrizJuego[0][i];
+        }
+
+        // TO-DO.
+    }
+
     @Override
     public void paint(Graphics graphics) {
         Graphics2D graphics2D = (Graphics2D) graphics;

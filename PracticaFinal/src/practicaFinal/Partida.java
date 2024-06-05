@@ -19,6 +19,10 @@ public class Partida {
         this.puntuacion = puntuacion;
     }
 
+    public void incrementaPuntuacion(int valor) {
+        puntuacion += valor;
+    }
+
     public String getNombre() {
         return nombre;
     }

@@ -11,7 +11,9 @@ public class TetrisUIB {
     public static final String CAMINO_CONFIG = "tetrisuib.conf";
     private static final String FICHERO_HISTORIAL = "partidasTetrisUIB.dat";
     private static Configuracion configuracion;
-    
+
+    private static GestorVentanas ventana;
+
     /**
      * @param args the command line arguments 
      */
@@ -31,29 +33,34 @@ public class TetrisUIB {
                 temp = new ConfiguracionFicheroLectura(CAMINO_CONFIG);
                 configuracion = temp.leer();
             } catch (IOException ex) {
-                
+
             } catch (ClassNotFoundException ex) {
-                
-            }finally{
+
+            } finally {
                 try {
                     temp.cerrarFichero();
                 } catch (IOException ex) {
-                    
+
                 }
             }
         }
         File file = new File(FICHERO_HISTORIAL);
         if (!file.exists()) {
-            
+
         }
-        GestorVentanas ventana = new GestorVentanas();
-        
+
+        ventana = new GestorVentanas();
     }
 
     public static Configuracion getConfiguracion() {
         return configuracion;
     }
-    public static String getHistoria(){
+
+    public static String getHistoria() {
         return FICHERO_HISTORIAL;
+    }
+
+    public static GestorVentanas getVentana() {
+        return ventana;
     }
 }
