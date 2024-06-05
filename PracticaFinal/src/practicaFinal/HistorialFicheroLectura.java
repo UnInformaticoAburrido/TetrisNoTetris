@@ -19,8 +19,7 @@ public class HistorialFicheroLectura {
         this.file = new RandomAccessFile(path, "w");
     }
 
-    /*public Partida leer() throws IOException, ClassNotFoundException {
-        
+    /*public Partida leerSiguietePartida() throws IOException, ClassNotFoundException {
         
     }*/
 

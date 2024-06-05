@@ -49,6 +49,10 @@ public class MenuGenerico {
                 preInicio.dispose();
             }
         });
+        JPanel panelBotones = new JPanel();
+        panelBotones.add(confirmarButton);
+        panelBotones.add(cancelarButton);
+        preInicio.add(panelBotones);
         preInicio.pack();
         preInicio.setVisible(true);
         return jugador;
