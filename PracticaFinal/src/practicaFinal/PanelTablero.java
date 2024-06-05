@@ -110,6 +110,8 @@ public class PanelTablero extends JPanel implements MouseListener, MouseMotionLi
                 piezaActual[i][j] = casilla;
             }
         }
+
+        reestablecerPieza();
     }
 
     /**
@@ -297,7 +299,6 @@ public class PanelTablero extends JPanel implements MouseListener, MouseMotionLi
 
         // Genera la nueva pieza:
         generaPieza();
-        reestablecerPieza();
     }
 
     @Override
