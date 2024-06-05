@@ -2,6 +2,8 @@ package practicaFinal;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * @author Dimitri Company Cifre
@@ -44,8 +46,29 @@ public class TetrisUIB {
         }
         File file = new File(FICHERO_HISTORIAL);
         if (!file.exists()) {
-            
+            try {
+                HistorialFicheroEscritura escritura = new HistorialFicheroEscritura(FICHERO_HISTORIAL);
+            } catch (IOException ex) {
+                
+            }
         }
+        
+        ///////////////////Eliminar
+        Partida partida = new Partida("Jose", 10, 10);
+        HistorialFicheroEscritura escritura;
+        try {
+            escritura = new HistorialFicheroEscritura(FICHERO_HISTORIAL);
+            escritura.escribir(partida);
+            escritura.escribir(partida);
+            escritura.escribir(partida);
+            escritura.escribir(partida);
+            escritura.escribir(partida);
+            escritura.cerrarFichero();
+        } catch (IOException ex) {
+            Logger.getLogger(TetrisUIB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ///////////////////Eliminar
+        
         GestorVentanas ventana = new GestorVentanas();
         
     }

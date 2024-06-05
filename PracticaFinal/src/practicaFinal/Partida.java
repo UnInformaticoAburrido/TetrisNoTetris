@@ -1,14 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package practicaFinal;
 
-/**
- *
- * @author dima
- */
-public class Partida {
+import java.io.Serializable;
+
+public class Partida  implements Serializable{
     private String nombre;
     private int tiempo;
     private int puntuacion;
@@ -41,5 +35,9 @@ public class Partida {
 
     public void setPuntuacion(int puntuacion) {
         this.puntuacion = puntuacion;
+    }
+    
+    public String toString() {
+        return "> Partida jugada por "+this.nombre+" con un tiempo de ["+this.tiempo+"] segundos ha consegido ["+this.puntuacion+"] puntus\n";
     }
 }

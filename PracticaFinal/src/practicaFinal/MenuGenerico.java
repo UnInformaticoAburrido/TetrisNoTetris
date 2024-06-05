@@ -3,6 +3,8 @@ package practicaFinal;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.EOFException;
+import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -18,15 +20,13 @@ public class MenuGenerico {
         Partida partida = new Partida("",TetrisUIB.getConfiguracion().getTiempoPartida(),0);
         
         JDialog preInicio = new JDialog(padre,"Tetris UIB");
+        preInicio.setLayout(new GridLayout(2, 1));
         preInicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         JLabel nombreLabel = new JLabel("Inserta tu nombre: ");
         JTextField nombre = new JTextField();
         GridLayout layout = new GridLayout(1, 2);
         JPanel contenedor = new JPanel(layout);
-        contenedor.add(nombreLabel);
-        contenedor.add(nombre);
-        preInicio.add(contenedor);
         
         JButton confirmarButton = new JButton("Confirmar");
         confirmarButton.addActionListener(new ActionListener() {
@@ -38,6 +38,7 @@ public class MenuGenerico {
         });
         
         JButton cancelarButton = new JButton("Cancelar");
+        
         cancelarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -46,24 +47,40 @@ public class MenuGenerico {
         });
         
         JPanel panelBotones = new JPanel();
+        
+        contenedor.add(nombreLabel);
+        
+        contenedor.add(nombre);
+        
+        preInicio.add(contenedor);
+        
         panelBotones.add(confirmarButton);
+        
         panelBotones.add(cancelarButton);
+        
         preInicio.add(panelBotones);
+        
         preInicio.pack();
+        
         preInicio.setVisible(true);
         
         return partida;
     }
 
     public static boolean configuracion(JFrame padre) {
+        
         //Generamos la ventana de selecion
         JDialog ventanaPreEntrada = new JDialog(padre, "Configuracion");
+        
         ventanaPreEntrada.setSize(400, 100);
+        
         ventanaPreEntrada.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
         ventanaPreEntrada.setVisible(true);
 
         //Generamos el unico panel de la configuracion
         JPanel central = new JPanel();
+        
         //Configuración específica juego
         JButton cej = new JButton("Configuración específica juego");
         cej.addActionListener(new ActionListener() {
@@ -73,6 +90,7 @@ public class MenuGenerico {
                 ConfigVentana ventana = new ConfigVentana();
             }
         });
+        
         //Modificar tiempo empezarPartida
         JButton mtp = new JButton("Modificar tiempo partida");
         mtp.addActionListener(new ActionListener() {
@@ -90,18 +108,56 @@ public class MenuGenerico {
                 ventanaPreEntrada.dispose();
             }
         });
+        
         central.add(cej);
         central.add(mtp);
         central.add(nada);
         ventanaPreEntrada.add(central);
+        
         return true;
     }
 
-    public static void historial() {
+    public static JPanel historial() {
+        
+        boolean continuar = true;
         
         JPanel historialPanel = new JPanel();
         
-        System.out.println("Funcionalidad no implementada");
+        try {
+            
+            HistorialFicheroLectura lector = new HistorialFicheroLectura(TetrisUIB.getHistoria());
+        
+            String text ="";
+            
+            while (continuar) {
+            
+                try {
+                
+                    Partida partida = lector.leer();
+                    
+                    text.concat(partida.toString());
+                
+                } catch (EOFException e) {
+                
+                    continuar=false;
+                
+                }
+                
+            }
+            
+            JLabel partidaLabel = new JLabel();
+            
+            historialPanel.add(partidaLabel);
+            
+            lector.cerrarFichero();
+        
+        } catch (IOException ex) {
+            
+        } finally {
+        
+            return historialPanel;
+        
+        }
     }
 
     public static JTextArea informacion() {
@@ -115,7 +171,9 @@ public class MenuGenerico {
         + "El juego terminara cuando se termina al terminarse el tiempo de juego.\n");
         
         text.setEditable(false);
+        
         text.setOpaque(false);
+        
         text.setLineWrap(true);
         
         return text;

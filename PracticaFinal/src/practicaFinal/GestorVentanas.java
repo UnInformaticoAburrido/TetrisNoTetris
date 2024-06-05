@@ -52,12 +52,14 @@ public class GestorVentanas extends MenuGenerico {
         JPanel juegoPanel = new JPanel();
         //Insertar panel de juego
         centralPanel.add(juegoPanel,"JuegoPanel");
+        
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BorderLayout());
         infoPanel.add(informacion(), BorderLayout.CENTER);
         centralPanel.add(infoPanel, "InfoPanel");
         
         JPanel historialPanel = new JPanel();
+        historialPanel.add(historial());
         centralPanel.add(historialPanel, "HistorialPanel");
     }
     //Funcion para crear el menu
@@ -99,6 +101,7 @@ public class GestorVentanas extends MenuGenerico {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
+                centralLayaut.show(centralPanel, "HistorialPanel");
             }
         });
 
