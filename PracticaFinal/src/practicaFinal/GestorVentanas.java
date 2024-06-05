@@ -9,7 +9,6 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
@@ -18,7 +17,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
-import javax.swing.border.Border;
 
 /**
  *
@@ -35,15 +33,13 @@ public class GestorVentanas extends MenuGenerico {
         ventana.setSize(dimensiones.width / 2, dimensiones.height / 2);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setLayout(new BorderLayout());
-        ventana.setJMenuBar(crearMenu(ventana));
+        ventana.setJMenuBar(crearMenu(ventana,ventana));
         Container contenido = ventana.getContentPane();
-        contenido.add(panelDeBotones(), BorderLayout.WEST);
+        contenido.add(panelDeBotones(ventana), BorderLayout.WEST);
         GestorJuego juego = new GestorJuego();
         //Insertamos el card layaut
-        Border border = BorderFactory.createMatteBorder(10, 10, 10, 10, Color.yellow);
-        centralPanel.setBorder(border);
         contenido.add(centralPanel, BorderLayout.CENTER);
-        contenido.add(menuIconos(), BorderLayout.NORTH);
+        contenido.add(menuIconos(ventana), BorderLayout.NORTH);
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
         
@@ -65,14 +61,16 @@ public class GestorVentanas extends MenuGenerico {
     //Funcion para crear el menu
     //Funcion para crear el panel de botones con iconos
     //Funcion dedicada a crear el panel de botones laterales
-    public JPanel panelDeBotones() {
+    public JPanel panelDeBotones(JFrame padre) {
         JPanel panelbotones = new JPanel(new GridLayout(5, 1));
         //Boton de Partida
         JButton Partida = new JButton("Partida");
         Partida.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                partida();
+                Jugador jugador = empezarPartida(padre);
+                //Aqui va la el metodo que llama al juego.
+                
             }
         });
 
@@ -82,7 +80,7 @@ public class GestorVentanas extends MenuGenerico {
         Configuracion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                configuracion();
+                configuracion(padre);
             }
         });
 
@@ -107,6 +105,7 @@ public class GestorVentanas extends MenuGenerico {
         });
 
         panelbotones.add(Informacion);
+        
         //Boton de Salir
         JButton Salir = new JButton("Salir");
         Salir.addActionListener(new ActionListener() {
@@ -120,7 +119,7 @@ public class GestorVentanas extends MenuGenerico {
         return panelbotones;
     }
 
-    public JMenuBar crearMenu(Container panelPrincipal) {
+    public JMenuBar crearMenu(Container panelPrincipal,JFrame padre) {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Menu");
         //Menu general
@@ -128,7 +127,7 @@ public class GestorVentanas extends MenuGenerico {
         partida.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                partida();
+                empezarPartida(padre);
             }
         });
 
@@ -137,7 +136,7 @@ public class GestorVentanas extends MenuGenerico {
         configuracion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                configuracion();
+                configuracion(padre);
             }
         });
 
@@ -189,13 +188,13 @@ public class GestorVentanas extends MenuGenerico {
         return menuBar;
     }
 
-    public JToolBar menuIconos() {
+    public JToolBar menuIconos(JFrame padre) {
         JToolBar iconBar = new JToolBar();
         JButton Partida = new JButton("Partida");
         Partida.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                partida();
+                empezarPartida(padre);
             }
         });
 
@@ -205,7 +204,7 @@ public class GestorVentanas extends MenuGenerico {
         Configuracion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                configuracion();
+                configuracion(padre);
             }
         });
 

@@ -9,8 +9,9 @@ import java.io.IOException;
  */
 public class TetrisUIB {
     public static final String CAMINO_CONFIG = "tetrisuib.conf";
+    private static final String FICHERO_HISTORIAL = "partidasTetrisUIB.dat";
     private static Configuracion configuracion;
-            
+    
     /**
      * @param args the command line arguments 
      */
@@ -40,9 +41,13 @@ public class TetrisUIB {
                     
                 }
             }
+        }
+        File file = new File(FICHERO_HISTORIAL);
+        if (!file.exists()) {
             
         }
         GestorVentanas ventana = new GestorVentanas();
+        
     }
 
     public static Configuracion getConfiguracion() {

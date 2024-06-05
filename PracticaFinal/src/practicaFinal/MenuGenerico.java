@@ -1,27 +1,15 @@
 package practicaFinal;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.Reader;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 
 /**
  *
@@ -30,15 +18,46 @@ import javax.swing.JTextPane;
  */
 public class MenuGenerico {
 
-    public static void partida() {
-        //Esta funcion deve iniciar la partida
-        System.out.println("Funcionalidad no implementada");
+    public static Jugador empezarPartida(JFrame padre) {
+        //Creamos un jugador
+        Jugador jugador = new Jugador();
+        
+        JDialog preInicio = new JDialog(padre,"Tetris UIB");
+        preInicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        JLabel nombreLabel = new JLabel("Inserta tu nombre: ");
+        JTextField nombre = new JTextField();
+        GridLayout layout = new GridLayout(1, 2);
+        JPanel contenedor = new JPanel(layout);
+        contenedor.add(nombreLabel);
+        contenedor.add(nombre);
+        preInicio.add(contenedor);
+        
+        JButton confirmarButton = new JButton("Confirmar");
+        confirmarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jugador.setNombre(nombre.getText());
+                preInicio.dispose();
+            }
+        });
+        
+        JButton cancelarButton = new JButton("Cancelar");
+        cancelarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                preInicio.dispose();
+            }
+        });
+        preInicio.pack();
+        preInicio.setVisible(true);
+        return jugador;
     }
 
-    public static boolean configuracion() {
+    public static boolean configuracion(JFrame padre) {
         //Generamos la ventana de selecion
-        JFrame ventanaPreEntrada = new JFrame();
-        ventanaPreEntrada.setSize(300, 200);
+        JDialog ventanaPreEntrada = new JDialog(padre, "Configuracion");
+        ventanaPreEntrada.setSize(400, 100);
         ventanaPreEntrada.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         ventanaPreEntrada.setVisible(true);
 
@@ -53,7 +72,7 @@ public class MenuGenerico {
                 ConfigVentana ventana = new ConfigVentana();
             }
         });
-        //Modificar tiempo partida
+        //Modificar tiempo empezarPartida
         JButton mtp = new JButton("Modificar tiempo partida");
         mtp.addActionListener(new ActionListener() {
             @Override
@@ -78,7 +97,8 @@ public class MenuGenerico {
     }
 
     public static void historial() {
-        //Esta funcion deve habrir el historial
+        JPanel historialPanel = new JPanel();
+        
         System.out.println("Funcionalidad no implementada");
     }
 
