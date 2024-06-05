@@ -1,0 +1,14 @@
+DISCLAIMER: Esta aplicacion ha sido tealizada por un grupo de estudientes en el contexto de practica del primer curso de los estudios de ingenieria informatica de la UNIVERSITAT DE LES ILLES BALEARS para el curso academico 2023-24.
+Los objetivos de esta practica pasan por trabajar con un entorno grafico he interactivo utilizando las prestaciones que ofrecen las livrerias graficas de java y la aplucacion de los conceptos de objetos y tipos de datos abstractos correspondientes a la programacion orientada a objertos.
+
+El bojetivo de este juego se basa en encajar multiples piezas aleatorias las cuales se mostraran en el panel de piezas y la deveras colocar en tablero.
+
+Al conseguir formar una columna o una fila todas las piezas que formen la fila/columna desapareceran y te otorgaran puntos por cada celda.
+
+Podras generar una nueva pieza consumiendo puntos en el proceso.
+
+Podras rotar las piezas perdiendo puntos en el proceso.
+
+El juego terminara cuando se termina al terminarse el tiempo de juego.
+
+

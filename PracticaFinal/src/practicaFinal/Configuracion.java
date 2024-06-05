@@ -2,6 +2,7 @@ package practicaFinal;
 
 import java.io.Serializable;
 
+
 public class Configuracion implements Serializable {
     private int puntuacionCasillasEliminadas;
     private int puntuacionRotarForma;
@@ -15,6 +16,7 @@ public class Configuracion implements Serializable {
         this.puntuacionNuevaForma = 5;
         this.imagenCasillasFormas = "img/piece.png";
         this.tiempoPartida = 30;
+        
     }
 
     public int getPuntuacionCasillasEliminadas() {
