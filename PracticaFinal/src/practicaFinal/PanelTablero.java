@@ -15,7 +15,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class PanelJuego extends JPanel implements MouseListener, MouseMotionListener {
+public class PanelTablero extends JPanel implements MouseListener, MouseMotionListener {
     // Constantes que definen los márgenes del tablero según la
     // esquina superior izquierda.
     private final int DESFASE_X = 50, DESFASE_Y = 40;
@@ -53,7 +53,7 @@ public class PanelJuego extends JPanel implements MouseListener, MouseMotionList
     // Variable que indica si se está moviendo una pieza con el ratón.
     private boolean moviendoPieza = false;
 
-    public PanelJuego() {
+    public PanelTablero() {
         super();
         addMouseListener(this);
         addMouseMotionListener(this);
@@ -178,14 +178,6 @@ public class PanelJuego extends JPanel implements MouseListener, MouseMotionList
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-    }
-
-    @Override
     public void mouseReleased(MouseEvent e) {
         int x = e.getX(), y = e.getY();
 
@@ -295,14 +287,6 @@ public class PanelJuego extends JPanel implements MouseListener, MouseMotionList
     }
 
     @Override
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-    }
-
-    @Override
     public void mouseDragged(MouseEvent e) {
         int x = e.getX(), y = e.getY();
 
@@ -323,6 +307,22 @@ public class PanelJuego extends JPanel implements MouseListener, MouseMotionList
         }
 
         repaint();
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
     }
 
     @Override
