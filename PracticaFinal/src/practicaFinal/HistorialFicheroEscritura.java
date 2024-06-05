@@ -20,8 +20,8 @@ public class HistorialFicheroEscritura {
         stream = new ObjectOutputStream(inputStream);
     }
     
-    public void escribir(Configuracion config) throws IOException {
-        stream.writeObject(config);
+    public void escribir(Partida partida) throws IOException {
+        stream.writeObject(partida);
     }
     
     public void cerrarFichero() throws IOException {

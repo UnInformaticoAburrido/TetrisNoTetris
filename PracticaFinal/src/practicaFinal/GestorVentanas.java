@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
@@ -36,9 +37,10 @@ public class GestorVentanas extends MenuGenerico {
         ventana.setJMenuBar(crearMenu(ventana,ventana));
         Container contenido = ventana.getContentPane();
         contenido.add(panelDeBotones(ventana), BorderLayout.WEST);
-        GestorJuego juego = new GestorJuego();
+        
         //Insertamos el card layaut
         contenido.add(centralPanel, BorderLayout.CENTER);
+        
         contenido.add(menuIconos(ventana), BorderLayout.NORTH);
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
@@ -70,7 +72,13 @@ public class GestorVentanas extends MenuGenerico {
             public void actionPerformed(ActionEvent e) {
                 Partida partida = empezarPartida(padre);
                 //Aqui va la el metodo que llama al juego.
-                
+                try {
+                    HistorialFicheroEscritura escribir = new HistorialFicheroEscritura(TetrisUIB.getHistoria());
+                    escribir.escribir(partida);
+                    escribir.cerrarFichero();
+                } catch (IOException ex) {
+                    
+                }
             }
         });
 

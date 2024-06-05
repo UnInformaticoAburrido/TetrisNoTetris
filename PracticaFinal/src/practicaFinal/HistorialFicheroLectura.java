@@ -1,31 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package practicaFinal;
 
-import java.io.FileNotFoundException;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.ObjectInputStream;
 
-/**
- *
- * @author dima
- */
 public class HistorialFicheroLectura {
-    private RandomAccessFile file;
-
-    public HistorialFicheroLectura(String path) throws FileNotFoundException {
-        this.file = new RandomAccessFile(path, "r");
+    private ObjectInputStream stream;
+    
+    public HistorialFicheroLectura(String camino) throws IOException {
+        FileInputStream inputStream = new FileInputStream(camino);
+        stream = new ObjectInputStream(inputStream);
     }
-
-    /*public Partida leerSiguietePartida() throws IOException, ClassNotFoundException {
-        
-        
-        Partida partida = new Partida(nombre, 0, 0);
-    }*/
-
+    
+    public Partida leer() throws IOException, ClassNotFoundException {
+        return (Partida) stream.readObject();
+    }
+    
     public void cerrarFichero() throws IOException {
-        
+        stream.close();
     }
 }

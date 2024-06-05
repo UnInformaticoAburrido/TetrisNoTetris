@@ -53,4 +53,7 @@ public class TetrisUIB {
     public static Configuracion getConfiguracion() {
         return configuracion;
     }
+    public static String getHistoria(){
+        return FICHERO_HISTORIAL;
+    }
 }

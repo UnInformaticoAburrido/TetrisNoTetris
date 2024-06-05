@@ -42,7 +42,4 @@ public class Partida {
     public void setPuntuacion(int puntuacion) {
         this.puntuacion = puntuacion;
     }
-    
-    
-    
 }
