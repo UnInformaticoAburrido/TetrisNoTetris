@@ -67,6 +67,7 @@ public class GestorVentanas extends MenuGenerico {
         centralPanel.add(infoPanel, "InfoPanel");
 
         JPanel historialPanel = new JPanel();
+        historialPanel.add(historial());
         centralPanel.add(historialPanel, "HistorialPanel");
     }
 
