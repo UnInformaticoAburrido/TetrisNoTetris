@@ -24,6 +24,7 @@ public class GestorVentanas extends MenuGenerico {
     private CardLayout centralLayout = new CardLayout();
     private JPanel centralPanel = new JPanel(centralLayout);
     private JPanel panelContenedorJuego = new JPanel(new BorderLayout());
+    private JTextArea historialTextArea = new JTextArea();
     private PanelJuego panelJuego = null;
 
     public void setPanelJuego(PanelJuego panelJuego) {
@@ -69,9 +70,8 @@ public class GestorVentanas extends MenuGenerico {
 
         // Insertamos el panel de historial
         JPanel historialPanel = new JPanel();
-        JTextArea partidasTextArea = new JTextArea();
-        partidasTextArea.setEditable(false);
-        historialPanel.add(historial(partidasTextArea));
+        historialTextArea.setEditable(false);
+        historialPanel.add(historialTextArea);
         centralPanel.add(historialPanel, "HistorialPanel");
     }
 
@@ -104,7 +104,7 @@ public class GestorVentanas extends MenuGenerico {
         Historial.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                historial(historialTextArea);
             }
         });
 

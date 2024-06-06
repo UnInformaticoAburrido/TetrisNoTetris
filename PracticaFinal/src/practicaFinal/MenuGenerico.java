@@ -123,13 +123,15 @@ public class MenuGenerico {
         return true;
     }
 
-    public static JTextArea historial(JTextArea partidaTextArea) {
+    public static void historial(JTextArea partidaTextArea) {
 
         boolean continuar = true;
         
+        HistorialFicheroLectura lector = null;
+        
         try {
 
-            HistorialFicheroLectura lector = new HistorialFicheroLectura(TetrisUIB.getHistoria());
+            lector = new HistorialFicheroLectura(TetrisUIB.getHistoria());
 
             String text = "";
 
@@ -145,20 +147,25 @@ public class MenuGenerico {
 
                     continuar = false;
 
+                } catch (ClassNotFoundException ex) {
+                 
                 }
 
             }
             
-            partidaTextArea.append(text);
+            partidaTextArea.setText(text);
             
             lector.cerrarFichero();
 
         } catch (IOException ex) {
 
         } finally {
-        
-            return partidaTextArea;
-        
+            if(lector != null) {
+                try {
+                    lector.cerrarFichero();
+                } catch (IOException e) {
+                }
+            }
         }
     }
 
