@@ -2,7 +2,7 @@ package practicaFinal;
 
 import java.io.Serializable;
 
-public class Partida  implements Serializable{
+public class Partida implements Serializable {
     private String nombre;
     private int tiempo;
     private int puntuacion;
@@ -11,6 +11,10 @@ public class Partida  implements Serializable{
         this.nombre = nombre;
         this.tiempo = tiempo;
         this.puntuacion = puntuacion;
+    }
+
+    public void incrementaPuntuacion(int valor) {
+        puntuacion += valor;
     }
 
     public String getNombre() {
@@ -36,8 +40,9 @@ public class Partida  implements Serializable{
     public void setPuntuacion(int puntuacion) {
         this.puntuacion = puntuacion;
     }
-    
+
     public String toString() {
-        return "> Partida jugada por "+this.nombre+" con un tiempo de ["+this.tiempo+"] segundos ha consegido ["+this.puntuacion+"] puntos";
+        return "> Partida jugada por " + this.nombre + " con un tiempo de [" + this.tiempo + "] segundos ha consegido ["
+                + this.puntuacion + "] puntos";
     }
 }

@@ -110,6 +110,22 @@ public class PanelTablero extends JPanel implements MouseListener, MouseMotionLi
                 piezaActual[i][j] = casilla;
             }
         }
+
+        reestablecerPieza();
+    }
+
+    /**
+     * Rota la pieza en sentido de las abujas del reloj.
+     */
+    public void rotarPieza() {
+        Casilla casillaTemp = matrizJuego[0][0];
+
+        for (int i = 0; i < 2; i++) {
+            matrizJuego[0][i] = casillaTemp;
+            casillaTemp = matrizJuego[0][i];
+        }
+
+        // TO-DO.
     }
 
     @Override
@@ -283,7 +299,6 @@ public class PanelTablero extends JPanel implements MouseListener, MouseMotionLi
 
         // Genera la nueva pieza:
         generaPieza();
-        reestablecerPieza();
     }
 
     @Override
