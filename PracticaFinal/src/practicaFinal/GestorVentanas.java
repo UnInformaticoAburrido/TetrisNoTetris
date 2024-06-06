@@ -9,7 +9,6 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
@@ -17,6 +16,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JToolBar;
 
 /**
@@ -47,23 +47,28 @@ public class GestorVentanas extends MenuGenerico {
         
         //Generamos las cartas
         JPanel logoPanel = new JPanel();
+        
         logoPanel.setBackground(Color.black);
         centralPanel.add(logoPanel, "LogoPanel");
         JPanel juegoPanel = new JPanel();
+        
         //Insertar panel de juego
         centralPanel.add(juegoPanel,"JuegoPanel");
         
+        //Insertamos el panel de informacion
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BorderLayout());
         infoPanel.add(informacion(), BorderLayout.CENTER);
         centralPanel.add(infoPanel, "InfoPanel");
         
+        //Insertamos el panel de historial
         JPanel historialPanel = new JPanel();
-        historialPanel.add(historial());
+        JTextArea partidasTextArea = new JTextArea();
+        partidasTextArea.setEditable(false);
+        historialPanel.add(historial(partidasTextArea));
         centralPanel.add(historialPanel, "HistorialPanel");
     }
-    //Funcion para crear el menu
-    //Funcion para crear el panel de botones con iconos
+    
     //Funcion dedicada a crear el panel de botones laterales
     public JPanel panelDeBotones(JFrame padre) {
         JPanel panelbotones = new JPanel(new GridLayout(5, 1));
@@ -73,14 +78,6 @@ public class GestorVentanas extends MenuGenerico {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Partida partida = empezarPartida(padre);
-                //Aqui va la el metodo que llama al juego.
-                try {
-                    HistorialFicheroEscritura escribir = new HistorialFicheroEscritura(TetrisUIB.getHistoria());
-                    escribir.escribir(partida);
-                    escribir.cerrarFichero();
-                } catch (IOException ex) {
-                    
-                }
             }
         });
 
@@ -129,7 +126,8 @@ public class GestorVentanas extends MenuGenerico {
         panelbotones.add(Salir);
         return panelbotones;
     }
-
+    
+    //Funcion para crear el menu
     public JMenuBar crearMenu(Container panelPrincipal,JFrame padre) {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Menu");
@@ -156,7 +154,7 @@ public class GestorVentanas extends MenuGenerico {
         historial.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                historial();
+                centralLayaut.show(centralPanel, "HistorialPanel");
             }
         });
 
@@ -199,6 +197,7 @@ public class GestorVentanas extends MenuGenerico {
         return menuBar;
     }
 
+    //Funcion para crear el panel de botones con iconos
     public JToolBar menuIconos(JFrame padre) {
         JToolBar iconBar = new JToolBar();
         JButton Partida = new JButton("Partida");
@@ -225,7 +224,7 @@ public class GestorVentanas extends MenuGenerico {
         Historial.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                historial();
+                centralLayaut.show(centralPanel, "HistorialPanel");
             }
         });
 

@@ -38,6 +38,6 @@ public class Partida  implements Serializable{
     }
     
     public String toString() {
-        return "> Partida jugada por "+this.nombre+" con un tiempo de ["+this.tiempo+"] segundos ha consegido ["+this.puntuacion+"] puntus\n";
+        return "> Partida jugada por "+this.nombre+" con un tiempo de ["+this.tiempo+"] segundos ha consegido ["+this.puntuacion+"] puntos";
     }
 }

@@ -117,11 +117,9 @@ public class MenuGenerico {
         return true;
     }
 
-    public static JPanel historial() {
+    public static JTextArea historial(JTextArea partidaTextArea) {
         
         boolean continuar = true;
-        
-        JPanel historialPanel = new JPanel();
         
         try {
             
@@ -135,7 +133,7 @@ public class MenuGenerico {
                 
                     Partida partida = lector.leer();
                     
-                    text.concat(partida.toString());
+                    text += partida.toString() + '\n';
                 
                 } catch (EOFException e) {
                 
@@ -145,9 +143,7 @@ public class MenuGenerico {
                 
             }
             
-            JLabel partidaLabel = new JLabel();
-            
-            historialPanel.add(partidaLabel);
+            partidaTextArea.append(text);
             
             lector.cerrarFichero();
         
@@ -155,7 +151,7 @@ public class MenuGenerico {
             
         } finally {
         
-            return historialPanel;
+            return partidaTextArea;
         
         }
     }
