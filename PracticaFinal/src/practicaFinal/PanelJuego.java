@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -66,6 +67,16 @@ public class PanelJuego extends JPanel {
                 int valorActual = progressBar.getValue();
                 progressBar.setValue(++valorActual);
                 progressBar.setString(tiempoTotal - valorActual + " s");
+
+                if (valorActual == tiempoTotal) {
+                    try {
+                        HistorialFicheroEscritura escribir = new HistorialFicheroEscritura(TetrisUIB.getHistoria());
+                        escribir.escribir(partida);
+                        escribir.cerrarFichero();
+                    } catch (IOException ex) {
+
+                    }
+                }
             }
         });
 
@@ -117,9 +128,7 @@ public class PanelJuego extends JPanel {
         this.add(panelTablero, BorderLayout.CENTER);
         this.add(panelLateral, BorderLayout.EAST);
         this.add(panelInferior, BorderLayout.SOUTH);
-    }
 
-    public void empezarTiempo() {
         timer.start();
     }
 
