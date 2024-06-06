@@ -4,9 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -49,38 +47,38 @@ public class GestorVentanas extends MenuGenerico {
         Container contenido = ventana.getContentPane();
         contenido.add(panelDeBotones(ventana), BorderLayout.WEST);
 
-        //Insertamos el card layout
+        // Insertamos el card layout
         contenido.add(centralPanel, BorderLayout.CENTER);
 
         contenido.add(menuIconos(ventana), BorderLayout.NORTH);
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
 
-        //Generamos las cartas
+        // Generamos las cartas
         JPanel logoPanel = new JPanel();
-        
+
         logoPanel.setBackground(Color.black);
         centralPanel.add(logoPanel, "LogoPanel");
-        //Insertar panel de juego
+        // Insertar panel de juego
         centralPanel.add(panelContenedorJuego, "JuegoPanel");
-        //Insertamos el panel de informacion
+        // Insertamos el panel de informacion
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BorderLayout());
         infoPanel.add(informacion(), BorderLayout.CENTER);
         centralPanel.add(infoPanel, "InfoPanel");
 
-        //Insertamos el panel de historial
+        // Insertamos el panel de historial
         JPanel historialPanel = new JPanel();
         JTextArea partidasTextArea = new JTextArea();
         partidasTextArea.setEditable(false);
         historialPanel.add(historial(partidasTextArea));
         centralPanel.add(historialPanel, "HistorialPanel");
     }
-    
-    //Funcion dedicada a crear el panel de botones laterales
+
+    // Funcion dedicada a crear el panel de botones laterales
     public JPanel panelDeBotones(JFrame padre) {
         JPanel panelbotones = new JPanel(new GridLayout(5, 1));
-        //Boton de Partida
+        // Boton de Partida
         JButton Partida = new JButton("Partida");
         Partida.addActionListener(new ActionListener() {
             @Override
@@ -91,7 +89,7 @@ public class GestorVentanas extends MenuGenerico {
         });
 
         panelbotones.add(Partida);
-        //Boton de Configuracion
+        // Boton de Configuracion
         JButton Configuracion = new JButton("Configuración");
         Configuracion.addActionListener(new ActionListener() {
             @Override
@@ -101,7 +99,7 @@ public class GestorVentanas extends MenuGenerico {
         });
 
         panelbotones.add(Configuracion);
-        //Boton de Historial
+        // Boton de Historial
         JButton Historial = new JButton("Historial");
         Historial.addActionListener(new ActionListener() {
             @Override
@@ -111,7 +109,7 @@ public class GestorVentanas extends MenuGenerico {
         });
 
         panelbotones.add(Historial);
-        //Boton de Informacion
+        // Boton de Informacion
         JButton Informacion = new JButton("Informacion");
         Informacion.addActionListener(new ActionListener() {
             @Override
@@ -122,7 +120,7 @@ public class GestorVentanas extends MenuGenerico {
 
         panelbotones.add(Informacion);
 
-        //Boton de Salir
+        // Boton de Salir
         JButton Salir = new JButton("Salir");
         Salir.addActionListener(new ActionListener() {
             @Override
@@ -134,12 +132,12 @@ public class GestorVentanas extends MenuGenerico {
         panelbotones.add(Salir);
         return panelbotones;
     }
-    
-    //Funcion para crear el menu
+
+    // Funcion para crear el menu
     public JMenuBar crearMenu(Container panelPrincipal, JFrame padre) {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Menu");
-        //Menu general
+        // Menu general
         JMenuItem partida = new JMenuItem("Partida");
         partida.addActionListener(new ActionListener() {
             @Override
@@ -163,7 +161,7 @@ public class GestorVentanas extends MenuGenerico {
         historial.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                centralLayaut.show(centralPanel, "HistorialPanel");
+                centralLayout.show(centralPanel, "HistorialPanel");
             }
         });
 
@@ -191,7 +189,7 @@ public class GestorVentanas extends MenuGenerico {
         return menuBar;
     }
 
-    //Funcion para crear el panel de botones con iconos
+    // Funcion para crear el panel de botones con iconos
     public JToolBar menuIconos(JFrame padre) {
         JToolBar iconBar = new JToolBar();
         JButton Partida = new JButton("Partida");
@@ -204,7 +202,7 @@ public class GestorVentanas extends MenuGenerico {
         });
 
         iconBar.add(Partida);
-        //Boton de Configuracion
+        // Boton de Configuracion
         JButton Configuracion = new JButton("Configuración");
         Configuracion.addActionListener(new ActionListener() {
             @Override
@@ -214,17 +212,17 @@ public class GestorVentanas extends MenuGenerico {
         });
 
         iconBar.add(Configuracion);
-        //Boton de Historial
+        // Boton de Historial
         JButton Historial = new JButton("Historial");
         Historial.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                centralLayaut.show(centralPanel, "HistorialPanel");
+                centralLayout.show(centralPanel, "HistorialPanel");
             }
         });
 
         iconBar.add(Historial);
-        //Boton de Informacion
+        // Boton de Informacion
         JButton Informacion = new JButton("Informacion");
         Informacion.addActionListener(new ActionListener() {
             @Override
@@ -234,7 +232,7 @@ public class GestorVentanas extends MenuGenerico {
         });
 
         iconBar.add(Informacion);
-        //Boton de Salir
+        // Boton de Salir
         JButton Salir = new JButton("Salir");
         Salir.addActionListener(new ActionListener() {
             @Override
