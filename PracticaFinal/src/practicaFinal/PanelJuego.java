@@ -1,7 +1,7 @@
 package practicaFinal;
 
 import java.awt.BorderLayout;
-import java.awt.GridBagLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,32 +33,33 @@ public class PanelJuego extends JPanel {
         JPanel panelInferiorTexto = new JPanel();
         JPanel panelInferiorTiempo = new JPanel();
 
-        GridBagLayout layoutPanelInferiorTexto = new GridBagLayout();
-
-        layoutPanelInferiorTexto.columnWidths = new int[] {
-                1, 2, 1, 1
-        };
-
+        GridLayout layoutPanelInferiorTexto = new GridLayout(1, 4);
         panelInferiorTexto.setLayout(layoutPanelInferiorTexto);
 
-        layoutPanelInferiorTexto.location(0, 0);
+        Font fuenteEtiquetasTitulos = new Font("SansSerif", Font.BOLD, 20);
+        Font fuenteEtiquetas = new Font("Monospaced", Font.PLAIN, 20);
+
         JLabel labelTituloJugador = new JLabel("Jugador: ");
-        panelInferior.add(labelTituloJugador);
+        labelTituloJugador.setFont(fuenteEtiquetasTitulos);
+        panelInferiorTexto.add(labelTituloJugador);
 
-        layoutPanelInferiorTexto.location(0, 1);
         JLabel labelJugador = new JLabel(partida.getNombre());
-        panelInferior.add(labelJugador);
+        labelJugador.setFont(fuenteEtiquetas);
+        panelInferiorTexto.add(labelJugador);
 
-        layoutPanelInferiorTexto.location(0, 2);
         JLabel labelTituloPuntacion = new JLabel("Puntuación: ");
-        panelInferior.add(labelTituloPuntacion);
+        labelTituloPuntacion.setFont(fuenteEtiquetasTitulos);
+        panelInferiorTexto.add(labelTituloPuntacion);
 
-        layoutPanelInferiorTexto.location(0, 3);
-        panelInferior.add(labelPuntuacion);
+        labelPuntuacion.setFont(fuenteEtiquetas);
+        panelInferiorTexto.add(labelPuntuacion);
 
         panelInferiorTiempo.setLayout(new BorderLayout());
 
         JProgressBar progressBar = new JProgressBar(0, partida.getTiempo());
+        progressBar.setString(partida.getTiempo() + " s");
+        progressBar.setFont(fuenteEtiquetas);
+        progressBar.setStringPainted(true);
 
         timer = new Timer(1000, new ActionListener() {
             @Override
@@ -69,13 +70,24 @@ public class PanelJuego extends JPanel {
                 progressBar.setString(tiempoTotal - valorActual + " s");
 
                 if (valorActual == tiempoTotal) {
+                    HistorialFicheroEscritura escritura = null;
+
                     try {
-                        HistorialFicheroEscritura escribir = new HistorialFicheroEscritura(TetrisUIB.getHistoria());
-                        escribir.escribir(partida);
-                        escribir.cerrarFichero();
+                        escritura = new HistorialFicheroEscritura(TetrisUIB.getHistoria());
+                        escritura.escribir(partida);
                     } catch (IOException ex) {
 
+                    } finally {
+                        if (escritura != null) {
+                            try {
+                                escritura.cerrarFichero();
+                            } catch (IOException e) {
+
+                            }
+                        }
                     }
+
+                    timer.stop();
                 }
             }
         });
