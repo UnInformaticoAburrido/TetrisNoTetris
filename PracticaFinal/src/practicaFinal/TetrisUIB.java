@@ -1,5 +1,6 @@
 package practicaFinal;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 
@@ -14,9 +15,13 @@ public class TetrisUIB {
 
     private static GestorVentanas ventana;
 
-    /**
-     * @param args the command line arguments 
-     */
+    // Constantes de colores:
+    public static final Color COLOR_PRINCIPAL = new Color(255, 138, 103); // #FF8A67
+    public static final Color COLOR_SECUNDARIO = new Color(251, 204, 175); // #FBCCAF
+    public static final Color COLOR_TERCIARIO = new Color(39, 105, 28); // #27691C
+    public static final Color COLOR_FONDOS = new Color(254, 240, 231); // #FEF0E7
+    public static final Color COLOR_RESALTADO = new Color(125, 255, 210); // #7DFFD2
+
     public static void main(String[] args) {
         if (!(new File(CAMINO_CONFIG).exists())) {
             configuracion = new Configuracion();

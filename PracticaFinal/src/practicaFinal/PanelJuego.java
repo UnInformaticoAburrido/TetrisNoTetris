@@ -27,14 +27,15 @@ public class PanelJuego extends JPanel {
         // ------------------------------
 
         JPanel panelInferior = new JPanel();
+        panelInferior.setBackground(TetrisUIB.COLOR_PRINCIPAL);
 
         panelInferior.setLayout(new GridLayout(2, 1));
 
         JPanel panelInferiorTexto = new JPanel();
         JPanel panelInferiorTiempo = new JPanel();
 
-        GridLayout layoutPanelInferiorTexto = new GridLayout(1, 4);
-        panelInferiorTexto.setLayout(layoutPanelInferiorTexto);
+        panelInferiorTexto.setLayout(new GridLayout(1, 4));
+        panelInferiorTexto.setOpaque(false);
 
         Font fuenteEtiquetasTitulos = new Font("SansSerif", Font.BOLD, 20);
         Font fuenteEtiquetas = new Font("Monospaced", Font.PLAIN, 20);
@@ -55,11 +56,14 @@ public class PanelJuego extends JPanel {
         panelInferiorTexto.add(labelPuntuacion);
 
         panelInferiorTiempo.setLayout(new BorderLayout());
+        panelInferiorTiempo.setOpaque(false);
 
         JProgressBar progressBar = new JProgressBar(0, partida.getTiempo());
         progressBar.setString(partida.getTiempo() + " s");
         progressBar.setFont(fuenteEtiquetas);
         progressBar.setStringPainted(true);
+        progressBar.setOpaque(false);
+        progressBar.setForeground(TetrisUIB.COLOR_TERCIARIO);
 
         timer = new Timer(1000, new ActionListener() {
             @Override
