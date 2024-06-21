@@ -1,6 +1,8 @@
 package practicaFinal;
 
+import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.EOFException;
@@ -175,18 +177,26 @@ public class MenuGenerico {
     public static JTextArea informacion() {
 
         JTextArea text = new JTextArea(
-                "DISCLAIMER: Esta aplicacion ha sido tealizada por un grupo de estudientes en el contexto de practica del primer curso de los estudios de ingenieria informatica de la UNIVERSITAT DE LES ILLES BALEARS para el curso academico 2023-24. Los objetivos de esta practica pasan por trabajar con un entorno grafico he interactivo utilizando las prestaciones que ofrecen las livrerias graficas de java y la aplucacion de los conceptos de objetos y tipos de datos abstractos correspondientes a la programacion orientada a objertos.\n"
-                        + "El bojetivo de este juego se basa en encajar multiples piezas aleatorias las cuales se mostraran en el panel de piezas y la deveras colocar en tablero.\n"
-                        + "Al conseguir formar una columna o una fila todas las piezas que formen la fila/columna desapareceran y te otorgaran puntos por cada celda.\n"
-                        + "Podras generar una nueva pieza consumiendo puntos en el proceso.\n"
-                        + "Podras rotar las piezas perdiendo puntos en el proceso.\n"
-                        + "El juego terminara cuando se termina al terminarse el tiempo de juego.\n");
+                "DISCLAIMER:\n"
+                        + "Esta aplicación ha sido realizada por un grupo de estudiantes en el contexto de práctica del primer curso de los estudios de\n"
+                        + "Ingeniería Informática de la UNIVERSITAT DE LES ILLES BALEARS (UIB) para el curso académico 2023-24.\n\n"
+                        + "Los objetivos de esta práctica pasan por trabajar con un entorno gráfico e interactivo utilizando las prestaciones que ofrecen\n"
+                        + "las librerías gráficas de Java (swing y awt) y la aplicación de los conceptos de programación orientada a objetos.\n\n"
+                        + "El objetivo de este juego se basa en encajar múltiples piezas generadas de manera aleatoria las cuales se mostrarán en el panel\n"
+                        + "de piezas correspondiente y colocarlas en el tablero.\n"
+                        + "Al conseguir formar una columna o una fila, todas las piezas que formen la fila / columna desaparecerán y otorgarán\n"
+                        + "puntos por cada celda.\n\n"
+                        + "De ser preciso, se pueden hacer las siguientes acciones adicionales haciendo uso de una determinada cantidad de puntos:\n\n"
+                        + "\t- Se pueden generar nuevas piezas.\n"
+                        + "\t- Se pueden rotar las piezas en el sentido horario.\n\n"
+                        + "El coste de las acciones se puede personalizar en el apartado de configuración.\n\n"
+                        + "El juego terminará al terminarse el tiempo de juego.\n"
+                        + "Este también se puede modificar en el apartado de configuración correspondiente.");
 
         text.setEditable(false);
-
         text.setOpaque(false);
-
-        text.setLineWrap(true);
+        text.setFont(new Font("SansSerif", Font.PLAIN, 15));
+        text.setMargin(new Insets(30, 30, 0, 0));
 
         return text;
     }
