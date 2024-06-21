@@ -4,19 +4,20 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class ConfigurarTiempoVentana extends JFrame {
+public class ConfigurarTiempoVentana extends JDialog {
 
-    public ConfigurarTiempoVentana() {
+    public ConfigurarTiempoVentana(JFrame padre) {
+        super(padre);
+
         setTitle("Cambiar tiempo partida");
         setDefaultCloseOperation(ConfigVentana.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setVisible(true);
 
         GridLayout gridCentral = new GridLayout(2, 1);
         JPanel central = new JPanel(gridCentral);
@@ -57,8 +58,11 @@ public class ConfigurarTiempoVentana extends JFrame {
         botones.add(confirmarButton);
         botones.add(cancelarButton);
         central.add(botones);
-        this.add(central);
-        this.pack();
+        add(central);
+        pack();
+
+        setLocationRelativeTo(padre);
+        setVisible(true);
     }
 
 }

@@ -70,6 +70,8 @@ public class MenuGenerico {
 
         preInicio.pack();
 
+        preInicio.setLocationRelativeTo(padre);
+
         preInicio.setVisible(true);
     }
 
@@ -82,8 +84,6 @@ public class MenuGenerico {
 
         ventanaPreEntrada.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        ventanaPreEntrada.setVisible(true);
-
         //Generamos el unico panel de la configuracion
         JPanel central = new JPanel();
 
@@ -93,7 +93,7 @@ public class MenuGenerico {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ventanaPreEntrada.dispose();
-                ConfigVentana ventana = new ConfigVentana();
+                ConfigVentana ventana = new ConfigVentana(padre);
             }
         });
 
@@ -102,7 +102,7 @@ public class MenuGenerico {
         mtp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ConfigurarTiempoVentana ventana = new ConfigurarTiempoVentana();
+                ConfigurarTiempoVentana ventana = new ConfigurarTiempoVentana(padre);
                 ventanaPreEntrada.dispose();
             }
         });
@@ -119,6 +119,9 @@ public class MenuGenerico {
         central.add(mtp);
         central.add(nada);
         ventanaPreEntrada.add(central);
+        ventanaPreEntrada.setLocationRelativeTo(padre);
+
+        ventanaPreEntrada.setVisible(true);
 
         return true;
     }
@@ -126,9 +129,9 @@ public class MenuGenerico {
     public static void historial(JTextArea partidaTextArea) {
 
         boolean continuar = true;
-        
+
         HistorialFicheroLectura lector = null;
-        
+
         try {
 
             lector = new HistorialFicheroLectura(TetrisUIB.getHistoria());
@@ -140,27 +143,27 @@ public class MenuGenerico {
                 try {
 
                     Partida partida = lector.leer();
-                    
+
                     text += partida.toString() + '\n';
-                
+
                 } catch (EOFException e) {
 
                     continuar = false;
 
                 } catch (ClassNotFoundException ex) {
-                 
+
                 }
 
             }
-            
+
             partidaTextArea.setText(text);
-            
+
             lector.cerrarFichero();
 
         } catch (IOException ex) {
 
         } finally {
-            if(lector != null) {
+            if (lector != null) {
                 try {
                     lector.cerrarFichero();
                 } catch (IOException e) {

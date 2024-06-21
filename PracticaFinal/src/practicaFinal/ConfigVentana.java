@@ -5,29 +5,32 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class ConfigVentana extends JFrame {
+public class ConfigVentana extends JDialog {
 
     private Configuracion configuracion;
     private String lastPath = "";
 
-    public ConfigVentana() {
+    public ConfigVentana(JFrame padre) {
+        super(padre);
+
         this.configuracion = TetrisUIB.getConfiguracion();
         setTitle("Configuracion");
         setSize(900, 400);
         setDefaultCloseOperation(ConfigVentana.DISPOSE_ON_CLOSE);
-        add(GPP());
-        setLocationRelativeTo(null);
+        add(generarPanelPrincipal());
+
+        setLocationRelativeTo(padre);
         setVisible(true);
     }
 
-    //Generar Panel Principal
-    private JPanel GPP() {
+    private JPanel generarPanelPrincipal() {
         JPanel principal = new JPanel();
         GridLayout grid = new GridLayout(6, 8);
         principal.setLayout(grid);
