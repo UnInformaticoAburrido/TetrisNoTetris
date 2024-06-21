@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -110,6 +111,8 @@ public class PanelJuego extends JPanel {
         panelLateral.setLayout(new GridLayout(2, 1));
 
         JButton botonGirarPieza = new JButton();
+        botonGirarPieza.setIcon(new ImageIcon("img/rotate.png"));
+        botonGirarPieza.setBackground(TetrisUIB.COLOR_SECUNDARIO);
 
         botonGirarPieza.addActionListener(new ActionListener() {
             @Override
@@ -122,6 +125,8 @@ public class PanelJuego extends JPanel {
         });
 
         JButton botonNuevaPieza = new JButton();
+        botonNuevaPieza.setIcon(new ImageIcon("img/newpiece.png"));
+        botonNuevaPieza.setBackground(TetrisUIB.COLOR_SECUNDARIO);
 
         botonNuevaPieza.addActionListener(new ActionListener() {
             @Override
@@ -148,12 +153,12 @@ public class PanelJuego extends JPanel {
         timer.start();
     }
 
-    public int getPuntuacion() {
-        return partida.getPuntuacion();
+    public Partida getPartida() {
+        return partida;
     }
 
-    public void setPuntuacion(int puntuacion) {
-        partida.setPuntuacion(puntuacion);
-        labelPuntuacion.setText(puntuacion + " puntos");
+    public void setPartida(Partida partida) {
+        this.partida = partida;
+        labelPuntuacion.setText(partida.getPuntuacion() + " puntos");
     }
 }

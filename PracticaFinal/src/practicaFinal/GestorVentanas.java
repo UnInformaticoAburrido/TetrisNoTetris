@@ -7,6 +7,8 @@ import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -37,7 +39,7 @@ public class GestorVentanas extends MenuGenerico {
 
     public GestorVentanas() {
         JFrame ventana = new JFrame("Tetris UIB");
-        ventana.setSize(1280, 900);
+        ventana.setSize(1100, 840);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setLayout(new BorderLayout());
         ventana.setJMenuBar(crearMenu(ventana, ventana));
@@ -75,8 +77,9 @@ public class GestorVentanas extends MenuGenerico {
     public JPanel panelDeBotones(JFrame padre) {
         JPanel panelbotones = new JPanel(new GridLayout(5, 1));
         // Boton de Partida
-        JButton Partida = new JButton("Partida");
-        Partida.addActionListener(new ActionListener() {
+        JButton partida = new JButton("Partida");
+        partida.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+        partida.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 empezarPartida(padre);
@@ -84,48 +87,52 @@ public class GestorVentanas extends MenuGenerico {
             }
         });
 
-        panelbotones.add(Partida);
+        panelbotones.add(partida);
         // Boton de Configuracion
-        JButton Configuracion = new JButton("Configuración");
-        Configuracion.addActionListener(new ActionListener() {
+        JButton configuracion = new JButton("Configuración");
+        configuracion.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+        configuracion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 configuracion(padre);
             }
         });
 
-        panelbotones.add(Configuracion);
+        panelbotones.add(configuracion);
         // Boton de Historial
-        JButton Historial = new JButton("Historial");
-        Historial.addActionListener(new ActionListener() {
+        JButton historial = new JButton("Historial");
+        historial.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+        historial.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 historial(historialTextArea);
             }
         });
 
-        panelbotones.add(Historial);
+        panelbotones.add(historial);
         // Boton de Informacion
-        JButton Informacion = new JButton("Informacion");
-        Informacion.addActionListener(new ActionListener() {
+        JButton informacion = new JButton("Informacion");
+        informacion.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+        informacion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 centralLayout.show(centralPanel, "InfoPanel");
             }
         });
 
-        panelbotones.add(Informacion);
+        panelbotones.add(informacion);
 
         // Boton de Salir
-        JButton Salir = new JButton("Salir");
-        Salir.addActionListener(new ActionListener() {
+        JButton salir = new JButton("Salir");
+        salir.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+        salir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 salir();
             }
         });
 
-        panelbotones.add(Salir);
+        panelbotones.add(salir);
         return panelbotones;
     }
 
@@ -188,8 +195,10 @@ public class GestorVentanas extends MenuGenerico {
     // Funcion para crear el panel de botones con iconos
     public JToolBar menuIconos(JFrame padre) {
         JToolBar iconBar = new JToolBar();
-        JButton Partida = new JButton("Partida");
-        Partida.addActionListener(new ActionListener() {
+        JButton partida = new JButton();
+        partida.setIcon(new ImageIcon("img/play.png"));
+        partida.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+        partida.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 empezarPartida(padre);
@@ -197,46 +206,54 @@ public class GestorVentanas extends MenuGenerico {
             }
         });
 
-        iconBar.add(Partida);
+        iconBar.add(partida);
         // Boton de Configuracion
-        JButton Configuracion = new JButton("Configuración");
-        Configuracion.addActionListener(new ActionListener() {
+        JButton configuracion = new JButton();
+        configuracion.setIcon(new ImageIcon("img/settings.png"));
+        configuracion.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+        configuracion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 configuracion(padre);
             }
         });
 
-        iconBar.add(Configuracion);
+        iconBar.add(configuracion);
         // Boton de Historial
-        JButton Historial = new JButton("Historial");
-        Historial.addActionListener(new ActionListener() {
+        JButton historial = new JButton();
+        historial.setIcon(new ImageIcon("img/history.png"));
+        historial.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+        historial.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 centralLayout.show(centralPanel, "HistorialPanel");
             }
         });
 
-        iconBar.add(Historial);
+        iconBar.add(historial);
         // Boton de Informacion
-        JButton Informacion = new JButton("Informacion");
-        Informacion.addActionListener(new ActionListener() {
+        JButton informacion = new JButton();
+        informacion.setIcon(new ImageIcon("img/info.png"));
+        informacion.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+        informacion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 centralLayout.show(centralPanel, "InfoPanel");
             }
         });
 
-        iconBar.add(Informacion);
+        iconBar.add(informacion);
         // Boton de Salir
-        JButton Salir = new JButton("Salir");
-        Salir.addActionListener(new ActionListener() {
+        JButton salir = new JButton();
+        salir.setIcon(new ImageIcon("img/exit.png"));
+        salir.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+        salir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 salir();
             }
         });
-        iconBar.add(Salir);
+        iconBar.add(salir);
         return iconBar;
     }
 }
