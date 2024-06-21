@@ -16,10 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
 
-/**
- *
- * @author dimit
- */
 public class GestorVentanas extends MenuGenerico {
     private CardLayout centralLayout = new CardLayout();
     private JPanel centralPanel = new JPanel(centralLayout);

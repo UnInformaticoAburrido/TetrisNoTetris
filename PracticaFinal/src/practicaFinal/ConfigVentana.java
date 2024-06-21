@@ -11,9 +11,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-/*
- * @author dima
- */
 public class ConfigVentana extends JFrame {
 
     private Configuracion configuracion;
@@ -36,7 +33,8 @@ public class ConfigVentana extends JFrame {
         principal.setLayout(grid);
 
         //PUNTUACIÓN CASILLAS FORMAS ELIMINADAS DEL TABLERO:
-        JLabel pcfe = new JLabel("PUNTUACIÓN CASILLAS FORMAS ELIMINADAS DEL TABLERO: " + configuracion.getPuntuacionCasillasEliminadas());
+        JLabel pcfe = new JLabel("PUNTUACIÓN CASILLAS FORMAS ELIMINADAS DEL TABLERO: "
+                + configuracion.getPuntuacionCasillasEliminadas());
         JTextField pcfeIn = new JTextField();
         pcfeIn.setColumns(10);
 
@@ -85,12 +83,14 @@ public class ConfigVentana extends JFrame {
                 if (!pcfeIn.getText().isEmpty()) {
                     try {
                         configuracion.setPuntuacionCasillasEliminadas(Integer.parseInt(pcfeIn.getText()));
-                        pcfe.setText("PUNTUACIÓN CASILLAS FORMAS ELIMINADAS DEL TABLERO: " + configuracion.getPuntuacionCasillasEliminadas());
+                        pcfe.setText("PUNTUACIÓN CASILLAS FORMAS ELIMINADAS DEL TABLERO: "
+                                + configuracion.getPuntuacionCasillasEliminadas());
                         modified = true;
                     } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Debes insertar un numero", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Debes insertar un numero", "Error",
+                                JOptionPane.ERROR_MESSAGE);
                     }
-                    
+
                 }
                 if (!prfIn.getText().isEmpty()) {
                     try {
@@ -98,30 +98,34 @@ public class ConfigVentana extends JFrame {
                         modified = true;
                         prf.setText("PUNTUACIÓN ROTAR FORMA: " + configuracion.getPuntuacionRotarForma());
                     } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Debes insertar un numero", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Debes insertar un numero", "Error",
+                                JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 if (!pnfIn.getText().isEmpty()) {
                     try {
-                    configuracion.setPuntuacionNuevaForma(Integer.parseInt(pnfIn.getText()));
-                    modified = true;
-                    pnf.setText("PUNTUACIÓN NUEVA FORMA: " + configuracion.getPuntuacionNuevaForma());
+                        configuracion.setPuntuacionNuevaForma(Integer.parseInt(pnfIn.getText()));
+                        modified = true;
+                        pnf.setText("PUNTUACIÓN NUEVA FORMA: " + configuracion.getPuntuacionNuevaForma());
                     } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Debes insertar un numero", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Debes insertar un numero", "Error",
+                                JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 if (!(lastPath.isEmpty())) {
                     try {
-                    configuracion.setImagenCasillasFormas(lastPath);
-                    modified = true;
-                    icf.setText("IMAGEN CASILLAS FORMAS [" + configuracion.getImagenCasillasFormas() + "]");
+                        configuracion.setImagenCasillasFormas(lastPath);
+                        modified = true;
+                        icf.setText("IMAGEN CASILLAS FORMAS [" + configuracion.getImagenCasillasFormas() + "]");
                     } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Debes insertar una ruta valida", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Debes insertar una ruta valida", "Error",
+                                JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 try {
                     if (modified) {
-                        ConfiguracionFicheroEscritura escritura = new ConfiguracionFicheroEscritura(TetrisUIB.CAMINO_CONFIG);
+                        ConfiguracionFicheroEscritura escritura = new ConfiguracionFicheroEscritura(
+                                TetrisUIB.CAMINO_CONFIG);
                         escritura.escribir(configuracion);
                         escritura.cerrarFichero();
                     }
@@ -139,14 +143,16 @@ public class ConfigVentana extends JFrame {
                 boolean modified = false;
                 if (!pcfeIn.getText().isEmpty()) {
                     //Realizo un try catch para mostrar un mensaje emegente y evitar un error el cual no se puede tratar de otra forma mas sencilla.
-                    try { 
+                    try {
                         configuracion.setPuntuacionCasillasEliminadas(Integer.parseInt(pcfeIn.getText()));
-                        pcfe.setText("PUNTUACIÓN CASILLAS FORMAS ELIMINADAS DEL TABLERO: " + configuracion.getPuntuacionCasillasEliminadas());
+                        pcfe.setText("PUNTUACIÓN CASILLAS FORMAS ELIMINADAS DEL TABLERO: "
+                                + configuracion.getPuntuacionCasillasEliminadas());
                         modified = true;
                     } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Debes insertar un numero", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Debes insertar un numero", "Error",
+                                JOptionPane.ERROR_MESSAGE);
                     }
-                    
+
                 }
                 if (!prfIn.getText().isEmpty()) {
                     try {
@@ -154,30 +160,34 @@ public class ConfigVentana extends JFrame {
                         modified = true;
                         prf.setText("PUNTUACIÓN ROTAR FORMA: " + configuracion.getPuntuacionRotarForma());
                     } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Debes insertar un numero", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Debes insertar un numero", "Error",
+                                JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 if (!pnfIn.getText().isEmpty()) {
                     try {
-                    configuracion.setPuntuacionNuevaForma(Integer.parseInt(pnfIn.getText()));
-                    modified = true;
-                    pnf.setText("PUNTUACIÓN NUEVA FORMA: " + configuracion.getPuntuacionNuevaForma());
+                        configuracion.setPuntuacionNuevaForma(Integer.parseInt(pnfIn.getText()));
+                        modified = true;
+                        pnf.setText("PUNTUACIÓN NUEVA FORMA: " + configuracion.getPuntuacionNuevaForma());
                     } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Debes insertar un numero", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Debes insertar un numero", "Error",
+                                JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 if (!(lastPath.isEmpty())) {
                     try {
-                    configuracion.setImagenCasillasFormas(lastPath);
-                    modified = true;
-                    icf.setText("IMAGEN CASILLAS FORMAS [" + configuracion.getImagenCasillasFormas() + "]");
+                        configuracion.setImagenCasillasFormas(lastPath);
+                        modified = true;
+                        icf.setText("IMAGEN CASILLAS FORMAS [" + configuracion.getImagenCasillasFormas() + "]");
                     } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Debes insertar una ruta valida", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Debes insertar una ruta valida", "Error",
+                                JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 try {
                     if (modified) {
-                        ConfiguracionFicheroEscritura escritura = new ConfiguracionFicheroEscritura(TetrisUIB.CAMINO_CONFIG);
+                        ConfiguracionFicheroEscritura escritura = new ConfiguracionFicheroEscritura(
+                                TetrisUIB.CAMINO_CONFIG);
                         escritura.escribir(configuracion);
                         escritura.cerrarFichero();
                     }
