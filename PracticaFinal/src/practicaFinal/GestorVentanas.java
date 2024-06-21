@@ -139,6 +139,7 @@ public class GestorVentanas extends MenuGenerico {
     // Funcion para crear el menu
     public JMenuBar crearMenu(Container panelPrincipal, JFrame padre) {
         JMenuBar menuBar = new JMenuBar();
+        menuBar.setBackground(TetrisUIB.COLOR_SECUNDARIO);
         JMenu menu = new JMenu("Menu");
         // Menu general
         JMenuItem partida = new JMenuItem("Partida");
@@ -195,6 +196,8 @@ public class GestorVentanas extends MenuGenerico {
     // Funcion para crear el panel de botones con iconos
     public JToolBar menuIconos(JFrame padre) {
         JToolBar iconBar = new JToolBar();
+        iconBar.setBackground(TetrisUIB.COLOR_PRINCIPAL);
+        iconBar.setFloatable(false); // Quita la barra que permite mover la JToolBar.s
         JButton partida = new JButton();
         partida.setIcon(new ImageIcon("img/play.png"));
         partida.setBackground(TetrisUIB.COLOR_SECUNDARIO);
