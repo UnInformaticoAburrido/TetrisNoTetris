@@ -58,21 +58,6 @@ public class TetrisUIB {
             }
         }
 
-        ///////////////////Eliminar
-        Partida partida = new Partida("Jose", 10, 10);
-        HistorialFicheroEscritura escritura;
-        try {
-            escritura = new HistorialFicheroEscritura(FICHERO_HISTORIAL);
-            escritura.escribir(partida);
-            escritura.escribir(partida);
-            escritura.escribir(partida);
-            escritura.escribir(partida);
-            escritura.escribir(partida);
-            escritura.cerrarFichero();
-        } catch (IOException ex) {
-        }
-        ///////////////////Eliminar
-
         ventana = new GestorVentanas();
 
     }
