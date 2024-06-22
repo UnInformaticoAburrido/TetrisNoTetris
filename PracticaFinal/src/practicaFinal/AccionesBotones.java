@@ -1,8 +1,6 @@
 package practicaFinal;
 
-import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.EOFException;
@@ -15,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class MenuGenerico {
+public class AccionesBotones {
 
     public static void empezarPartida(JFrame padre) {
         // Creamos una partida
@@ -79,9 +77,7 @@ public class MenuGenerico {
 
         // Generamos la ventana de selecion
         JDialog ventanaPreEntrada = new JDialog(padre, "Configuracion");
-
         ventanaPreEntrada.setSize(400, 100);
-
         ventanaPreEntrada.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Generamos el unico panel de la configuracion
@@ -161,32 +157,5 @@ public class MenuGenerico {
                 }
             }
         }
-    }
-
-    public static JTextArea informacion() {
-
-        JTextArea text = new JTextArea(
-                "DISCLAIMER:\n"
-                        + "Esta aplicación ha sido realizada por un grupo de estudiantes en el contexto de práctica del primer curso de los estudios de\n"
-                        + "Ingeniería Informática de la UNIVERSITAT DE LES ILLES BALEARS (UIB) para el curso académico 2023-24.\n\n"
-                        + "Los objetivos de esta práctica pasan por trabajar con un entorno gráfico e interactivo utilizando las prestaciones que ofrecen\n"
-                        + "las librerías gráficas de Java (swing y awt) y la aplicación de los conceptos de programación orientada a objetos.\n\n"
-                        + "El objetivo de este juego se basa en encajar múltiples piezas generadas de manera aleatoria las cuales se mostrarán en el panel\n"
-                        + "de piezas correspondiente y colocarlas en el tablero.\n"
-                        + "Al conseguir formar una columna o una fila, todas las piezas que formen la fila / columna desaparecerán y otorgarán\n"
-                        + "puntos por cada celda.\n\n"
-                        + "De ser preciso, se pueden hacer las siguientes acciones adicionales haciendo uso de una determinada cantidad de puntos:\n\n"
-                        + "\t- Se pueden generar nuevas piezas.\n"
-                        + "\t- Se pueden rotar las piezas en el sentido horario.\n\n"
-                        + "El coste de las acciones se puede personalizar en el apartado de configuración.\n\n"
-                        + "El juego terminará al terminarse el tiempo de juego.\n"
-                        + "Este también se puede modificar en el apartado de configuración correspondiente.");
-
-        text.setEditable(false);
-        text.setOpaque(false);
-        text.setFont(new Font("SansSerif", Font.PLAIN, 15));
-        text.setMargin(new Insets(30, 30, 0, 0));
-
-        return text;
     }
 }
