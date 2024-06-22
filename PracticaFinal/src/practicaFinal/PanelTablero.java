@@ -348,6 +348,9 @@ public class PanelTablero extends JPanel implements MouseListener, MouseMotionLi
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        // En caso de que el jugador encuentre algun error de dibujado,
+        // se intenta solucionar redibujando el panel al clicar.
+        repaint();
     }
 
     @Override
