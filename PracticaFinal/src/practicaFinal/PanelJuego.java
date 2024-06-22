@@ -10,6 +10,7 @@ import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.Timer;
@@ -17,8 +18,11 @@ import javax.swing.Timer;
 public class PanelJuego extends JPanel {
     private Partida partida;
     private Timer timer;
+    private JProgressBar progressBar = new JProgressBar();
+    private JLabel labelJugador = new JLabel();
     private JLabel labelPuntuacion = new JLabel();
-    private PanelTablero panelTablero = new PanelTablero();
+    private PanelTablero panelTablero = new PanelTablero(this);
+    private boolean partidaEnCurso = false;
 
     public PanelJuego(Partida partida) {
         this.partida = partida;
@@ -45,7 +49,6 @@ public class PanelJuego extends JPanel {
         labelTituloJugador.setFont(fuenteEtiquetasTitulos);
         panelInferiorTexto.add(labelTituloJugador);
 
-        JLabel labelJugador = new JLabel(partida.getNombre());
         labelJugador.setFont(fuenteEtiquetas);
         panelInferiorTexto.add(labelJugador);
 
@@ -59,7 +62,6 @@ public class PanelJuego extends JPanel {
         panelInferiorTiempo.setLayout(new BorderLayout());
         panelInferiorTiempo.setOpaque(false);
 
-        JProgressBar progressBar = new JProgressBar(0, partida.getTiempo());
         progressBar.setString(partida.getTiempo() + " s");
         progressBar.setFont(fuenteEtiquetas);
         progressBar.setStringPainted(true);
@@ -92,7 +94,7 @@ public class PanelJuego extends JPanel {
                         }
                     }
 
-                    timer.stop();
+                    finalizaPartida();
                 }
             }
         });
@@ -118,7 +120,8 @@ public class PanelJuego extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int penalizacion = TetrisUIB.getConfiguracion().getPuntuacionRotarForma();
-                partida.incrementaPuntuacion(-penalizacion);
+                partida.incrementaPuntuacion(penalizacion);
+                actualizaPuntuacion();
 
                 panelTablero.rotarPieza();
             }
@@ -132,7 +135,8 @@ public class PanelJuego extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int penalizacion = TetrisUIB.getConfiguracion().getPuntuacionNuevaForma();
-                partida.incrementaPuntuacion(-penalizacion);
+                partida.incrementaPuntuacion(penalizacion);
+                actualizaPuntuacion();
 
                 panelTablero.generaPieza();
             }
@@ -149,16 +153,51 @@ public class PanelJuego extends JPanel {
         this.add(panelTablero, BorderLayout.CENTER);
         this.add(panelLateral, BorderLayout.EAST);
         this.add(panelInferior, BorderLayout.SOUTH);
+    }
+
+    public void empezarPartida(String nombre) {
+        panelTablero.restablecerTablero();
+        panelTablero.actualizaImagenCasilla();
+        panelTablero.generaPieza();
+
+        int tiempo = TetrisUIB.getConfiguracion().getTiempoPartida();
+
+        partida.setNombre(nombre);
+        partida.setTiempo(tiempo);
+        partida.setPuntuacion(0);
+
+        progressBar.setValue(0);
+        progressBar.setMaximum(tiempo);
+        labelJugador.setText(nombre);
+
+        actualizaPuntuacion();
 
         timer.start();
+        partidaEnCurso = true;
     }
 
-    public Partida getPartida() {
-        return partida;
+    public boolean isPartidaEnCurso() {
+        return partidaEnCurso;
     }
 
-    public void setPartida(Partida partida) {
-        this.partida = partida;
-        labelPuntuacion.setText(partida.getPuntuacion() + " puntos");
+    public void incrementaPuntuacion(int valor) {
+        partida.incrementaPuntuacion(valor);
+        actualizaPuntuacion();
+    }
+
+    private void actualizaPuntuacion() {
+        int puntuacion = partida.getPuntuacion();
+        labelPuntuacion.setText(puntuacion + " puntos");
+    }
+
+    private void finalizaPartida() {
+        timer.stop();
+
+        JOptionPane.showMessageDialog(this, "¡Se ha terminado el tiempo!\n"
+                + "Has conseguido un total de " + partida.getPuntuacion() + " puntos.", "Final de la partida",
+                JOptionPane.INFORMATION_MESSAGE);
+
+        TetrisUIB.getVentana().cambiarPanel("LogoPanel");
+        partidaEnCurso = false;
     }
 }

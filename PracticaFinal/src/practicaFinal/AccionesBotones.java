@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -16,9 +17,6 @@ import javax.swing.JTextField;
 public class AccionesBotones {
 
     public static void empezarPartida(JFrame padre) {
-        // Creamos una partida
-        Partida partida = new Partida("", TetrisUIB.getConfiguracion().getTiempoPartida());
-
         JDialog preInicio = new JDialog(padre, "Tetris UIB");
         preInicio.setLayout(new GridLayout(2, 1));
         preInicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -28,10 +26,10 @@ public class AccionesBotones {
 
         JLabel nombreLabel = new JLabel("Inserta tu nombre: ");
         nombreLabel.setForeground(TetrisUIB.COLOR_TERCIARIO);
-        JTextField nombre = new JTextField();
+        JTextField nombreCampoDeTexto = new JTextField();
 
         contenedor.add(nombreLabel);
-        contenedor.add(nombre);
+        contenedor.add(nombreCampoDeTexto);
 
         preInicio.add(contenedor);
 
@@ -44,16 +42,22 @@ public class AccionesBotones {
         confirmarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                partida.setNombre(nombre.getText());
+                String nombre = nombreCampoDeTexto.getText();
+
+                if (nombre.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Debes introducir un nombre.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+
+                    return;
+                }
+
                 preInicio.dispose();
 
                 // Empieza la partida:
 
-                PanelJuego panelJuego = new PanelJuego(partida);
                 VentanaPrincipal ventana = TetrisUIB.getVentana();
-                ventana.setPanelJuego(panelJuego);
+                ventana.getPanelJuego().empezarPartida(nombreCampoDeTexto.getText());
                 ventana.cambiarPanel("JuegoPanel");
-
             }
         });
 

@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
@@ -23,9 +24,8 @@ import javax.swing.JToolBar;
 public class VentanaPrincipal {
     private CardLayout centralLayout = new CardLayout();
     private JPanel centralPanel = new JPanel(centralLayout);
-    private JPanel panelContenedorJuego = new JPanel(new BorderLayout());
     private JTextArea historialTextArea = new JTextArea();
-    private PanelJuego panelJuego = null;
+    private PanelJuego panelJuego = new PanelJuego(new Partida());
 
     private JFrame ventana = new JFrame("Tetris UIB");
 
@@ -34,6 +34,18 @@ public class VentanaPrincipal {
     private ActionListener actionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
+            String actionCommand = e.getActionCommand();
+
+            // Impedimos que el usuario pueda hacer alguna acción que no sea salir
+            // cuando hay una partida en curso.
+            if (!actionCommand.equals("Salir") && panelJuego.isPartidaEnCurso()) {
+                JOptionPane.showMessageDialog(ventana,
+                        "Debes terminar la partida antes de poder hacer cualquier otra acción.", "Mensaje",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+                return;
+            }
+
             switch (e.getActionCommand()) {
                 case "Nueva Partida" -> AccionesBotones.empezarPartida(ventana);
                 case "Configuración" -> AccionesBotones.configuracion(ventana);
@@ -44,21 +56,13 @@ public class VentanaPrincipal {
         }
     };
 
-    public void setPanelJuego(PanelJuego panelJuego) {
-        if (this.panelJuego != null) {
-            // Quitamos el panel de juego del contenedor.
-            panelContenedorJuego.remove(this.panelJuego);
-        }
-
-        this.panelJuego = panelJuego;
-
-        panelContenedorJuego.add(panelJuego, BorderLayout.CENTER);
-        panelContenedorJuego.updateUI(); // Parecido al update pero sin parámetros.
-    }
-
     // Permite cambiar el panel que se muestra en el centro desde una clase externa.
     public void cambiarPanel(String nombre) {
         centralLayout.show(centralPanel, nombre);
+    }
+
+    public PanelJuego getPanelJuego() {
+        return panelJuego;
     }
 
     public VentanaPrincipal() {
@@ -86,7 +90,7 @@ public class VentanaPrincipal {
 
         centralPanel.add(logoPanel, "LogoPanel");
         // Insertar panel de juego
-        centralPanel.add(panelContenedorJuego, "JuegoPanel");
+        centralPanel.add(panelJuego, "JuegoPanel");
         // Insertamos el panel de informacion
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BorderLayout());

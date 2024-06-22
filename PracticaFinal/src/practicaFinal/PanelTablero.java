@@ -53,17 +53,17 @@ public class PanelTablero extends JPanel implements MouseListener, MouseMotionLi
     // Variable que indica si se está moviendo una pieza con el ratón.
     private boolean moviendoPieza = false;
 
-    public PanelTablero() {
+    private PanelJuego panelJuego;
+
+    public PanelTablero(PanelJuego panelJuego) {
         super();
         addMouseListener(this);
         addMouseMotionListener(this);
 
-        // Inicializa la matriz de casillas:
-        for (int i = 0; i < TABLERO_X; i++) {
-            for (int j = 0; j < TABLERO_Y; j++) {
-                matrizJuego[i][j] = new Casilla();
-            }
-        }
+        this.panelJuego = panelJuego;
+
+        // Inicializa la matriz de casillas.
+        restablecerTablero();
 
         // Lee la imagen de las casillas.
         actualizaImagenCasilla();
@@ -111,7 +111,7 @@ public class PanelTablero extends JPanel implements MouseListener, MouseMotionLi
             }
         }
 
-        reestablecerPieza();
+        restablecerPieza();
     }
 
     /**
@@ -132,6 +132,17 @@ public class PanelTablero extends JPanel implements MouseListener, MouseMotionLi
 
         piezaActual = resultado;
         repaint();
+    }
+
+    // Restablece el tablero, liberando todas las casillas de este.
+    // Se crean nuevas casillas en vez de cambiar su valor para regenerar los
+    // colores de estas.
+    public void restablecerTablero() {
+        for (int i = 0; i < TABLERO_X; i++) {
+            for (int j = 0; j < TABLERO_Y; j++) {
+                matrizJuego[i][j] = new Casilla();
+            }
+        }
     }
 
     @Override
@@ -207,7 +218,7 @@ public class PanelTablero extends JPanel implements MouseListener, MouseMotionLi
         // Si la pieza se ha soltado fuera del tablero,
         // se devuelve a donde estaba.
         if (!dentroTablero(x, y) || !moviendoPieza) {
-            reestablecerPieza();
+            restablecerPieza();
             return;
         }
 
@@ -230,14 +241,14 @@ public class PanelTablero extends JPanel implements MouseListener, MouseMotionLi
                 if (columnaActual < 0 || columnaActual >= TABLERO_X ||
                         filaActual < 0 || filaActual >= TABLERO_Y) {
 
-                    reestablecerPieza();
+                    restablecerPieza();
                     return;
                 }
 
                 Casilla casillaTablero = matrizJuego[columnaActual][filaActual];
 
                 if (casillaTablero.isOcupada()) {
-                    reestablecerPieza();
+                    restablecerPieza();
                     return;
                 }
             }
@@ -256,6 +267,8 @@ public class PanelTablero extends JPanel implements MouseListener, MouseMotionLi
                 matrizJuego[columna + i][fila + j] = casilla;
             }
         }
+
+        int puntosPorCasilla = TetrisUIB.getConfiguracion().getPuntuacionCasillasEliminadas();
 
         // Comprueba el tablero para puntuar:
         for (int i = 0; i < TABLERO_X; i++) {
@@ -292,6 +305,7 @@ public class PanelTablero extends JPanel implements MouseListener, MouseMotionLi
                 if (columnaOcupada) {
                     for (int k = 0; k < TABLERO_X; k++) {
                         matrizJuego[k][j].setOcupada(false);
+                        panelJuego.incrementaPuntuacion(puntosPorCasilla);
                     }
                 }
 
@@ -299,6 +313,7 @@ public class PanelTablero extends JPanel implements MouseListener, MouseMotionLi
                 if (filaOcupada) {
                     for (int k = 0; k < TABLERO_Y; k++) {
                         matrizJuego[i][k].setOcupada(false);
+                        panelJuego.incrementaPuntuacion(puntosPorCasilla);
                     }
                 }
             }
@@ -360,8 +375,8 @@ public class PanelTablero extends JPanel implements MouseListener, MouseMotionLi
         }
     }
 
-    // Reestablece la pieza a su posición original.
-    private void reestablecerPieza() {
+    // Restablece la pieza a su posición original.
+    private void restablecerPieza() {
         moviendoPieza = false;
         nuevaPiezaPosActualX = NUEVA_PIEZA_POS_X;
         nuevaPiezaPosActualY = NUEVA_PIEZA_POS_Y;

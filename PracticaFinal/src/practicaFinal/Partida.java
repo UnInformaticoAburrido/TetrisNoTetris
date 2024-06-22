@@ -7,6 +7,11 @@ public class Partida implements Serializable {
     private int tiempo;
     private int puntuacion = 0;
 
+    public Partida() {
+        nombre = "";
+        tiempo = 0;
+    }
+
     public Partida(String nombre, int tiempo) {
         this.nombre = nombre;
         this.tiempo = tiempo;
