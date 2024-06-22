@@ -20,12 +20,7 @@ public class ConfigurarTiempoVentana extends JDialog {
         setDefaultCloseOperation(ConfigVentana.DISPOSE_ON_CLOSE);
         setBackground(TetrisUIB.COLOR_FONDOS);
 
-        GridLayout gridCentral = new GridLayout(2, 1);
-
-        JPanel central = new JPanel(gridCentral);
-
-        JPanel botones = new JPanel(gridCentral);
-        botones.setBackground(TetrisUIB.COLOR_FONDOS);
+        JPanel central = new JPanel(new GridLayout(2, 1));
 
         // Insertamos los imputs
         JPanel panelIn = new JPanel(new GridLayout(1, 2));
@@ -33,8 +28,7 @@ public class ConfigurarTiempoVentana extends JDialog {
 
         int tiempoActual = TetrisUIB.getConfiguracion().getTiempoPartida();
 
-        JLabel text = new JLabel(
-                "MODIFICAR TIEMPO PARTIDA [ " + tiempoActual + " segundos ]");
+        JLabel text = new JLabel("Tiempo de la partida [ " + tiempoActual + " segundos ]");
         text.setForeground(TetrisUIB.COLOR_TERCIARIO);
         panelIn.add(text);
 
@@ -45,6 +39,9 @@ public class ConfigurarTiempoVentana extends JDialog {
         central.add(panelIn);
 
         // Insertamos los botones
+        JPanel botones = new JPanel();
+        botones.setBackground(TetrisUIB.COLOR_FONDOS);
+
         JButton confirmarButton = new JButton("Confirmar");
         confirmarButton.setBackground(TetrisUIB.COLOR_SECUNDARIO);
         confirmarButton.setForeground(TetrisUIB.COLOR_TERCIARIO);

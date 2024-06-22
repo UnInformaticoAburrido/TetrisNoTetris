@@ -23,15 +23,24 @@ public class AccionesBotones {
         preInicio.setLayout(new GridLayout(2, 1));
         preInicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+        JPanel contenedor = new JPanel(new GridLayout(1, 2));
+        contenedor.setBackground(TetrisUIB.COLOR_FONDOS);
+
         JLabel nombreLabel = new JLabel("Inserta tu nombre: ");
+        nombreLabel.setForeground(TetrisUIB.COLOR_TERCIARIO);
         JTextField nombre = new JTextField();
-        GridLayout layout = new GridLayout(1, 2);
-        JPanel contenedor = new JPanel(layout);
+
         contenedor.add(nombreLabel);
         contenedor.add(nombre);
+
         preInicio.add(contenedor);
 
+        JPanel panelBotones = new JPanel();
+        panelBotones.setBackground(TetrisUIB.COLOR_FONDOS);
+
         JButton confirmarButton = new JButton("Confirmar");
+        confirmarButton.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+        confirmarButton.setForeground(TetrisUIB.COLOR_TERCIARIO);
         confirmarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -49,19 +58,14 @@ public class AccionesBotones {
         });
 
         JButton cancelarButton = new JButton("Cancelar");
+        cancelarButton.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+        cancelarButton.setForeground(TetrisUIB.COLOR_TERCIARIO);
         cancelarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 preInicio.dispose();
             }
         });
-
-        JPanel panelBotones = new JPanel();
-
-        contenedor.add(nombreLabel);
-        contenedor.add(nombre);
-
-        preInicio.add(contenedor);
 
         panelBotones.add(confirmarButton);
         panelBotones.add(cancelarButton);
