@@ -16,15 +16,21 @@ import javax.swing.JTextField;
 
 public class ConfigVentana extends JDialog {
 
-    private Configuracion configuracion;
-    private String lastPath = "";
+    private Configuracion configActual;
+    private String ultimoCaminoFileChooser;
+    private JTextField[] camposDeTexto = new JTextField[4];
 
     public ConfigVentana(JFrame padre) {
         super(padre);
 
-        this.configuracion = TetrisUIB.getConfiguracion();
+        configActual = TetrisUIB.getConfiguracion();
+
+        File ficheroImagen = new File(configActual.getImagenCasillasFormas());
+
+        ultimoCaminoFileChooser = ficheroImagen.getAbsolutePath();
+
         setTitle("Configuracion");
-        setSize(900, 400);
+        setSize(790, 240);
         setDefaultCloseOperation(ConfigVentana.DISPOSE_ON_CLOSE);
         add(generarPanelPrincipal());
 
@@ -33,208 +39,199 @@ public class ConfigVentana extends JDialog {
     }
 
     private JPanel generarPanelPrincipal() {
-        JPanel principal = new JPanel();
-        GridLayout grid = new GridLayout(6, 8);
-        principal.setLayout(grid);
+        JPanel panelPrincipal = new JPanel(new GridLayout(5, 1));
+        panelPrincipal.setBackground(TetrisUIB.COLOR_FONDOS);
 
-        //PUNTUACIÓN CASILLAS FORMAS ELIMINADAS DEL TABLERO:
-        JLabel pcfe = new JLabel("PUNTUACIÓN CASILLAS FORMAS ELIMINADAS DEL TABLERO: "
-                + configuracion.getPuntuacionCasillasEliminadas());
-        JTextField pcfeIn = new JTextField();
-        pcfeIn.setColumns(10);
+        GridLayout layoutPaneles = new GridLayout(1, 2);
 
-        //Insertamos los campos
-        principal.add(pcfe);
-        principal.add(pcfeIn);
+        // Añadimos los paneles para modificar puntuaciones:
+        for (int i = 0; i < 3; i++) {
+            JPanel panel = new JPanel(layoutPaneles);
+            panel.setBackground(TetrisUIB.COLOR_FONDOS);
 
-        //PUNTUACIÓN ROTAR FORMA:
-        JLabel prf = new JLabel("PUNTUACIÓN ROTAR FORMA: " + configuracion.getPuntuacionRotarForma());
-        JTextField prfIn = new JTextField();
-        prfIn.setColumns(10);
+            JLabel label = new JLabel();
+            label.setForeground(TetrisUIB.COLOR_TERCIARIO);
 
-        //Insertamos los campos
-        principal.add(prf);
-        principal.add(prfIn);
+            String texto;
+            int valorEnConfig;
 
-        //PUNTUACIÓN NUEVA FORMA:
-        JLabel pnf = new JLabel("PUNTUACIÓN NUEVA FORMA: " + configuracion.getPuntuacionNuevaForma());
-        JTextField pnfIn = new JTextField();
-        pnfIn.setColumns(10);
+            switch (i) {
+                case 0:
+                    texto = "Puntuación por cada casilla eliminada del tablero";
+                    valorEnConfig = configActual.getPuntuacionCasillasEliminadas();
+                    break;
 
-        //Insertamos los campos
-        principal.add(pnf);
-        principal.add(pnfIn);
+                case 1:
+                    texto = "Puntuación por rotar la forma";
+                    valorEnConfig = configActual.getPuntuacionRotarForma();
+                    break;
 
-        //IMAGEN CASILLAS FORMAS: 
-        //Generamos un panel para almacenar dos metodos de entrada del archivo en una unica linea.
-        JPanel icfPanel = new JPanel();
-        JLabel icf = new JLabel("IMAGEN CASILLAS FORMAS [" + configuracion.getImagenCasillasFormas() + "]");
-        JTextField icfIn = new JTextField();
-        icfIn.setColumns(20);
-        JButton icfButon = new JButton("Buscar Archivo");
-        icfPanel.add(icf);
-        icfPanel.add(icfIn);
-        icfPanel.add(icfButon);
-        principal.add(icfPanel);
+                case 2:
+                    texto = "Puntuación por generar una nueva forma";
+                    valorEnConfig = configActual.getPuntuacionNuevaForma();
+                    break;
 
-        //Generamos el menu
-        JPanel botones = new JPanel();
-        JButton botonAplicar = new JButton("Aplicar cambios");
-        //Funcionalidad
-        icfButon.addActionListener(new ActionListener() {
+                // Podemos evitar errores si ponemos valores por defecto:
+                default:
+                    texto = "";
+                    valorEnConfig = 0;
+            }
+
+            texto += " [ " + valorEnConfig + " puntos ]";
+            label.setText(texto);
+
+            panel.add(label);
+
+            JTextField campoDeTexto = new JTextField();
+            campoDeTexto.setText(Integer.toString(valorEnConfig));
+
+            panel.add(campoDeTexto);
+
+            panelPrincipal.add(panel);
+
+            // Permite acceder al contenido del campo de texto más tarde
+            // a la hora de guardar las configuraciones.
+            camposDeTexto[i] = campoDeTexto;
+        }
+
+        // Añadimos el panel para elegir la imagen de las casillas:
+
+        JPanel panelImagenCasillas = new JPanel(new GridLayout(1, 3));
+        panelImagenCasillas.setBackground(TetrisUIB.COLOR_FONDOS);
+
+        String imagenCasillas = configActual.getImagenCasillasFormas();
+
+        JLabel etiquetaImagen = new JLabel("Imagen de las casillas [" + imagenCasillas + "]");
+        etiquetaImagen.setForeground(TetrisUIB.COLOR_TERCIARIO);
+
+        JTextField campoTextoImagen = new JTextField(imagenCasillas);
+
+        JButton botonBuscarImagen = new JButton("Buscar Archivo");
+        botonBuscarImagen.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+        botonBuscarImagen.setForeground(TetrisUIB.COLOR_TERCIARIO);
+
+        botonBuscarImagen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                    File archivoSelecionado = new File(lastPath);
-                    JFileChooser fileChooser = new JFileChooser();
+                File archivoSelecionado = new File(ultimoCaminoFileChooser);
 
-                    int r = fileChooser.showOpenDialog(principal);
-                    if (r == JFileChooser.APPROVE_OPTION) {
-                        archivoSelecionado = fileChooser.getSelectedFile();
-                        if (archivoSelecionado != null) {
-                            String lastPath = archivoSelecionado.getAbsolutePath();
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setSelectedFile(archivoSelecionado);
+
+                int resultado = fileChooser.showOpenDialog(panelPrincipal);
+
+                if (resultado == JFileChooser.APPROVE_OPTION) {
+                    archivoSelecionado = fileChooser.getSelectedFile();
+
+                    if (archivoSelecionado != null) {
+                        ultimoCaminoFileChooser = archivoSelecionado.getAbsolutePath();
+                        campoTextoImagen.setText(archivoSelecionado.getPath());
+                    }
+                }
+            }
+        });
+
+        panelImagenCasillas.add(etiquetaImagen);
+        panelImagenCasillas.add(botonBuscarImagen);
+        panelImagenCasillas.add(campoTextoImagen);
+
+        panelPrincipal.add(panelImagenCasillas);
+
+        camposDeTexto[3] = campoTextoImagen;
+
+        // Añadimos el panel de los botones inferiores:
+
+        ActionListener accionesBotones = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                switch (e.getActionCommand()) {
+                    case "Aceptar":
+                        if (aplicarCambios()) {
+                            // Solo se cierra si se aplicaron los cambios con éxito.
+                            dispose();
                         }
-                    }
+                        break;
+
+                    case "Aplicar cambios":
+                        // Aplica los cambios sin cerrar la ventana.
+                        aplicarCambios();
+                        break;
+
+                    case "Cancelar":
+                        // Cierra la ventana sin guardar los cambios.
+                        dispose();
+                        break;
                 }
             }
+        };
 
-            );
-        botonAplicar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                boolean modified = false;
-                if (!pcfeIn.getText().isEmpty()) {
-                    try {
-                        configuracion.setPuntuacionCasillasEliminadas(Integer.parseInt(pcfeIn.getText()));
-                        pcfe.setText("PUNTUACIÓN CASILLAS FORMAS ELIMINADAS DEL TABLERO: "
-                                + configuracion.getPuntuacionCasillasEliminadas());
-                        modified = true;
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Debes insertar un numero", "Error",
-                                JOptionPane.ERROR_MESSAGE);
-                    }
+        JPanel panelBotones = new JPanel();
+        panelBotones.setBackground(TetrisUIB.COLOR_FONDOS);
 
-                }
-                if (!prfIn.getText().isEmpty()) {
-                    try {
-                        configuracion.setPuntuacionRotarForma(Integer.parseInt(prfIn.getText()));
-                        modified = true;
-                        prf.setText("PUNTUACIÓN ROTAR FORMA: " + configuracion.getPuntuacionRotarForma());
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Debes insertar un numero", "Error",
-                                JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-                if (!pnfIn.getText().isEmpty()) {
-                    try {
-                        configuracion.setPuntuacionNuevaForma(Integer.parseInt(pnfIn.getText()));
-                        modified = true;
-                        pnf.setText("PUNTUACIÓN NUEVA FORMA: " + configuracion.getPuntuacionNuevaForma());
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Debes insertar un numero", "Error",
-                                JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-                if (!(lastPath.isEmpty())) {
-                    try {
-                        configuracion.setImagenCasillasFormas(lastPath);
-                        modified = true;
-                        icf.setText("IMAGEN CASILLAS FORMAS [" + configuracion.getImagenCasillasFormas() + "]");
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Debes insertar una ruta valida", "Error",
-                                JOptionPane.ERROR_MESSAGE);
-                    }
-                }
+        for (int i = 0; i < 3; i++) {
+            JButton boton = new JButton();
+            boton.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+            boton.setForeground(TetrisUIB.COLOR_TERCIARIO);
+            boton.addActionListener(accionesBotones);
+
+            switch (i) {
+                case 0 -> boton.setText("Aplicar cambios");
+                case 1 -> boton.setText("Aceptar");
+                case 2 -> boton.setText("Cancelar");
+            }
+
+            panelBotones.add(boton);
+        }
+
+        panelPrincipal.add(panelBotones);
+
+        return panelPrincipal;
+    }
+
+    // Aplica los cambios y devuelve true sí y solo sí no hubo ningún error.
+    private boolean aplicarCambios() {
+        Configuracion nuevaConfig = new Configuracion();
+
+        for (int i = 0; i < 4; i++) {
+            String nuevoValor = camposDeTexto[i].getText();
+            int valorNumerico = 0;
+
+            // i == 4 quiere decir que estamos en la imagen de la casilla,
+            // que no es un número.
+            if (i != 4) {
+                // Intentamos transformar el valor en un número:
+
                 try {
-                    if (modified) {
-                        ConfiguracionFicheroEscritura escritura = new ConfiguracionFicheroEscritura(
-                                TetrisUIB.CAMINO_CONFIG);
-                        escritura.escribir(configuracion);
-                        escritura.cerrarFichero();
-                    }
-                } catch (IOException ex) {
-                    System.err.println("No se ha podido encontrar la ruta");
+                    valorNumerico = Integer.parseInt(nuevoValor);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "¡Debes insertar un número!", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+
+                    return false; // Ha habido un error: devolvemos false.
+                }
+            } else {
+                // Miramos si la ruta del fichero existe:
+
+                File archivo = new File(nuevoValor);
+
+                if (!archivo.exists()) {
+                    JOptionPane.showMessageDialog(null, "¡Debes insertar una ruta válida!", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+
+                    return false; // Ha habido un error: devolvemos false.
                 }
             }
 
-        });
-        //Aplica los cambios y cierra el menu
-        JButton botonAceptar = new JButton("Aceptar");
-        botonAceptar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                boolean modified = false;
-                if (!pcfeIn.getText().isEmpty()) {
-                    //Realizo un try catch para mostrar un mensaje emegente y evitar un error el cual no se puede tratar de otra forma mas sencilla.
-                    try {
-                        configuracion.setPuntuacionCasillasEliminadas(Integer.parseInt(pcfeIn.getText()));
-                        pcfe.setText("PUNTUACIÓN CASILLAS FORMAS ELIMINADAS DEL TABLERO: "
-                                + configuracion.getPuntuacionCasillasEliminadas());
-                        modified = true;
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Debes insertar un numero", "Error",
-                                JOptionPane.ERROR_MESSAGE);
-                    }
-
-                }
-                if (!prfIn.getText().isEmpty()) {
-                    try {
-                        configuracion.setPuntuacionRotarForma(Integer.parseInt(prfIn.getText()));
-                        modified = true;
-                        prf.setText("PUNTUACIÓN ROTAR FORMA: " + configuracion.getPuntuacionRotarForma());
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Debes insertar un numero", "Error",
-                                JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-                if (!pnfIn.getText().isEmpty()) {
-                    try {
-                        configuracion.setPuntuacionNuevaForma(Integer.parseInt(pnfIn.getText()));
-                        modified = true;
-                        pnf.setText("PUNTUACIÓN NUEVA FORMA: " + configuracion.getPuntuacionNuevaForma());
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Debes insertar un numero", "Error",
-                                JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-                if (!(lastPath.isEmpty())) {
-                    try {
-                        configuracion.setImagenCasillasFormas(lastPath);
-                        modified = true;
-                        icf.setText("IMAGEN CASILLAS FORMAS [" + configuracion.getImagenCasillasFormas() + "]");
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Debes insertar una ruta valida", "Error",
-                                JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-                try {
-                    if (modified) {
-                        ConfiguracionFicheroEscritura escritura = new ConfiguracionFicheroEscritura(
-                                TetrisUIB.CAMINO_CONFIG);
-                        escritura.escribir(configuracion);
-                        escritura.cerrarFichero();
-                    }
-                } catch (IOException ex) {
-                    System.err.println("No se ha podido encontrar la ruta");
-                } finally {
-                    dispose();
-                }
+            switch (i) {
+                case 0 -> nuevaConfig.setPuntuacionCasillasEliminadas(valorNumerico);
+                case 1 -> nuevaConfig.setPuntuacionRotarForma(valorNumerico);
+                case 2 -> nuevaConfig.setPuntuacionNuevaForma(valorNumerico);
+                case 3 -> nuevaConfig.setImagenCasillasFormas(nuevoValor);
             }
-        });
-        //
-        JButton botonCancelar = new JButton("Cancelar");
-        botonCancelar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
+        }
 
-        });
-        botones.add(botonAplicar);
-        botones.add(botonAceptar);
-        botones.add(botonCancelar);
-
-        principal.add(botones);
-
-        return principal;
+        TetrisUIB.setConfiguracion(nuevaConfig);
+        TetrisUIB.guardarConfiguracionAFichero();
+        return true;
     }
 }
