@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
 /*
  * @author Dimitri Company Cifre
  * @author Joan Enric Soler Carvajal
@@ -62,8 +64,35 @@ public class TetrisUIB {
 
     }
 
+    // Guarda la configuración actual a un fichero en memoria secundaria.
+    public static void guardarConfiguracionAFichero() {
+        ConfiguracionFicheroEscritura escritura = null;
+
+        try {
+            escritura = new ConfiguracionFicheroEscritura(CAMINO_CONFIG);
+            escritura.escribir(configuracion);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "No se ha podido guardar la configuración.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } finally {
+            if (escritura != null) {
+                try {
+                    escritura.cerrarFichero();
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(null, "No se ha podido cerrar el fichero de configuración.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+
+                }
+            }
+        }
+    }
+
     public static Configuracion getConfiguracion() {
         return configuracion;
+    }
+
+    public static void setConfiguracion(Configuracion config) {
+        configuracion = config;
     }
 
     public static String getHistoria() {
