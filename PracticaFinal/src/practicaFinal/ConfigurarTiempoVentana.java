@@ -31,12 +31,15 @@ public class ConfigurarTiempoVentana extends JDialog {
         JPanel panelIn = new JPanel(new GridLayout(1, 2));
         panelIn.setBackground(TetrisUIB.COLOR_FONDOS);
 
+        int tiempoActual = TetrisUIB.getConfiguracion().getTiempoPartida();
+
         JLabel text = new JLabel(
-                "MODIFICAR TIEMPO PARTIDA [ " + TetrisUIB.getConfiguracion().getTiempoPartida() + " segundos ]");
+                "MODIFICAR TIEMPO PARTIDA [ " + tiempoActual + " segundos ]");
         text.setForeground(TetrisUIB.COLOR_TERCIARIO);
         panelIn.add(text);
 
         JTextField tiempoField = new JTextField();
+        tiempoField.setText(Integer.toString(tiempoActual));
         panelIn.add(tiempoField);
 
         central.add(panelIn);
@@ -55,8 +58,10 @@ public class ConfigurarTiempoVentana extends JDialog {
                     } catch (NumberFormatException ex) {
                         JOptionPane.showMessageDialog(null, "Debes insertar un numero", "Error",
                                 JOptionPane.ERROR_MESSAGE);
+                        return;
                     }
 
+                    TetrisUIB.guardarConfiguracionAFichero();
                     dispose();
                 }
             }

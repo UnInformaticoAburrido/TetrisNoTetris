@@ -196,9 +196,9 @@ public class ConfigVentana extends JDialog {
             String nuevoValor = camposDeTexto[i].getText();
             int valorNumerico = 0;
 
-            // i == 4 quiere decir que estamos en la imagen de la casilla,
+            // i == 3 quiere decir que estamos en la imagen de la casilla,
             // que no es un número.
-            if (i != 4) {
+            if (i != 3) {
                 // Intentamos transformar el valor en un número:
 
                 try {

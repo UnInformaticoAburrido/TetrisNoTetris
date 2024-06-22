@@ -11,8 +11,8 @@ public class Configuracion implements Serializable {
 
     public Configuracion() {
         this.puntuacionCasillasEliminadas = 1;
-        this.puntuacionRotarForma = 1;
-        this.puntuacionNuevaForma = 5;
+        this.puntuacionRotarForma = -1;
+        this.puntuacionNuevaForma = -5;
         this.imagenCasillasFormas = "img/piece.png";
         this.tiempoPartida = 30;
 
