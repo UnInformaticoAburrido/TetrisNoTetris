@@ -2,7 +2,6 @@ package practicaFinal;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -11,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -55,14 +55,19 @@ public class GestorVentanas extends MenuGenerico {
 
         // Generamos las cartas
         JPanel logoPanel = new JPanel();
+        logoPanel.setBackground(TetrisUIB.COLOR_FONDOS);
 
-        logoPanel.setBackground(Color.black);
+        JLabel imagenLogo = new JLabel();
+        imagenLogo.setIcon(new ImageIcon("img/logo.png"));
+        logoPanel.add(imagenLogo);
+
         centralPanel.add(logoPanel, "LogoPanel");
         // Insertar panel de juego
         centralPanel.add(panelContenedorJuego, "JuegoPanel");
         // Insertamos el panel de informacion
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BorderLayout());
+        infoPanel.setBackground(TetrisUIB.COLOR_FONDOS);
         infoPanel.add(informacion(), BorderLayout.CENTER);
         centralPanel.add(infoPanel, "InfoPanel");
 
@@ -79,6 +84,7 @@ public class GestorVentanas extends MenuGenerico {
         // Boton de Partida
         JButton partida = new JButton("Partida");
         partida.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+        partida.setForeground(TetrisUIB.COLOR_TERCIARIO);
         partida.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -91,6 +97,7 @@ public class GestorVentanas extends MenuGenerico {
         // Boton de Configuracion
         JButton configuracion = new JButton("Configuración");
         configuracion.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+        configuracion.setForeground(TetrisUIB.COLOR_TERCIARIO);
         configuracion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -102,6 +109,7 @@ public class GestorVentanas extends MenuGenerico {
         // Boton de Historial
         JButton historial = new JButton("Historial");
         historial.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+        historial.setForeground(TetrisUIB.COLOR_TERCIARIO);
         historial.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -113,6 +121,7 @@ public class GestorVentanas extends MenuGenerico {
         // Boton de Informacion
         JButton informacion = new JButton("Informacion");
         informacion.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+        informacion.setForeground(TetrisUIB.COLOR_TERCIARIO);
         informacion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -125,6 +134,7 @@ public class GestorVentanas extends MenuGenerico {
         // Boton de Salir
         JButton salir = new JButton("Salir");
         salir.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+        salir.setForeground(TetrisUIB.COLOR_TERCIARIO);
         salir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

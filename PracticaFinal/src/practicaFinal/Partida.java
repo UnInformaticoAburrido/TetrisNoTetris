@@ -5,12 +5,11 @@ import java.io.Serializable;
 public class Partida implements Serializable {
     private String nombre;
     private int tiempo;
-    private int puntuacion;
+    private int puntuacion = 0;
 
-    public Partida(String nombre, int tiempo, int puntuacion) {
+    public Partida(String nombre, int tiempo) {
         this.nombre = nombre;
         this.tiempo = tiempo;
-        this.puntuacion = puntuacion;
     }
 
     public void incrementaPuntuacion(int valor) {

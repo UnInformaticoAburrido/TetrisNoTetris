@@ -18,8 +18,8 @@ import javax.swing.JTextField;
 public class MenuGenerico {
 
     public static void empezarPartida(JFrame padre) {
-        //Creamos un jugador
-        Partida partida = new Partida("", TetrisUIB.getConfiguracion().getTiempoPartida(), 0);
+        // Creamos una partida
+        Partida partida = new Partida("", TetrisUIB.getConfiguracion().getTiempoPartida());
 
         JDialog preInicio = new JDialog(padre, "Tetris UIB");
         preInicio.setLayout(new GridLayout(2, 1));
@@ -79,17 +79,17 @@ public class MenuGenerico {
 
     public static boolean configuracion(JFrame padre) {
 
-        //Generamos la ventana de selecion
+        // Generamos la ventana de selecion
         JDialog ventanaPreEntrada = new JDialog(padre, "Configuracion");
 
         ventanaPreEntrada.setSize(400, 100);
 
         ventanaPreEntrada.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        //Generamos el unico panel de la configuracion
+        // Generamos el unico panel de la configuracion
         JPanel central = new JPanel();
 
-        //Configuración específica juego
+        // Configuración específica juego
         JButton cej = new JButton("Configuración específica juego");
         cej.addActionListener(new ActionListener() {
             @Override
@@ -99,7 +99,7 @@ public class MenuGenerico {
             }
         });
 
-        //Modificar tiempo empezarPartida
+        // Modificar tiempo empezarPartida
         JButton mtp = new JButton("Modificar tiempo partida");
         mtp.addActionListener(new ActionListener() {
             @Override
