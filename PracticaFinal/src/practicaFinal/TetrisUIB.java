@@ -13,7 +13,7 @@ public class TetrisUIB {
     private static final String FICHERO_HISTORIAL = "partidasTetrisUIB.dat";
     private static Configuracion configuracion;
 
-    private static GestorVentanas ventana;
+    private static VentanaPrincipal ventana;
 
     // Constantes de colores:
     public static final Color COLOR_PRINCIPAL = new Color(255, 138, 103); // #FF8A67
@@ -58,7 +58,7 @@ public class TetrisUIB {
             }
         }
 
-        ventana = new GestorVentanas();
+        ventana = new VentanaPrincipal();
 
     }
 
@@ -70,7 +70,7 @@ public class TetrisUIB {
         return FICHERO_HISTORIAL;
     }
 
-    public static GestorVentanas getVentana() {
+    public static VentanaPrincipal getVentana() {
         return ventana;
     }
 }

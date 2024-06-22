@@ -43,12 +43,14 @@ public class MenuGenerico {
                 // Empieza la partida:
 
                 PanelJuego panelJuego = new PanelJuego(partida);
-                TetrisUIB.getVentana().setPanelJuego(panelJuego);
+                VentanaPrincipal ventana = TetrisUIB.getVentana();
+                ventana.setPanelJuego(panelJuego);
+                ventana.cambiarPanel("JuegoPanel");
+
             }
         });
 
         JButton cancelarButton = new JButton("Cancelar");
-
         cancelarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -59,21 +61,17 @@ public class MenuGenerico {
         JPanel panelBotones = new JPanel();
 
         contenedor.add(nombreLabel);
-
         contenedor.add(nombre);
 
         preInicio.add(contenedor);
 
         panelBotones.add(confirmarButton);
-
         panelBotones.add(cancelarButton);
 
         preInicio.add(panelBotones);
 
         preInicio.pack();
-
         preInicio.setLocationRelativeTo(padre);
-
         preInicio.setVisible(true);
     }
 
@@ -135,33 +133,24 @@ public class MenuGenerico {
         HistorialFicheroLectura lector = null;
 
         try {
-
             lector = new HistorialFicheroLectura(TetrisUIB.getHistoria());
 
             String text = "";
 
             while (continuar) {
-
                 try {
-
                     Partida partida = lector.leer();
-
                     text += partida.toString() + '\n';
-
                 } catch (EOFException e) {
-
                     continuar = false;
-
                 } catch (ClassNotFoundException ex) {
 
                 }
-
             }
 
             partidaTextArea.setText(text);
 
             lector.cerrarFichero();
-
         } catch (IOException ex) {
 
         } finally {
@@ -199,11 +188,5 @@ public class MenuGenerico {
         text.setMargin(new Insets(30, 30, 0, 0));
 
         return text;
-    }
-
-    public static void salir() {
-        // Esta función permite salir del programa.
-        System.out.println("Se ha salido del programa. (Code 0)");
-        System.exit(0);
     }
 }
