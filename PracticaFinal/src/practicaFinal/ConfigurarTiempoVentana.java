@@ -18,51 +18,69 @@ public class ConfigurarTiempoVentana extends JDialog {
 
         setTitle("Cambiar tiempo partida");
         setDefaultCloseOperation(ConfigVentana.DISPOSE_ON_CLOSE);
+        setBackground(TetrisUIB.COLOR_FONDOS);
 
         GridLayout gridCentral = new GridLayout(2, 1);
+
         JPanel central = new JPanel(gridCentral);
+
         JPanel botones = new JPanel(gridCentral);
-        //Insertamos los imputs
-        GridLayout grid = new GridLayout(1, 2);
-        JPanel panelIn = new JPanel(grid);
+        botones.setBackground(TetrisUIB.COLOR_FONDOS);
+
+        // Insertamos los imputs
+        JPanel panelIn = new JPanel(new GridLayout(1, 2));
+        panelIn.setBackground(TetrisUIB.COLOR_FONDOS);
+
         JLabel text = new JLabel(
-                "MODIFICAR TIEMPO PARTIDA [ " + TetrisUIB.getConfiguracion().getTiempoPartida() + " ]");
-        JTextField tiempoField = new JTextField();
+                "MODIFICAR TIEMPO PARTIDA [ " + TetrisUIB.getConfiguracion().getTiempoPartida() + " segundos ]");
+        text.setForeground(TetrisUIB.COLOR_TERCIARIO);
         panelIn.add(text);
+
+        JTextField tiempoField = new JTextField();
         panelIn.add(tiempoField);
-        this.add(panelIn);
-        //Insertamos los central
+
+        central.add(panelIn);
+
+        // Insertamos los botones
         JButton confirmarButton = new JButton("Confirmar");
+        confirmarButton.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+        confirmarButton.setForeground(TetrisUIB.COLOR_TERCIARIO);
         confirmarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!tiempoField.getText().isEmpty()) {
                     try {
-                        TetrisUIB.getConfiguracion().setTiempoPartida(Integer.parseInt(tiempoField.getText()));
+                        int tiempo = Integer.parseInt(tiempoField.getText());
+                        TetrisUIB.getConfiguracion().setTiempoPartida(tiempo);
                     } catch (NumberFormatException ex) {
                         JOptionPane.showMessageDialog(null, "Debes insertar un numero", "Error",
                                 JOptionPane.ERROR_MESSAGE);
                     }
+
                     dispose();
                 }
             }
         });
+
         JButton cancelarButton = new JButton("Cancelar");
+        cancelarButton.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+        cancelarButton.setForeground(TetrisUIB.COLOR_TERCIARIO);
         cancelarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
             }
         });
-        central.add(panelIn);
+
         botones.add(confirmarButton);
         botones.add(cancelarButton);
         central.add(botones);
+
         add(central);
+
         pack();
 
         setLocationRelativeTo(padre);
         setVisible(true);
     }
-
 }
