@@ -75,46 +75,46 @@ public class AccionesBotones {
 
     public static boolean configuracion(JFrame padre) {
 
-        // Generamos la ventana de selecion
+        // Generamos la ventana de selección del tipo de configuración a modificar:
+
         JDialog ventanaPreEntrada = new JDialog(padre, "Configuracion");
-        ventanaPreEntrada.setSize(400, 100);
+        ventanaPreEntrada.setSize(485, 100);
         ventanaPreEntrada.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Generamos el unico panel de la configuracion
-        JPanel central = new JPanel();
+        JPanel panel = new JPanel();
+        panel.setBackground(TetrisUIB.COLOR_FONDOS);
 
-        // Configuración específica juego
-        JButton cej = new JButton("Configuración específica juego");
-        cej.addActionListener(new ActionListener() {
+        // Definimos las acciones de los botones.
+        ActionListener actionListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ventanaPreEntrada.dispose();
-                ConfigVentana ventana = new ConfigVentana(padre);
-            }
-        });
+                switch (e.getActionCommand()) {
+                    case "Configuración específica del juego" -> new ConfigVentana(padre);
+                    case "Modificar tiempo de la partida" -> new ConfigurarTiempoVentana(padre);
+                }
 
-        // Modificar tiempo empezarPartida
-        JButton mtp = new JButton("Modificar tiempo partida");
-        mtp.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ConfigurarTiempoVentana ventana = new ConfigurarTiempoVentana(padre);
                 ventanaPreEntrada.dispose();
             }
-        });
+        };
 
-        JButton nada = new JButton("Nada");
-        nada.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ventanaPreEntrada.dispose();
+        // Generamos los botones.
+        for (int i = 0; i < 3; i++) {
+            JButton boton = new JButton();
+            boton.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+            boton.setForeground(TetrisUIB.COLOR_TERCIARIO);
+            boton.addActionListener(actionListener);
+
+            switch (i) {
+                case 0 -> boton.setText("Configuración específica del juego");
+                case 1 -> boton.setText("Modificar tiempo de la partida");
+                case 2 -> boton.setText("Nada");
             }
-        });
 
-        central.add(cej);
-        central.add(mtp);
-        central.add(nada);
-        ventanaPreEntrada.add(central);
+            panel.add(boton);
+        }
+
+        ventanaPreEntrada.add(panel);
         ventanaPreEntrada.setLocationRelativeTo(padre);
 
         ventanaPreEntrada.setVisible(true);
