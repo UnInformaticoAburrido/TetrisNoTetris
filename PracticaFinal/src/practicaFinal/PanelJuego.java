@@ -46,14 +46,14 @@ public class PanelJuego extends JPanel {
         Font fuenteEtiquetasTitulos = new Font("SansSerif", Font.BOLD, 20);
         Font fuenteEtiquetas = new Font("Monospaced", Font.PLAIN, 20);
 
-        JLabel labelTituloJugador = new JLabel("Jugador: ");
+        JLabel labelTituloJugador = new JLabel("    Jugador: ");
         labelTituloJugador.setFont(fuenteEtiquetasTitulos);
         panelInferiorTexto.add(labelTituloJugador);
 
         labelJugador.setFont(fuenteEtiquetas);
         panelInferiorTexto.add(labelJugador);
 
-        JLabel labelTituloPuntacion = new JLabel("Puntuación: ");
+        JLabel labelTituloPuntacion = new JLabel("    Puntuación: ");
         labelTituloPuntacion.setFont(fuenteEtiquetasTitulos);
         panelInferiorTexto.add(labelTituloPuntacion);
 
@@ -173,6 +173,7 @@ public class PanelJuego extends JPanel {
         partida.setPuntuacion(0);
 
         progressBar.setValue(0);
+        progressBar.setString(tiempo + " s");
         progressBar.setMaximum(tiempo);
         labelJugador.setText(nombre);
 
