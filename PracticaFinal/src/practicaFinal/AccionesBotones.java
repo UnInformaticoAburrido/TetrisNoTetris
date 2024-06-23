@@ -51,6 +51,13 @@ public class AccionesBotones {
                     return;
                 }
 
+                if (nombre.length() > 20) {
+                    JOptionPane.showMessageDialog(null, "El nombre debe ser menor a 20 carácteres.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+
+                    return;
+                }
+
                 preInicio.dispose();
 
                 // Empieza la partida:
