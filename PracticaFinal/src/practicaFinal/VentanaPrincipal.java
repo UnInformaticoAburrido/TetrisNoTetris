@@ -8,9 +8,12 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.EOFException;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -19,15 +22,17 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
-public class VentanaPrincipal {
+public class VentanaPrincipal extends JFrame {
     private CardLayout centralLayout = new CardLayout();
     private JPanel centralPanel = new JPanel(centralLayout);
     private JTextArea historialTextArea = new JTextArea();
     private PanelJuego panelJuego = new PanelJuego(new Partida());
 
-    private JFrame ventana = new JFrame("Tetris UIB");
+    // Permite acceder a la ventana dentro de un ActionListener.
+    private JFrame ventana = this;
 
     // Definimos las acciones que hacen los botones.
     // Se define como atributo de la clase para poder ser usado múltiples veces.
@@ -47,9 +52,9 @@ public class VentanaPrincipal {
             }
 
             switch (e.getActionCommand()) {
-                case "Nueva Partida" -> AccionesBotones.empezarPartida(ventana);
-                case "Configuración" -> AccionesBotones.configuracion(ventana);
-                case "Historial" -> AccionesBotones.historial(historialTextArea);
+                case "Nueva Partida" -> empezarPartida();
+                case "Configuración" -> configuracion();
+                case "Historial" -> historial();
                 case "Información" -> cambiarPanel("InfoPanel");
                 case "Salir" -> System.exit(0);
             }
@@ -66,19 +71,19 @@ public class VentanaPrincipal {
     }
 
     public VentanaPrincipal() {
-        ventana.setSize(1120, 840);
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ventana.setLayout(new BorderLayout());
-        ventana.setJMenuBar(crearMenu(ventana, ventana));
-        Container contenido = ventana.getContentPane();
-        contenido.add(panelDeBotones(ventana), BorderLayout.WEST);
+        setTitle("Tetris UIB");
+        setSize(1120, 840);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+        setJMenuBar(crearMenu());
 
-        // Insertamos el card layout
+        Container contenido = getContentPane();
+        contenido.add(panelDeBotones(), BorderLayout.WEST);
         contenido.add(centralPanel, BorderLayout.CENTER);
+        contenido.add(menuIconos(), BorderLayout.NORTH);
 
-        contenido.add(menuIconos(ventana), BorderLayout.NORTH);
-        ventana.setLocationRelativeTo(null);
-        ventana.setVisible(true);
+        setLocationRelativeTo(null);
+        setVisible(true);
 
         // Generamos las cartas
         JPanel logoPanel = new JPanel();
@@ -112,7 +117,7 @@ public class VentanaPrincipal {
     }
 
     // Funcion dedicada a crear el panel de botones laterales
-    public JPanel panelDeBotones(JFrame padre) {
+    public JPanel panelDeBotones() {
         JPanel panelbotones = new JPanel(new GridLayout(5, 1));
 
         Font fuenteBotones = new Font("SansSerif", Font.BOLD, 16);
@@ -139,7 +144,7 @@ public class VentanaPrincipal {
     }
 
     // Funcion para crear el menu
-    public JMenuBar crearMenu(Container panelPrincipal, JFrame padre) {
+    public JMenuBar crearMenu() {
         JMenuBar menuBar = new JMenuBar();
         menuBar.setBackground(TetrisUIB.getColorSecundario());
 
@@ -166,7 +171,7 @@ public class VentanaPrincipal {
     }
 
     // Funcion para crear el panel de botones con iconos
-    public JToolBar menuIconos(JFrame padre) {
+    public JToolBar menuIconos() {
         JToolBar iconBar = new JToolBar();
         iconBar.setBackground(TetrisUIB.getColorPrincipal());
         iconBar.setFloatable(false); // Quita la barra que permite mover la JToolBar.
@@ -209,6 +214,166 @@ public class VentanaPrincipal {
         }
 
         return iconBar;
+    }
+
+    private void empezarPartida() {
+        JDialog preInicio = new JDialog(this, "Tetris UIB");
+        preInicio.setLayout(new GridLayout(2, 1));
+        preInicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        JPanel contenedor = new JPanel(new GridLayout(1, 2));
+        contenedor.setBackground(TetrisUIB.getColorFondos());
+
+        JLabel nombreLabel = new JLabel("Inserta tu nombre: ");
+        nombreLabel.setForeground(TetrisUIB.getColorTerciario());
+        JTextField nombreCampoDeTexto = new JTextField();
+
+        contenedor.add(nombreLabel);
+        contenedor.add(nombreCampoDeTexto);
+
+        preInicio.add(contenedor);
+
+        JPanel panelBotones = new JPanel();
+        panelBotones.setBackground(TetrisUIB.getColorFondos());
+
+        JButton confirmarButton = new JButton("Confirmar");
+        confirmarButton.setBackground(TetrisUIB.getColorSecundario());
+        confirmarButton.setForeground(TetrisUIB.getColorTerciario());
+        confirmarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nombre = nombreCampoDeTexto.getText();
+
+                if (nombre.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Debes introducir un nombre.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+
+                    return;
+                }
+
+                if (nombre.length() > 20) {
+                    JOptionPane.showMessageDialog(null, "El nombre debe ser menor a 20 carácteres.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+
+                    return;
+                }
+
+                preInicio.dispose();
+
+                // Empieza la partida:
+
+                VentanaPrincipal ventana = TetrisUIB.getVentana();
+                ventana.getPanelJuego().empezarPartida(nombreCampoDeTexto.getText());
+                ventana.cambiarPanel("JuegoPanel");
+            }
+        });
+
+        JButton cancelarButton = new JButton("Cancelar");
+        cancelarButton.setBackground(TetrisUIB.getColorSecundario());
+        cancelarButton.setForeground(TetrisUIB.getColorTerciario());
+        cancelarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                preInicio.dispose();
+            }
+        });
+
+        panelBotones.add(confirmarButton);
+        panelBotones.add(cancelarButton);
+
+        preInicio.add(panelBotones);
+
+        preInicio.pack();
+        preInicio.setLocationRelativeTo(this);
+        preInicio.setVisible(true);
+    }
+
+    private boolean configuracion() {
+
+        // Generamos la ventana de selección del tipo de configuración a modificar:
+
+        JDialog ventanaPreEntrada = new JDialog(this, "Configuracion");
+        ventanaPreEntrada.setSize(485, 100);
+        ventanaPreEntrada.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // Generamos el unico panel de la configuracion
+        JPanel panel = new JPanel();
+        panel.setBackground(TetrisUIB.getColorFondos());
+
+        // Definimos las acciones de los botones.
+        ActionListener actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                switch (e.getActionCommand()) {
+                    case "Configuración específica del juego" -> new ConfigVentana(ventana);
+                    case "Modificar tiempo de la partida" -> new ConfigurarTiempoVentana(ventana);
+                }
+
+                ventanaPreEntrada.dispose();
+            }
+        };
+
+        // Generamos los botones.
+        for (int i = 0; i < 3; i++) {
+            JButton boton = new JButton();
+            boton.setBackground(TetrisUIB.getColorSecundario());
+            boton.setForeground(TetrisUIB.getColorTerciario());
+            boton.addActionListener(actionListener);
+
+            switch (i) {
+                case 0 -> boton.setText("Configuración específica del juego");
+                case 1 -> boton.setText("Modificar tiempo de la partida");
+                case 2 -> boton.setText("Nada");
+            }
+
+            panel.add(boton);
+        }
+
+        ventanaPreEntrada.add(panel);
+        ventanaPreEntrada.setLocationRelativeTo(this);
+
+        ventanaPreEntrada.setVisible(true);
+
+        return true;
+    }
+
+    private void historial() {
+
+        PartidaFicheroInOut fichero = null;
+
+        try {
+            fichero = new PartidaFicheroInOut(TetrisUIB.getHistoria());
+
+            String text = "";
+
+            boolean continuar = true;
+            while (continuar) {
+                try {
+                    Partida partida = fichero.lectura();
+                    text += partida.toString() + '\n';
+                } catch (EOFException e) {
+                    continuar = false;
+                }
+            }
+
+            historialTextArea.setText(text);
+            cambiarPanel("HistorialPanel");
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null,
+                    "No se ha podido leer el fichero de partidas.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } finally {
+            if (fichero != null) {
+                try {
+                    fichero.cerrarFichero();
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(null,
+                            "No se ha podido cerrar el fichero de partidas.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
     }
 
     private JTextArea informacionTextArea() {
