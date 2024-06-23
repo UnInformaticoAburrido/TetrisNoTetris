@@ -13,13 +13,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class ConfigVentana extends JDialog {
+public class ConfigGeneralVentana extends JDialog {
 
     private Configuracion configActual;
     private String ultimoCaminoFileChooser;
     private JTextField[] camposDeTexto = new JTextField[4];
 
-    public ConfigVentana(JFrame padre) {
+    public ConfigGeneralVentana(JFrame padre) {
         super(padre);
 
         configActual = TetrisUIB.getConfiguracion();
@@ -30,7 +30,7 @@ public class ConfigVentana extends JDialog {
 
         setTitle("Configuracion");
         setSize(790, 240);
-        setDefaultCloseOperation(ConfigVentana.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(ConfigGeneralVentana.DISPOSE_ON_CLOSE);
         add(generarPanelPrincipal());
 
         setLocationRelativeTo(padre);

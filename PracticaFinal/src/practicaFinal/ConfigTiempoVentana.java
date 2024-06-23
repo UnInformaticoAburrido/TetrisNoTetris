@@ -11,13 +11,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class ConfigurarTiempoVentana extends JDialog {
+public class ConfigTiempoVentana extends JDialog {
 
-    public ConfigurarTiempoVentana(JFrame padre) {
+    public ConfigTiempoVentana(JFrame padre) {
         super(padre);
 
         setTitle("Cambiar tiempo partida");
-        setDefaultCloseOperation(ConfigVentana.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(ConfigGeneralVentana.DISPOSE_ON_CLOSE);
         setBackground(TetrisUIB.getColorFondos());
 
         JPanel central = new JPanel(new GridLayout(2, 1));

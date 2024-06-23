@@ -305,8 +305,8 @@ public class VentanaPrincipal extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 switch (e.getActionCommand()) {
-                    case "Configuración específica del juego" -> new ConfigVentana(ventana);
-                    case "Modificar tiempo de la partida" -> new ConfigurarTiempoVentana(ventana);
+                    case "Configuración específica del juego" -> new ConfigGeneralVentana(ventana);
+                    case "Modificar tiempo de la partida" -> new ConfigTiempoVentana(ventana);
                 }
 
                 ventanaPreEntrada.dispose();
