@@ -5,7 +5,6 @@ import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.EOFException;
@@ -344,7 +343,7 @@ public class VentanaPrincipal extends JFrame {
         try {
             fichero = new PartidaFicheroInOut(TetrisUIB.getFicheroHistorial());
 
-            String text = "";
+            String text = "\n Historial de partidas:\n\n";
 
             boolean continuar = true;
             while (continuar) {
@@ -379,27 +378,26 @@ public class VentanaPrincipal extends JFrame {
     private JTextArea informacionTextArea() {
 
         JTextArea textArea = new JTextArea(
-                "DISCLAIMER:\n"
-                        + "Esta aplicación ha sido realizada por un grupo de estudiantes en el contexto de práctica del primer curso de los estudios de\n"
-                        + "Ingeniería Informática de la UNIVERSITAT DE LES ILLES BALEARS (UIB) para el curso académico 2023-24.\n\n"
-                        + "Los objetivos de esta práctica pasan por trabajar con un entorno gráfico e interactivo utilizando las prestaciones que ofrecen\n"
-                        + "las librerías gráficas de Java (swing y awt) y la aplicación de los conceptos de programación orientada a objetos.\n\n"
-                        + "El objetivo de este juego se basa en encajar múltiples piezas generadas de manera aleatoria las cuales se mostrarán en el panel\n"
-                        + "de piezas correspondiente y colocarlas en el tablero.\n"
-                        + "Al conseguir formar una columna o una fila, todas las piezas que formen la fila / columna desaparecerán y otorgarán\n"
-                        + "puntos por cada celda.\n\n"
-                        + "De ser preciso, se pueden hacer las siguientes acciones adicionales haciendo uso de una determinada cantidad de puntos:\n\n"
-                        + "\t- Se pueden generar nuevas piezas.\n"
-                        + "\t- Se pueden rotar las piezas en el sentido horario.\n\n"
-                        + "El coste de las acciones se puede personalizar en el apartado de configuración.\n\n"
-                        + "El juego terminará al terminarse el tiempo de juego.\n"
-                        + "Este también se puede modificar en el apartado de configuración correspondiente.");
+                "\n\n\n           Esta aplicación ha sido realizada por un grupo de estudiantes en el contexto de práctica del primer curso de los estudios de\n"
+                        + "           Ingeniería Informática de la UNIVERSITAT DE LES ILLES BALEARS (UIB) para el curso académico 2023-24.\n\n"
+                        + "           Los objetivos de esta práctica pasan por trabajar con un entorno gráfico e interactivo utilizando las prestaciones que ofrecen\n"
+                        + "           las librerías gráficas de Java (swing y awt), la aplicación de los conceptos de programación orientada a objetos y\n"
+                        + "           el uso de ficheros para almacenar información en memória secundária.\n\n"
+                        + "           El objetivo de este juego se basa en encajar múltiples piezas generadas de manera aleatoria las cuales se mostrarán en el panel\n"
+                        + "           de piezas correspondiente y colocarlas en el tablero.\n"
+                        + "           Al conseguir formar una columna o una fila, todas las piezas que formen la fila / columna desaparecerán y otorgarán\n"
+                        + "           puntos por cada celda.\n\n"
+                        + "           De ser preciso, se pueden hacer las siguientes acciones adicionales haciendo uso de una determinada cantidad de puntos:\n\n"
+                        + "           \t- Se pueden generar nuevas piezas.\n"
+                        + "           \t- Se pueden rotar las piezas en el sentido horario.\n\n"
+                        + "           El coste de las acciones se puede personalizar en el apartado de configuración.\n\n"
+                        + "           El juego terminará al terminarse el tiempo de juego, modificable mediante la ventana de configuración correspondiente.\n\n"
+                        + "           Las partidas finalizadas se guardarán en el historial que se puede consultar mediante los diferentes botones.");
 
         textArea.setEditable(false);
         textArea.setOpaque(false);
         textArea.setForeground(TetrisUIB.getColorTerciario());
         textArea.setFont(new Font("SansSerif", Font.PLAIN, 15));
-        textArea.setMargin(new Insets(30, 30, 0, 0)); // Insets es para poner margenes, similar a la clase Rectangle.
 
         return textArea;
     }
