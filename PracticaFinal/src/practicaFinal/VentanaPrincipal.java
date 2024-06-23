@@ -82,7 +82,7 @@ public class VentanaPrincipal {
 
         // Generamos las cartas
         JPanel logoPanel = new JPanel();
-        logoPanel.setBackground(TetrisUIB.COLOR_FONDOS);
+        logoPanel.setBackground(TetrisUIB.getColorFondos());
 
         JLabel imagenLogo = new JLabel();
         imagenLogo.setIcon(new ImageIcon("img/logo.png"));
@@ -94,17 +94,17 @@ public class VentanaPrincipal {
         // Insertamos el panel de informacion
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BorderLayout());
-        infoPanel.setBackground(TetrisUIB.COLOR_FONDOS);
+        infoPanel.setBackground(TetrisUIB.getColorFondos());
         infoPanel.add(informacionTextArea(), BorderLayout.CENTER);
 
         centralPanel.add(infoPanel, "InfoPanel");
 
         // Insertamos el panel de historial
         JPanel historialPanel = new JPanel();
-        historialPanel.setBackground(TetrisUIB.COLOR_FONDOS);
+        historialPanel.setBackground(TetrisUIB.getColorFondos());
         historialTextArea.setEditable(false);
         historialTextArea.setOpaque(false);
-        historialTextArea.setForeground(TetrisUIB.COLOR_TERCIARIO);
+        historialTextArea.setForeground(TetrisUIB.getColorTerciario());
         historialTextArea.setFont(new Font("SansSerif", Font.PLAIN, 15));
 
         historialPanel.add(historialTextArea);
@@ -119,8 +119,8 @@ public class VentanaPrincipal {
 
         for (int i = 0; i < 5; i++) {
             JButton boton = new JButton();
-            boton.setBackground(TetrisUIB.COLOR_SECUNDARIO);
-            boton.setForeground(TetrisUIB.COLOR_TERCIARIO);
+            boton.setBackground(TetrisUIB.getColorSecundario());
+            boton.setForeground(TetrisUIB.getColorTerciario());
             boton.setFont(fuenteBotones);
             boton.addActionListener(actionListener);
 
@@ -141,10 +141,10 @@ public class VentanaPrincipal {
     // Funcion para crear el menu
     public JMenuBar crearMenu(Container panelPrincipal, JFrame padre) {
         JMenuBar menuBar = new JMenuBar();
-        menuBar.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+        menuBar.setBackground(TetrisUIB.getColorSecundario());
 
         JMenu menu = new JMenu("Menú");
-        menu.setForeground(TetrisUIB.COLOR_TERCIARIO);
+        menu.setForeground(TetrisUIB.getColorTerciario());
 
         for (int i = 0; i < 5; i++) {
             JMenuItem item = new JMenuItem();
@@ -168,12 +168,12 @@ public class VentanaPrincipal {
     // Funcion para crear el panel de botones con iconos
     public JToolBar menuIconos(JFrame padre) {
         JToolBar iconBar = new JToolBar();
-        iconBar.setBackground(TetrisUIB.COLOR_PRINCIPAL);
+        iconBar.setBackground(TetrisUIB.getColorPrincipal());
         iconBar.setFloatable(false); // Quita la barra que permite mover la JToolBar.
 
         for (int i = 0; i < 5; i++) {
             JButton boton = new JButton();
-            boton.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+            boton.setBackground(TetrisUIB.getColorSecundario());
             boton.addActionListener(actionListener);
 
             // NOTA: setActionCommand() se usa para que el actionListener sepa en qué
@@ -232,7 +232,7 @@ public class VentanaPrincipal {
 
         textArea.setEditable(false);
         textArea.setOpaque(false);
-        textArea.setForeground(TetrisUIB.COLOR_TERCIARIO);
+        textArea.setForeground(TetrisUIB.getColorTerciario());
         textArea.setFont(new Font("SansSerif", Font.PLAIN, 15));
         textArea.setMargin(new Insets(30, 30, 0, 0)); // Insets es para poner margenes, similar a la clase Rectangle.
 

@@ -1,6 +1,7 @@
 package practicaFinal;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -32,7 +33,7 @@ public class PanelJuego extends JPanel {
         // ------------------------------
 
         JPanel panelInferior = new JPanel();
-        panelInferior.setBackground(TetrisUIB.COLOR_PRINCIPAL);
+        panelInferior.setBackground(TetrisUIB.getColorPrincipal());
 
         panelInferior.setLayout(new GridLayout(2, 1));
 
@@ -66,7 +67,7 @@ public class PanelJuego extends JPanel {
         progressBar.setFont(fuenteEtiquetas);
         progressBar.setStringPainted(true);
         progressBar.setOpaque(false);
-        progressBar.setForeground(TetrisUIB.COLOR_TERCIARIO);
+        progressBar.setForeground(TetrisUIB.getColorTerciario());
 
         timer = new Timer(1000, new ActionListener() {
             @Override
@@ -77,19 +78,24 @@ public class PanelJuego extends JPanel {
                 progressBar.setString(tiempoTotal - valorActual + " s");
 
                 if (valorActual == tiempoTotal) {
-                    HistorialFicheroEscritura escritura = null;
+                    PartidaFicheroInOut fichero = null;
 
                     try {
-                        escritura = new HistorialFicheroEscritura(TetrisUIB.getHistoria());
-                        escritura.escribir(partida);
-                    } catch (IOException ex) {
-
+                        fichero = new PartidaFicheroInOut(TetrisUIB.getHistoria());
+                        fichero.irAlFinal();
+                        fichero.escritura(partida);
+                    } catch (IOException e) {
+                        JOptionPane.showMessageDialog((Component) event.getSource(),
+                                "No se ha podido escribir la partida al historial.",
+                                "Error", JOptionPane.ERROR_MESSAGE);
                     } finally {
-                        if (escritura != null) {
+                        if (fichero != null) {
                             try {
-                                escritura.cerrarFichero();
+                                fichero.cerrarFichero();
                             } catch (IOException e) {
-
+                                JOptionPane.showMessageDialog((Component) event.getSource(),
+                                        "No se ha podido cerrar el fichero del historial.",
+                                        "Error", JOptionPane.ERROR_MESSAGE);
                             }
                         }
                     }
@@ -114,7 +120,7 @@ public class PanelJuego extends JPanel {
 
         JButton botonGirarPieza = new JButton();
         botonGirarPieza.setIcon(new ImageIcon("img/rotate.png"));
-        botonGirarPieza.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+        botonGirarPieza.setBackground(TetrisUIB.getColorSecundario());
 
         botonGirarPieza.addActionListener(new ActionListener() {
             @Override
@@ -129,7 +135,7 @@ public class PanelJuego extends JPanel {
 
         JButton botonNuevaPieza = new JButton();
         botonNuevaPieza.setIcon(new ImageIcon("img/newpiece.png"));
-        botonNuevaPieza.setBackground(TetrisUIB.COLOR_SECUNDARIO);
+        botonNuevaPieza.setBackground(TetrisUIB.getColorSecundario());
 
         botonNuevaPieza.addActionListener(new ActionListener() {
             @Override

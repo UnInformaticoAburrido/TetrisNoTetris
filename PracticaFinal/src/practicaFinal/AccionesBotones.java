@@ -22,10 +22,10 @@ public class AccionesBotones {
         preInicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel contenedor = new JPanel(new GridLayout(1, 2));
-        contenedor.setBackground(TetrisUIB.COLOR_FONDOS);
+        contenedor.setBackground(TetrisUIB.getColorFondos());
 
         JLabel nombreLabel = new JLabel("Inserta tu nombre: ");
-        nombreLabel.setForeground(TetrisUIB.COLOR_TERCIARIO);
+        nombreLabel.setForeground(TetrisUIB.getColorTerciario());
         JTextField nombreCampoDeTexto = new JTextField();
 
         contenedor.add(nombreLabel);
@@ -34,11 +34,11 @@ public class AccionesBotones {
         preInicio.add(contenedor);
 
         JPanel panelBotones = new JPanel();
-        panelBotones.setBackground(TetrisUIB.COLOR_FONDOS);
+        panelBotones.setBackground(TetrisUIB.getColorFondos());
 
         JButton confirmarButton = new JButton("Confirmar");
-        confirmarButton.setBackground(TetrisUIB.COLOR_SECUNDARIO);
-        confirmarButton.setForeground(TetrisUIB.COLOR_TERCIARIO);
+        confirmarButton.setBackground(TetrisUIB.getColorSecundario());
+        confirmarButton.setForeground(TetrisUIB.getColorTerciario());
         confirmarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -62,8 +62,8 @@ public class AccionesBotones {
         });
 
         JButton cancelarButton = new JButton("Cancelar");
-        cancelarButton.setBackground(TetrisUIB.COLOR_SECUNDARIO);
-        cancelarButton.setForeground(TetrisUIB.COLOR_TERCIARIO);
+        cancelarButton.setBackground(TetrisUIB.getColorSecundario());
+        cancelarButton.setForeground(TetrisUIB.getColorTerciario());
         cancelarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -91,7 +91,7 @@ public class AccionesBotones {
 
         // Generamos el unico panel de la configuracion
         JPanel panel = new JPanel();
-        panel.setBackground(TetrisUIB.COLOR_FONDOS);
+        panel.setBackground(TetrisUIB.getColorFondos());
 
         // Definimos las acciones de los botones.
         ActionListener actionListener = new ActionListener() {
@@ -109,8 +109,8 @@ public class AccionesBotones {
         // Generamos los botones.
         for (int i = 0; i < 3; i++) {
             JButton boton = new JButton();
-            boton.setBackground(TetrisUIB.COLOR_SECUNDARIO);
-            boton.setForeground(TetrisUIB.COLOR_TERCIARIO);
+            boton.setBackground(TetrisUIB.getColorSecundario());
+            boton.setForeground(TetrisUIB.getColorTerciario());
             boton.addActionListener(actionListener);
 
             switch (i) {
@@ -132,17 +132,17 @@ public class AccionesBotones {
 
     public static void historial(JTextArea partidaTextArea) {
 
-        HistorialFicheroLectura lector = null;
+        PartidaFicheroInOut fichero = null;
 
         try {
-            lector = new HistorialFicheroLectura(TetrisUIB.getHistoria());
+            fichero = new PartidaFicheroInOut(TetrisUIB.getHistoria());
 
             String text = "";
 
             boolean continuar = true;
             while (continuar) {
                 try {
-                    Partida partida = lector.leer();
+                    Partida partida = fichero.lectura();
                     text += partida.toString() + '\n';
                 } catch (EOFException e) {
                     continuar = false;
@@ -152,14 +152,14 @@ public class AccionesBotones {
             partidaTextArea.setText(text);
             TetrisUIB.getVentana().cambiarPanel("HistorialPanel");
 
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException e) {
             JOptionPane.showMessageDialog(null,
                     "No se ha podido leer el fichero de partidas.", "Error",
                     JOptionPane.ERROR_MESSAGE);
         } finally {
-            if (lector != null) {
+            if (fichero != null) {
                 try {
-                    lector.cerrarFichero();
+                    fichero.cerrarFichero();
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(null,
                             "No se ha podido cerrar el fichero de partidas.", "Error",

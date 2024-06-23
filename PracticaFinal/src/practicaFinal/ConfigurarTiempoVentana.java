@@ -18,18 +18,18 @@ public class ConfigurarTiempoVentana extends JDialog {
 
         setTitle("Cambiar tiempo partida");
         setDefaultCloseOperation(ConfigVentana.DISPOSE_ON_CLOSE);
-        setBackground(TetrisUIB.COLOR_FONDOS);
+        setBackground(TetrisUIB.getColorFondos());
 
         JPanel central = new JPanel(new GridLayout(2, 1));
 
         // Insertamos los imputs
         JPanel panelIn = new JPanel(new GridLayout(1, 2));
-        panelIn.setBackground(TetrisUIB.COLOR_FONDOS);
+        panelIn.setBackground(TetrisUIB.getColorFondos());
 
         int tiempoActual = TetrisUIB.getConfiguracion().getTiempoPartida();
 
         JLabel text = new JLabel("Tiempo de la partida [ " + tiempoActual + " segundos ]");
-        text.setForeground(TetrisUIB.COLOR_TERCIARIO);
+        text.setForeground(TetrisUIB.getColorTerciario());
         panelIn.add(text);
 
         JTextField tiempoField = new JTextField();
@@ -40,11 +40,11 @@ public class ConfigurarTiempoVentana extends JDialog {
 
         // Insertamos los botones
         JPanel botones = new JPanel();
-        botones.setBackground(TetrisUIB.COLOR_FONDOS);
+        botones.setBackground(TetrisUIB.getColorFondos());
 
         JButton confirmarButton = new JButton("Confirmar");
-        confirmarButton.setBackground(TetrisUIB.COLOR_SECUNDARIO);
-        confirmarButton.setForeground(TetrisUIB.COLOR_TERCIARIO);
+        confirmarButton.setBackground(TetrisUIB.getColorSecundario());
+        confirmarButton.setForeground(TetrisUIB.getColorTerciario());
         confirmarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -65,8 +65,8 @@ public class ConfigurarTiempoVentana extends JDialog {
         });
 
         JButton cancelarButton = new JButton("Cancelar");
-        cancelarButton.setBackground(TetrisUIB.COLOR_SECUNDARIO);
-        cancelarButton.setForeground(TetrisUIB.COLOR_TERCIARIO);
+        cancelarButton.setBackground(TetrisUIB.getColorSecundario());
+        cancelarButton.setForeground(TetrisUIB.getColorTerciario());
         cancelarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

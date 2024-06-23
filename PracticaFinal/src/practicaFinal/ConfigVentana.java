@@ -39,17 +39,17 @@ public class ConfigVentana extends JDialog {
 
     private JPanel generarPanelPrincipal() {
         JPanel panelPrincipal = new JPanel(new GridLayout(5, 1));
-        panelPrincipal.setBackground(TetrisUIB.COLOR_FONDOS);
+        panelPrincipal.setBackground(TetrisUIB.getColorFondos());
 
         GridLayout layoutPaneles = new GridLayout(1, 2);
 
         // Añadimos los paneles para modificar puntuaciones:
         for (int i = 0; i < 3; i++) {
             JPanel panel = new JPanel(layoutPaneles);
-            panel.setBackground(TetrisUIB.COLOR_FONDOS);
+            panel.setBackground(TetrisUIB.getColorFondos());
 
             JLabel label = new JLabel();
-            label.setForeground(TetrisUIB.COLOR_TERCIARIO);
+            label.setForeground(TetrisUIB.getColorTerciario());
 
             String texto;
             int valorEnConfig;
@@ -96,18 +96,18 @@ public class ConfigVentana extends JDialog {
         // Añadimos el panel para elegir la imagen de las casillas:
 
         JPanel panelImagenCasillas = new JPanel(new GridLayout(1, 3));
-        panelImagenCasillas.setBackground(TetrisUIB.COLOR_FONDOS);
+        panelImagenCasillas.setBackground(TetrisUIB.getColorFondos());
 
         String imagenCasillas = configActual.getImagenCasillasFormas();
 
         JLabel etiquetaImagen = new JLabel("Imagen de las casillas [" + imagenCasillas + "]");
-        etiquetaImagen.setForeground(TetrisUIB.COLOR_TERCIARIO);
+        etiquetaImagen.setForeground(TetrisUIB.getColorTerciario());
 
         JTextField campoTextoImagen = new JTextField(imagenCasillas);
 
         JButton botonBuscarImagen = new JButton("Buscar Archivo");
-        botonBuscarImagen.setBackground(TetrisUIB.COLOR_SECUNDARIO);
-        botonBuscarImagen.setForeground(TetrisUIB.COLOR_TERCIARIO);
+        botonBuscarImagen.setBackground(TetrisUIB.getColorSecundario());
+        botonBuscarImagen.setForeground(TetrisUIB.getColorTerciario());
 
         botonBuscarImagen.addActionListener(new ActionListener() {
             @Override
@@ -165,12 +165,12 @@ public class ConfigVentana extends JDialog {
         };
 
         JPanel panelBotones = new JPanel();
-        panelBotones.setBackground(TetrisUIB.COLOR_FONDOS);
+        panelBotones.setBackground(TetrisUIB.getColorFondos());
 
         for (int i = 0; i < 3; i++) {
             JButton boton = new JButton();
-            boton.setBackground(TetrisUIB.COLOR_SECUNDARIO);
-            boton.setForeground(TetrisUIB.COLOR_TERCIARIO);
+            boton.setBackground(TetrisUIB.getColorSecundario());
+            boton.setForeground(TetrisUIB.getColorTerciario());
             boton.addActionListener(accionesBotones);
 
             switch (i) {

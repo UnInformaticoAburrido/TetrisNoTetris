@@ -149,7 +149,7 @@ public class PanelTablero extends JPanel implements MouseListener, MouseMotionLi
     public void paint(Graphics graphics) {
         Graphics2D graphics2D = (Graphics2D) graphics;
 
-        graphics2D.setColor(TetrisUIB.COLOR_FONDOS);
+        graphics2D.setColor(TetrisUIB.getColorFondos());
         graphics2D.fillRect(0, 0, getWidth(), getHeight());
 
         graphics2D.setColor(Color.BLACK);
