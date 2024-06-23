@@ -89,7 +89,7 @@ public class TetrisUIB {
         configuracion = config;
     }
 
-    public static String getHistoria() {
+    public static String getFicheroHistorial() {
         return FICHERO_HISTORIAL;
     }
 

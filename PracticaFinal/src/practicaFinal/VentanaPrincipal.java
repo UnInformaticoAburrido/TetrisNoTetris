@@ -342,7 +342,7 @@ public class VentanaPrincipal extends JFrame {
         PartidaFicheroInOut fichero = null;
 
         try {
-            fichero = new PartidaFicheroInOut(TetrisUIB.getHistoria());
+            fichero = new PartidaFicheroInOut(TetrisUIB.getFicheroHistorial());
 
             String text = "";
 
