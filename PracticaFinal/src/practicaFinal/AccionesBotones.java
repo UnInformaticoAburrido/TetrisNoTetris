@@ -132,8 +132,6 @@ public class AccionesBotones {
 
     public static void historial(JTextArea partidaTextArea) {
 
-        boolean continuar = true;
-
         HistorialFicheroLectura lector = null;
 
         try {
@@ -141,27 +139,31 @@ public class AccionesBotones {
 
             String text = "";
 
+            boolean continuar = true;
             while (continuar) {
                 try {
                     Partida partida = lector.leer();
                     text += partida.toString() + '\n';
                 } catch (EOFException e) {
                     continuar = false;
-                } catch (ClassNotFoundException ex) {
-
                 }
             }
 
             partidaTextArea.setText(text);
+            TetrisUIB.getVentana().cambiarPanel("HistorialPanel");
 
-            lector.cerrarFichero();
-        } catch (IOException ex) {
-
+        } catch (IOException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null,
+                    "No se ha podido leer el fichero de partidas.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
         } finally {
             if (lector != null) {
                 try {
                     lector.cerrarFichero();
                 } catch (IOException e) {
+                    JOptionPane.showMessageDialog(null,
+                            "No se ha podido cerrar el fichero de partidas.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
                 }
             }
         }

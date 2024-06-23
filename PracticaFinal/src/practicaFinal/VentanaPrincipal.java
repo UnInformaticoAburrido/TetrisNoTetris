@@ -95,12 +95,18 @@ public class VentanaPrincipal {
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BorderLayout());
         infoPanel.setBackground(TetrisUIB.COLOR_FONDOS);
-        infoPanel.add(informacion(), BorderLayout.CENTER);
+        infoPanel.add(informacionTextArea(), BorderLayout.CENTER);
+
         centralPanel.add(infoPanel, "InfoPanel");
 
         // Insertamos el panel de historial
         JPanel historialPanel = new JPanel();
+        historialPanel.setBackground(TetrisUIB.COLOR_FONDOS);
         historialTextArea.setEditable(false);
+        historialTextArea.setOpaque(false);
+        historialTextArea.setForeground(TetrisUIB.COLOR_TERCIARIO);
+        historialTextArea.setFont(new Font("SansSerif", Font.PLAIN, 15));
+
         historialPanel.add(historialTextArea);
         centralPanel.add(historialPanel, "HistorialPanel");
     }
@@ -205,9 +211,9 @@ public class VentanaPrincipal {
         return iconBar;
     }
 
-    private JTextArea informacion() {
+    private JTextArea informacionTextArea() {
 
-        JTextArea text = new JTextArea(
+        JTextArea textArea = new JTextArea(
                 "DISCLAIMER:\n"
                         + "Esta aplicación ha sido realizada por un grupo de estudiantes en el contexto de práctica del primer curso de los estudios de\n"
                         + "Ingeniería Informática de la UNIVERSITAT DE LES ILLES BALEARS (UIB) para el curso académico 2023-24.\n\n"
@@ -224,12 +230,12 @@ public class VentanaPrincipal {
                         + "El juego terminará al terminarse el tiempo de juego.\n"
                         + "Este también se puede modificar en el apartado de configuración correspondiente.");
 
-        text.setEditable(false);
-        text.setOpaque(false);
-        text.setForeground(TetrisUIB.COLOR_TERCIARIO);
-        text.setFont(new Font("SansSerif", Font.PLAIN, 15));
-        text.setMargin(new Insets(30, 30, 0, 0)); // Insets es para poner margenes, similar a la clase Rectangle.
+        textArea.setEditable(false);
+        textArea.setOpaque(false);
+        textArea.setForeground(TetrisUIB.COLOR_TERCIARIO);
+        textArea.setFont(new Font("SansSerif", Font.PLAIN, 15));
+        textArea.setMargin(new Insets(30, 30, 0, 0)); // Insets es para poner margenes, similar a la clase Rectangle.
 
-        return text;
+        return textArea;
     }
 }
