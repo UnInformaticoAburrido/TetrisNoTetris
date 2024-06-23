@@ -1,5 +1,6 @@
 package practicaFinal;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -185,14 +186,15 @@ public class PanelTablero extends JPanel implements MouseListener, MouseMotionLi
             }
         }
 
-        graphics.setColor(Color.GREEN);
+        graphics2D.setColor(TetrisUIB.getColorTerciario());
+        graphics2D.setStroke(new BasicStroke(5));
 
         // Dibuja la parte donde aparecen las nuevas piezas:
         graphics2D.drawRect(
-                NUEVA_PIEZA_POS_X,
-                NUEVA_PIEZA_POS_Y,
-                PIEZA_ANCHURA,
-                PIEZA_ALTURA);
+                NUEVA_PIEZA_POS_X - 3,
+                NUEVA_PIEZA_POS_Y - 3,
+                PIEZA_ANCHURA + 4,
+                PIEZA_ALTURA + 4);
 
         for (int i = 0; i < PIEZA_X; i++) {
             for (int j = 0; j < PIEZA_Y; j++) {
