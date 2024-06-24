@@ -261,9 +261,8 @@ public class VentanaPrincipal extends JFrame {
 
                 // Empieza la partida:
 
-                VentanaPrincipal ventana = TetrisUIB.getVentana();
-                ventana.getPanelJuego().empezarPartida(nombreCampoDeTexto.getText());
-                ventana.cambiarPanel("JuegoPanel");
+                panelJuego.empezarPartida(nombreCampoDeTexto.getText());
+                cambiarPanel("JuegoPanel");
             }
         });
 
