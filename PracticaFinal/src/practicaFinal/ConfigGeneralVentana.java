@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -29,7 +30,7 @@ public class ConfigGeneralVentana extends JDialog {
         ultimoCaminoFileChooser = ficheroImagen.getAbsolutePath();
 
         setTitle("Configuracion");
-        setSize(790, 240);
+        setSize(980, 240);
         setDefaultCloseOperation(ConfigGeneralVentana.DISPOSE_ON_CLOSE);
         add(generarPanelPrincipal());
 
@@ -123,8 +124,8 @@ public class ConfigGeneralVentana extends JDialog {
                     archivoSelecionado = fileChooser.getSelectedFile();
 
                     if (archivoSelecionado != null) {
-                        ultimoCaminoFileChooser = archivoSelecionado.getAbsolutePath();
-                        campoTextoImagen.setText(archivoSelecionado.getPath());
+                        ultimoCaminoFileChooser = archivoSelecionado.getPath();
+                        campoTextoImagen.setText(ultimoCaminoFileChooser);
                     }
                 }
             }
