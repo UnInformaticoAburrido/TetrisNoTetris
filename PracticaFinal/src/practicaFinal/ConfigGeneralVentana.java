@@ -191,6 +191,9 @@ public class ConfigGeneralVentana extends JDialog {
     private boolean aplicarCambios() {
         Configuracion nuevaConfig = new Configuracion();
 
+        // Ponemos el tiempo de la partida de modo que no lo perdemos.
+        nuevaConfig.setTiempoPartida(configActual.getTiempoPartida());
+
         for (int i = 0; i < 4; i++) {
             String nuevoValor = camposDeTexto[i].getText();
             int valorNumerico = 0;
