@@ -42,7 +42,12 @@ public class TetrisUIB {
             try {
                 lectura = new ConfiguracionFicheroLectura(CAMINO_CONFIG);
                 configuracion = lectura.leer();
-            } catch (IOException | ClassNotFoundException e) {
+            } catch (ClassNotFoundException e) {
+                JOptionPane.showMessageDialog(null, "El fichero de configuración está corrupto.\nSe va a eliminar.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+
+                new File(CAMINO_CONFIG).delete();
+            } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "No se ha posido leer el fichero de configuración.",
                         "Error", JOptionPane.ERROR_MESSAGE);
             } finally {
