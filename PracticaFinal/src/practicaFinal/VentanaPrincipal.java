@@ -51,7 +51,7 @@ public class VentanaPrincipal extends JFrame {
             }
 
             switch (e.getActionCommand()) {
-                case "Nueva Partida" -> empezarPartida();
+                case "Nueva Partida" -> nuevaPartida();
                 case "Configuración" -> configuracion();
                 case "Historial" -> historial();
                 case "Información" -> cambiarPanel("InfoPanel");
@@ -60,7 +60,7 @@ public class VentanaPrincipal extends JFrame {
         }
     };
 
-    // Permite cambiar el panel que se muestra en el centro desde una clase externa.
+    // Permite cambiar el panel que se muestra en el centro, incluso desde una clase externa.
     public void cambiarPanel(String nombre) {
         centralLayout.show(centralPanel, nombre);
     }
@@ -77,9 +77,9 @@ public class VentanaPrincipal extends JFrame {
         setJMenuBar(crearMenu());
 
         Container contenido = getContentPane();
-        contenido.add(panelDeBotones(), BorderLayout.WEST);
+        contenido.add(crearPanelDeBotones(), BorderLayout.WEST);
         contenido.add(centralPanel, BorderLayout.CENTER);
-        contenido.add(menuIconos(), BorderLayout.NORTH);
+        contenido.add(crearToolBar(), BorderLayout.NORTH);
 
         setLocationRelativeTo(null);
         setVisible(true);
@@ -116,7 +116,7 @@ public class VentanaPrincipal extends JFrame {
     }
 
     // Funcion dedicada a crear el panel de botones laterales
-    public JPanel panelDeBotones() {
+    private JPanel crearPanelDeBotones() {
         JPanel panelbotones = new JPanel(new GridLayout(5, 1));
 
         Font fuenteBotones = new Font("SansSerif", Font.BOLD, 16);
@@ -143,7 +143,7 @@ public class VentanaPrincipal extends JFrame {
     }
 
     // Funcion para crear el menu
-    public JMenuBar crearMenu() {
+    private JMenuBar crearMenu() {
         JMenuBar menuBar = new JMenuBar();
         menuBar.setBackground(TetrisUIB.getColorSecundario());
 
@@ -170,7 +170,7 @@ public class VentanaPrincipal extends JFrame {
     }
 
     // Funcion para crear el panel de botones con iconos
-    public JToolBar menuIconos() {
+    private JToolBar crearToolBar() {
         JToolBar iconBar = new JToolBar();
         iconBar.setBackground(TetrisUIB.getColorPrincipal());
         iconBar.setFloatable(false); // Quita la barra que permite mover la JToolBar.
@@ -215,7 +215,7 @@ public class VentanaPrincipal extends JFrame {
         return iconBar;
     }
 
-    private void empezarPartida() {
+    private void nuevaPartida() {
         JDialog preInicio = new JDialog(this, "Tetris UIB");
         preInicio.setLayout(new GridLayout(2, 1));
         preInicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

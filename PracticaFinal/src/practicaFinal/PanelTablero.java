@@ -136,12 +136,10 @@ public class PanelTablero extends JPanel implements MouseListener, MouseMotionLi
     }
 
     // Restablece el tablero, liberando todas las casillas de este.
-    // Se crean nuevas casillas en vez de cambiar su valor para regenerar los
-    // colores de estas.
     public void restablecerTablero() {
         for (int i = 0; i < TABLERO_X; i++) {
             for (int j = 0; j < TABLERO_Y; j++) {
-                matrizJuego[i][j] = new Casilla();
+                matrizJuego[i][j].setOcupada(false);
             }
         }
     }
@@ -352,6 +350,9 @@ public class PanelTablero extends JPanel implements MouseListener, MouseMotionLi
     public void mouseClicked(MouseEvent e) {
         // En caso de que el jugador encuentre algun error de dibujado,
         // se intenta solucionar redibujando el panel al clicar.
+        // Nota: este metodo solo se llama cuando el usuario hace la acción
+        // de clicar, no se llama cuando el usuario arrastra el ratón por lo
+        // que el impacto de rendimiento es prácticamente nulo.
         repaint();
     }
 

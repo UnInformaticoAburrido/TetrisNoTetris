@@ -18,7 +18,7 @@ import javax.swing.Timer;
 
 public class PanelJuego extends JPanel {
     private Partida partida;
-    private Timer timer;
+    private Timer temporizador;
     private JProgressBar progressBar = new JProgressBar();
     private JLabel labelJugador = new JLabel();
     private JLabel labelPuntuacion = new JLabel();
@@ -69,7 +69,7 @@ public class PanelJuego extends JPanel {
         progressBar.setOpaque(false);
         progressBar.setForeground(TetrisUIB.getColorTerciario());
 
-        timer = new Timer(1000, new ActionListener() {
+        temporizador = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
                 int tiempoTotal = partida.getTiempo();
@@ -100,7 +100,7 @@ public class PanelJuego extends JPanel {
                         }
                     }
 
-                    finalizaPartida();
+                    finalizarPartida();
                 }
             }
         });
@@ -179,7 +179,7 @@ public class PanelJuego extends JPanel {
 
         actualizaPuntuacion();
 
-        timer.start();
+        temporizador.start();
         partidaEnCurso = true;
     }
 
@@ -192,13 +192,14 @@ public class PanelJuego extends JPanel {
         actualizaPuntuacion();
     }
 
+    // Actualiza la puntuación que se muestra en la JProgressBar.
     private void actualizaPuntuacion() {
         int puntuacion = partida.getPuntuacion();
         labelPuntuacion.setText(puntuacion + " puntos");
     }
 
-    private void finalizaPartida() {
-        timer.stop();
+    private void finalizarPartida() {
+        temporizador.stop();
 
         JOptionPane.showMessageDialog(this, "¡Se ha terminado el tiempo!\n"
                 + "Has conseguido un total de " + partida.getPuntuacion() + " puntos.", "Final de la partida",
