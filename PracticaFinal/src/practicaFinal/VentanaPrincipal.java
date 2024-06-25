@@ -81,9 +81,6 @@ public class VentanaPrincipal extends JFrame {
         contenido.add(centralPanel, BorderLayout.CENTER);
         contenido.add(crearToolBar(), BorderLayout.NORTH);
 
-        setLocationRelativeTo(null);
-        setVisible(true);
-
         // Generamos las cartas
         JPanel logoPanel = new JPanel();
         logoPanel.setBackground(TetrisUIB.getColorFondos());
@@ -93,8 +90,10 @@ public class VentanaPrincipal extends JFrame {
         logoPanel.add(imagenLogo);
 
         centralPanel.add(logoPanel, "LogoPanel");
+
         // Insertar panel de juego
         centralPanel.add(panelJuego, "JuegoPanel");
+
         // Insertamos el panel de informacion
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BorderLayout());
@@ -106,13 +105,18 @@ public class VentanaPrincipal extends JFrame {
         // Insertamos el panel de historial
         JPanel historialPanel = new JPanel();
         historialPanel.setBackground(TetrisUIB.getColorFondos());
+
         historialTextArea.setEditable(false);
         historialTextArea.setOpaque(false);
         historialTextArea.setForeground(TetrisUIB.getColorTerciario());
         historialTextArea.setFont(new Font("SansSerif", Font.PLAIN, 15));
 
         historialPanel.add(historialTextArea);
+
         centralPanel.add(historialPanel, "HistorialPanel");
+
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     // Funcion dedicada a crear el panel de botones laterales
@@ -251,7 +255,7 @@ public class VentanaPrincipal extends JFrame {
                 }
 
                 if (nombre.length() > 20) {
-                    JOptionPane.showMessageDialog(null, "El nombre debe ser menor a 20 carácteres.", "Error",
+                    JOptionPane.showMessageDialog(null, "El nombre debe ser menor a 20 caracteres.", "Error",
                             JOptionPane.ERROR_MESSAGE);
 
                     return;
