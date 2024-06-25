@@ -74,7 +74,6 @@ public class TetrisUIB {
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(null, "No se ha podido cerrar el fichero de configuración.", "Error",
                             JOptionPane.ERROR_MESSAGE);
-
                 }
             }
         }
