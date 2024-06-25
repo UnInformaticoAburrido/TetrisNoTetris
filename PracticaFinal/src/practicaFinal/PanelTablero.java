@@ -64,7 +64,11 @@ public class PanelTablero extends JPanel implements MouseListener, MouseMotionLi
         this.panelJuego = panelJuego;
 
         // Inicializa la matriz de casillas.
-        restablecerTablero();
+        for (int i = 0; i < TABLERO_X; i++) {
+            for (int j = 0; j < TABLERO_Y; j++) {
+                matrizJuego[i][j] = new Casilla();
+            }
+        }
 
         // Lee la imagen de las casillas.
         actualizaImagenCasilla();
