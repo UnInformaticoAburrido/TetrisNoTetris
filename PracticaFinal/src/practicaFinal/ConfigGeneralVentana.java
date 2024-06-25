@@ -31,7 +31,6 @@ public class ConfigGeneralVentana extends JDialog {
 
         setTitle("Configuracion");
         setSize(980, 240);
-        setDefaultCloseOperation(ConfigGeneralVentana.DISPOSE_ON_CLOSE);
         add(generarPanelPrincipal());
 
         setLocationRelativeTo(padre);

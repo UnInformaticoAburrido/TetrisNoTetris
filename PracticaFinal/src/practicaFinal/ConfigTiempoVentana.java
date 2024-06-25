@@ -17,7 +17,6 @@ public class ConfigTiempoVentana extends JDialog {
         super(padre);
 
         setTitle("Cambiar tiempo partida");
-        setDefaultCloseOperation(ConfigGeneralVentana.DISPOSE_ON_CLOSE);
         setBackground(TetrisUIB.getColorFondos());
 
         JPanel central = new JPanel(new GridLayout(2, 1));

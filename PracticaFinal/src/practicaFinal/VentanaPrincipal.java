@@ -222,7 +222,6 @@ public class VentanaPrincipal extends JFrame {
     private void nuevaPartida() {
         JDialog preInicio = new JDialog(this, "Tetris UIB");
         preInicio.setLayout(new GridLayout(2, 1));
-        preInicio.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel contenedor = new JPanel(new GridLayout(1, 2));
         contenedor.setBackground(TetrisUIB.getColorFondos());
@@ -296,7 +295,6 @@ public class VentanaPrincipal extends JFrame {
 
         JDialog ventanaPreEntrada = new JDialog(this, "Configuracion");
         ventanaPreEntrada.setSize(485, 100);
-        ventanaPreEntrada.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Generamos el unico panel de la configuracion
         JPanel panel = new JPanel();
