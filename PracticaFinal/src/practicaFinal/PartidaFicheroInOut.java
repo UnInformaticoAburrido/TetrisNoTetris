@@ -29,7 +29,7 @@ public class PartidaFicheroInOut {
                     "La posición no está dentro del fichero.");
         }
 
-        fichero.seek(posicion);
+        fichero.seek(posicion * Partida.getDimension());
         return lectura();
     }
 
@@ -39,15 +39,8 @@ public class PartidaFicheroInOut {
         fichero.writeInt(partida.getPuntuacion());
     }
 
-    public void escritura(Partida partida, int posicion) throws IOException, PosicionIncorrectaException {
-        long posicionMaxima = fichero.length() / Partida.getDimension();
-
-        if (posicion <= 0 || posicion > posicionMaxima) {
-            throw new PosicionIncorrectaException(
-                    "La posición no está dentro del fichero.");
-        }
-
-        fichero.seek(posicion);
+    public void escritura(Partida partida, int posicion) throws IOException {
+        fichero.seek(posicion * Partida.getDimension());
         escritura(partida);
     }
 

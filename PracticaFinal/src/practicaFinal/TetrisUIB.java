@@ -26,19 +26,13 @@ public class TetrisUIB {
 
     public static void main(String[] args) {
         if (!(new File(CAMINO_CONFIG).exists())) {
+            // Si no existe un fichero de configuración, usamos la configuración por defecto.
             configuracion = new Configuracion();
 
-            try {
-                ConfiguracionFicheroEscritura escritura = new ConfiguracionFicheroEscritura(CAMINO_CONFIG);
-                escritura.escribir(configuracion);
-                escritura.cerrarFichero();
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(null, "No se ha posido crear el fichero de configuración.",
-                        "Error", JOptionPane.ERROR_MESSAGE);
-            }
         } else {
             ConfiguracionFicheroLectura lectura = null;
 
+            // Leemos el fichero de configuración.
             try {
                 lectura = new ConfiguracionFicheroLectura(CAMINO_CONFIG);
                 configuracion = lectura.leer();
