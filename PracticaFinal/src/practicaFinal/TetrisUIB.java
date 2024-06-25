@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  */
 public class TetrisUIB {
     private static final String CAMINO_CONFIG = "tetrisuib.conf";
-    private static final String FICHERO_HISTORIAL = "partidasTetrisUIB.dat";
+    private static final String CAMINO_HISTORIAL = "partidasTetrisUIB.dat";
     private static Configuracion configuracion;
 
     private static VentanaPrincipal ventana;
@@ -88,8 +88,8 @@ public class TetrisUIB {
         configuracion = config;
     }
 
-    public static String getFicheroHistorial() {
-        return FICHERO_HISTORIAL;
+    public static String getCaminoHistorial() {
+        return CAMINO_HISTORIAL;
     }
 
     public static VentanaPrincipal getVentana() {

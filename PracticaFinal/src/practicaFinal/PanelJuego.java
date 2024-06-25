@@ -81,7 +81,7 @@ public class PanelJuego extends JPanel {
                     PartidaFicheroInOut fichero = null;
 
                     try {
-                        fichero = new PartidaFicheroInOut(TetrisUIB.getFicheroHistorial());
+                        fichero = new PartidaFicheroInOut(TetrisUIB.getCaminoHistorial());
                         fichero.irAlFinal();
                         fichero.escritura(partida);
                     } catch (IOException e) {
