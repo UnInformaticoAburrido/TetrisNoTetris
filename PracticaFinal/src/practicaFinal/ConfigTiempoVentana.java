@@ -48,15 +48,25 @@ public class ConfigTiempoVentana extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!tiempoField.getText().isEmpty()) {
+                    int tiempo;
+
                     try {
-                        int tiempo = Integer.parseInt(tiempoField.getText());
-                        TetrisUIB.getConfiguracion().setTiempoPartida(tiempo);
+                        tiempo = Integer.parseInt(tiempoField.getText());
                     } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(null, "Debes insertar un numero", "Error",
+                        JOptionPane.showMessageDialog(null, "Debes insertar un número.", "Error",
                                 JOptionPane.ERROR_MESSAGE);
+
                         return;
                     }
 
+                    if (tiempo < 0) {
+                        JOptionPane.showMessageDialog(null, "El tiempo no puede ser negativo.", "Error",
+                                JOptionPane.ERROR_MESSAGE);
+
+                        return;
+                    }
+
+                    TetrisUIB.getConfiguracion().setTiempoPartida(tiempo);
                     TetrisUIB.guardarConfiguracionAFichero();
                     dispose();
                 }
