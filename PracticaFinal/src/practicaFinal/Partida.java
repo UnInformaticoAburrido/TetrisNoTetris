@@ -1,8 +1,6 @@
 package practicaFinal;
 
-import java.io.Serializable;
-
-public class Partida implements Serializable {
+public class Partida {
     private String nombre; // 20 caracteres = 40 bytes.
     private int tiempo; // 4 bytes
     private int puntuacion; // 4 bytes
