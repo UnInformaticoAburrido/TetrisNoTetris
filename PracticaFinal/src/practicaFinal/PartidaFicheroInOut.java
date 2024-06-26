@@ -39,7 +39,12 @@ public class PartidaFicheroInOut {
         fichero.writeInt(partida.getPuntuacion());
     }
 
-    public void escritura(Partida partida, int posicion) throws IOException {
+    public void escritura(Partida partida, int posicion) throws IOException, PosicionIncorrectaException {
+        if (posicion <= 0) {
+            throw new PosicionIncorrectaException(
+                    "La posición no está dentro del fichero.");
+        }
+
         fichero.seek(posicion * Partida.getDimension());
         escritura(partida);
     }
